@@ -1,0 +1,16 @@
+/* ========== WIPER ========== */
+
+.swiper-pagination
+    position: initial
+    margin-top: $mb-l
+
+    &-bullet
+        @include square(5px)
+        background-color: $title
+        opacity: 1
+        &-active
+            @include square(1.5rem, 5px)
+            border-radius: .5rem
+
+    &-horizontal &-bullets &-bullet
+        margin: 0 .5rem

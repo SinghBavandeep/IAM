@@ -1,0 +1,84 @@
+/* ========== NEW ========== */
+
+.new
+    &__container
+        margin-top: $mb-m
+
+    &__content
+        @extend %neomorphism-out
+        @include position(relative)
+        width: 242px
+        margin: $mb-m 0
+        padding: 2rem 0 1.5rem 0
+        border-radius: .75rem
+        text-align: center
+        overflow: hidden
+    
+    &__img
+        @extend %transition
+        width: 120px
+        margin-bottom: $mb-s
+
+    &__tag
+        @extend %neomorphism-in
+        @extend %title-color
+        @include position(absolute, $top: 8%, $left: 8%)
+        padding: .25rem .5rem
+        border-radius: .25rem
+        font-size: $size-s
+
+    &__title
+        font-size: $size-m
+        font-weight: $medium
+
+    &__subtitle
+        @extend %title-color
+        font-size: $size-s
+        margin-bottom: $mb-s
+
+    &__prices
+        display: inline-flex
+        align-items: center
+        column-gap: .5rem
+
+    &__price
+        @extend %title-color
+        font-weight: $medium
+        
+    &__discount
+        font-weight: $medium
+        font-size: $size-xs
+        text-decoration: line-through
+        color: $primary
+
+    &__button
+        @extend .trick__button
+        visibility: visible
+        transform: translateX(0)
+
+
+
+@media screen and (min-width: 992px)
+    .new
+        &__content
+            width: 310px
+            border-radius: 1rem
+            padding: 2rem 0
+        &__img
+            width: 150px
+        &__img,
+        &__subtitle
+            margin-bottom: $mb-m
+        &__title
+            font-size: $size-m
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,46 @@
+/* ========== NEWSLETTER ========== */
+
+.newsletter
+    &__description
+        text-align: center
+        margin-bottom: $mb-l
+
+    &__form
+        @extend %neomorphism-out
+        @include flex(space-between, null)
+        padding: 1rem
+        border-radius: .75rem
+
+    &__input
+        @extend %title-color
+        width: 70%
+        padding: 0 .5rem
+        background: none
+        &::placeholder
+            color: $text
+
+        
+@media screen and (min-width: 576px)
+    .newsletter
+        &__container
+            display: grid
+            grid-template-columns: .7fr
+            justify-content: center
+        &__description
+            padding: 0 3rem
+
+@media screen and (min-width: 767px)
+    .newsletter
+        &__container
+            grid-template-columns: .5fr
+
+
+
+
+
+
+
+
+
+
+

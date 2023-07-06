@@ -1,0 +1,83 @@
+/* ========== VARIABLES SASS ========== */
+    
+$hue: 240
+$body-font: 'Poppins', sans-serif
+
+/* ========== z index ========== */
+$tooltip: 10
+$fixed: 100
+
+/* ========== Margenes ========== */
+$header-height: 3.5rem
+$mb-xs: .25rem
+$mb-s: .5rem
+$mb-m: 1rem
+$mb-l: 1.5rem
+$mb-xl: 2rem
+$mb-xxl: 2.5rem
+
+/* ========== Font Weight ========== */
+$medium: 500
+$semi-bold: 600
+$black: 900
+
+/* ========== VARIABLES CSS ========== */
+*:root
+    // ========== Coulors ==========
+    --text-color: hsl(#{$hue}, 12%, 35%)
+    --text-color-light: hsl(#{$hue}, 12%, 65%)
+
+    --first-color: hsl(#{$hue}, 91%, 54%)
+
+    --title-color: hsl(#{$hue}, 53%, 15%)
+    --text-color: hsl(#{$hue}, 12%, 35%)
+    --text-gradient: linear-gradient(hsl(#{$hue}, 91%, 78%), hsl(#{$hue}, 24%, 94%))
+    // --text-color-light: hsl(#{$hue}, 12%, 65%)
+    --body-color: hsl(#{$hue}, 24%, 94%)
+    --container-color: hsl(#{$hue}, 24%, 90%)
+
+    --shadow-dark: hsla(#{$hue}, 30%, 86%, .55)
+    --shadow-light: hsla(#{$hue}, 0%, 100%, .6)
+
+
+
+    // ========== Font Size ==========
+    --font-xxl: 2rem
+    --font-xl: 1.5rem
+    --font-l: 1.25rem
+    --font-m: 1rem
+    --font-s: .813rem
+    --font-xs: .75rem
+
+
+// Responsive font size
+@media screen and ( min-width: 992px )
+    *:root
+        --font-xxl: 4rem
+        --font-xl: 2.25rem
+        --font-l: 2.5rem
+        --font-m: 1.25rem
+        --font-s: .875rem
+        --font-xs: .813rem
+
+
+
+.dark-theme
+    --title-color: hsl(#{$hue}, 12%, 95%) 
+    --text-color: hsl(#{$hue}, 12%, 75%) 
+    --text-color-light: hsl(#{$hue}, 12%, 45%) 
+    --text-gradient: linear-gradient(hsl(#{$hue}, 91%, 78%), hsl(#{$hue}, 4%, 24%))
+    --body-color: hsl(#{$hue}, 10%, 16%)
+    --container-color: hsl(#{$hue}, 10%, 12%)
+
+    --shadow-dark: hsla(#{$hue}, 8%, 20%, .35)
+    --shadow-light: hsla(#{$hue}, 8%, 12%, .55)
+
+
+
+
+
+
+
+
+

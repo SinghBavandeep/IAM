@@ -1,0 +1,49 @@
+/* ========== CATEGORY ========== */
+
+.category
+    &__container
+        grid-template-columns: (1fr) (1fr)
+        gap: 1rem 2rem
+
+    &__data
+        text-align: center
+        &:hover img
+            transform: translateY(-.5rem)
+
+    &__img
+        @extend %transition
+        width: 120px
+        margin-bottom: $mb-s
+
+    &__title
+        margin-bottom: $mb-xs
+
+
+@media screen and (max-width: 320px)
+    .category
+        &__container
+            grid-template-columns: .8fr
+            justify-content: center
+
+
+@media screen and (min-width: 767px)
+    .category
+        &__container
+            grid-template-columns: repeat(3, 200px)
+            justify-content: center
+
+
+@media screen and (min-width: 992px)
+    .category
+        &__container
+            column-gap: 8rem
+        &__img
+            width: 200px
+
+
+
+
+
+
+
+

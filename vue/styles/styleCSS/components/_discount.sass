@@ -1,0 +1,40 @@
+/* ========== DISCOUNT ========== */
+
+.discount
+    &__container
+        @extend %neomorphism-out
+        padding: 2.5rem 0 1.5rem
+        border-radius: .75rem
+        row-gap: .75rem
+
+    &__data
+        text-align: center
+
+    &__img
+        width: 200px
+        justify-self: center
+
+@media screen and (min-width: 767px)
+    .discount
+        &__container
+            grid-template-columns: repeat(2, max-content)
+            justify-content: center
+            align-items: center
+            column-gap: 3rem
+            padding: 3rem 0
+            border-radius: 3rem
+        &__img
+            width: 350px
+            order: -1
+        &__data
+            padding-right: 6rem
+
+
+@media screen and (min-width: 992px)
+    .discount
+        &__container
+            column-gap: 7rem
+
+
+
+

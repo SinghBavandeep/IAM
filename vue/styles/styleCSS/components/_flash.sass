@@ -1,0 +1,42 @@
+
+
+.flash
+    @include position(absolute, $top: 50%, $left:50%, $center: true)
+    display: grid
+    align-items: center
+    &__container
+    &__content
+        @extend %neomorphism-out
+        border-radius: .75rem
+        max-width: 415px
+        margin: 0 auto
+        padding: .75rem
+        display: grid
+        row-gap: 1rem
+        animation-name: animate-login
+        animation-duration: .4s
+
+    &__img
+        width: 150px
+        justify-self: center
+
+    &__data
+        text-align: center
+        margin: $mb-xxl 0
+    
+    &__title
+        @extend %title-color
+        font-size: $size-xl
+        margin-bottom: $mb-s
+    
+    &__description
+        color: $text
+        font-size: $size-xs
+
+    &__button
+        @extend %title-color
+
+
+
+
+

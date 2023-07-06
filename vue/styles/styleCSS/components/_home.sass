@@ -1,0 +1,110 @@
+/* ========== HOME ========== */
+
+.home
+    &__content
+        row-gap: 1rem
+    
+    &__group
+        @include position(relative)
+        padding-top: 2rem
+
+    &__img
+        height: 250px
+        justify-self: center
+
+    &__indicator
+        @include position(absolute, $top: 7rem, $right: 2rem)
+        @include square(8px, $radius: 50%)
+        background-color: $title
+        &::after
+            @include position(absolute, $top: -3rem, $right: 45%)
+            @include square(1px, 48px)
+            content: ''
+            background-color: $title
+
+    &__details
+        &-img
+            @include position(absolute, $right: .5rem)
+
+        &-title
+            font-size: $size-s
+            text-align: right
+
+        &-subtitle
+            @extend .home__details-title
+
+    &__subtitle
+        font-size: $size-m
+        text-transform: uppercase
+        margin-bottom: $mb-m
+
+    &__title
+        font-size: $size-xxl
+        font-weight: $black
+        line-height: 109%
+        margin-bottom: $mb-m
+
+    &__description
+        margin-bottom: $mb-m
+
+    &__buttons
+        @include flex(space-between)
+            
+
+@media screen and ( max-width: 320px )
+    .home
+    &__img
+        height: 200px
+    &__buttons
+        flex-direction: column
+        width: max-content
+        row-gap: 1rem
+
+@media screen and (min-width: 767px)
+    .home
+        &__content
+            padding: 8rem 0 2rem
+            grid-template-columns: (1fr) (1fr)
+            gap: 4rem
+            
+
+@media screen and (min-width: 992px)
+    .home
+        &__content
+            padding-top: 9rem
+            gap: 3rem
+        &__group
+            padding-top: 0
+        &__indicator
+            top: initial
+            right: initial
+            bottom: 15%
+            left: 45%
+            &::after
+                top: 0
+                height: 75px
+        &__details-img
+            bottom: 0%
+            right: 58%
+        &__title
+            margin-bottom: var(--mb-1-5)
+        &__description
+            margin-bottom: var(--mb-2-5)
+            padding-right: 2rem
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

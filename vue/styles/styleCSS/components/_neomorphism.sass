@@ -1,0 +1,32 @@
+
+$shadow1: var(--shadow-light)
+$shadow2: var(--shadow-dark)
+
+%neomorphism-in
+    box-shadow: -4px -4px 8px $shadow1,
+    4px 4px 8px $shadow2,
+    4px 4px 8px $shadow2 inset,
+    -4px -4px 8px $shadow1 inset
+
+%neomorphism-bevel
+    box-shadow: 4px 4px 8px $shadow1 inset,
+    -4px -4px 8px $shadow2 inset,
+    -4px -4px 8px $shadow2 inset ,
+    4px 4px 8px $shadow1 inset
+
+%neomorphism-out
+    box-shadow: -4px -4px 8px $shadow1,
+    4px 4px 8px $shadow2 ,
+    4px 4px 8px $shadow2  ,
+    -4px -4px 8px $shadow1 
+
+%neomorphism-text
+    text-shadow: -1px -1px 4px rgba(255, 255, 255, .4),
+    1px 1px 4px rgba(0, 0, 0, .2)
+
+%neomorphism-text-alt
+    text-shadow: -1px -1px 4px rgba(0, 0, 0, .4),
+    1px 1px 4px rgba(255, 255, 255, .08)
+
+
+    

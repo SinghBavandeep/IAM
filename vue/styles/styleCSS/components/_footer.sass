@@ -1,0 +1,76 @@
+/* ========== FOOTER ========== */
+
+.footer
+    @include position(relative)
+    overflow: hidden
+
+    &__container
+        row-gap: 2rem
+
+    &__logo
+        @extend .nav__logo
+
+        &-img
+            @extend .nav__logo-img
+
+    &__description
+        margin-bottom: $mb-xxl
+
+    &__social
+        display: flex
+        column-gap: .75rem
+
+        &-link
+            @extend %title-color
+            @extend %neomorphism-out
+            display: inline-flex
+            padding: $mb-xs
+            border-radius: .25rem
+            font-size: $size-m
+            &:hover
+                @extend %neomorphism-in
+            &:active
+                @extend %neomorphism-out
+                
+    &__title
+        font-size: $size-m
+        margin-bottom: $mb-m
+
+    &__links
+        display: grid
+        row-gap: .35rem
+
+    &__link
+        @extend %transition
+        color: $text
+        &:hover
+            @extend %title-color
+
+    &__copy
+        margin-top: 4.5rem
+        text-align: center
+        font-size: $size-xs
+
+
+@media screen and (min-width: 767px)
+    .footer
+        &__container
+            grid-template-columns: (1fr) (1fr) (1fr) (1fr)
+            justify-items: center
+            column-gap: 1rem
+        &__img-two
+            right: initial
+            bottom: 0
+            left: 15%
+
+@media screen and (min-width: 992px)
+    .footer
+        &__copy
+            margin-top: 6rem
+        
+
+
+
+
+
+

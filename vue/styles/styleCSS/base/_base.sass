@@ -1,0 +1,70 @@
+/* ========== BASE ========== */
+$primary: var(--first-color)
+$secondary: var(--first-color-alt)
+$title: var(--title-color)
+$text: var(--text-color)
+$text-light: var(--text-color-light)
+$body: var(--body-color)
+$container: var(--container-color)
+$title: var(--title-color)
+$text-color: var(--text-color) 
+$text-gradient: var(--text-gradient)  
+
+$size-xs: var(--font-xs)
+$size-s: var(--font-s)
+$size-xxl: var(--font-xxl)
+$size-m: var(--font-m)
+$size-l: var(--font-l)
+$size-xl: var(--font-xl)
+
+
+
+
+/* ========== Font Family ========== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;900&display=swap');
+
+*
+  margin: 0
+  padding: 0
+  box-sizing: border-box
+
+html
+  scroll-behavior: smooth
+
+body
+  margin: $header-height 0 0 0
+  font-family: $body-font
+  font-size: $size-m
+  background: $body
+
+h1,h2,h3,h4
+  color: $title
+  font-weight: $semi-bold
+
+ul
+  list-style: none
+
+img
+  max-width: 100%
+  height: auto
+
+a
+  text-decoration: none
+
+i
+  color : $title
+
+p
+  color: $text
+
+input
+  border: none
+  outline: none
+
+button
+  @extend input    
+
+
+@media screen and (min-width: 767px)
+  body
+    margin: 0

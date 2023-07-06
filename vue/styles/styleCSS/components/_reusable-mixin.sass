@@ -1,0 +1,40 @@
+// Centrer un element avec un display flex
+%transition
+    transition: .4s
+
+%title-color
+    color: $title
+
+%gradient-text
+    background: $text-gradient
+    color: transparent
+    -webkit-background-clip: text
+    background-clip: text
+
+@mixin square($width, $height: null, $radius: null)
+    width: $width
+    border-radius: $radius
+    @if $height != null
+        height: $height
+    @else 
+        height: $width
+    
+@mixin position($position, $top: null, $left: null, $right: null, $bottom: null, $center: false)
+    position: $position
+    top: $top
+    left: $left
+    right: $right
+    bottom: $bottom
+    @if $center == true
+        transform: translate(-50%,-50%)
+    
+    
+@mixin flex($justify, $align: center, $dir: null)
+    display: flex
+    justify-content: $justify
+    align-items: $align
+    flex-direction: $dir
+         
+@mixin for-phone-only
+    @media screen and ( max-width: 767px )
+        @content  

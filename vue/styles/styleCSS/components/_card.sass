@@ -1,0 +1,146 @@
+
+.card
+
+    &__content
+        display: grid
+        grid-template-rows: (1fr) (1fr)
+
+    &__data
+        position: relative
+        margin: 0 .75rem
+
+        &-img
+            display: flex
+            flex-direction: column
+            justify-content: center
+            align-items: center
+        
+        &-details
+            display: flex
+            flex-direction: column
+            justify-content: space-between
+
+    &__detail
+        padding: 1.5rem 1rem
+        text-align: left
+        @extend %neomorphism-in
+        width: 100%
+        border-radius: .75rem
+
+    &__img
+        width: 220px
+        margin-bottom: $mb-m
+    &__title
+        font-size: $size-m
+        font-weight: $medium
+
+    &__subtitle
+        @extend %title-color
+        font-size: $size-s
+        margin-bottom: $mb-s
+
+    &__price
+        @extend %title-color
+        @extend .card__title
+
+    &__description
+        color: $text
+        font-size: $size-xs
+        height: 50px
+        overflow-y: auto
+
+    &__buttons
+        display: flex
+        justify-content: center
+        column-gap: 1.5rem
+        margin: 1rem 0
+
+
+    &__button
+        align-self: center
+        width: 90px
+        font-size: 1.2rem
+        &:hover i
+            color: $primary
+
+    & .swiper-pagination
+        text-align: left
+        margin-top: 0
+        margin-bottom: $mb-l
+        &-bullet
+            @extend %neomorphism-in
+            @include square($size-m, $radius: 50%)
+            display: inline-flex
+            justify-content: center
+            background: none
+            font-size: $size-xs
+            color: $text
+            &-active
+                color: $primary !important
+            &:hover
+                font-weight: $semi-bold
+                color: $title
+
+    .swiper-button-next,
+        @extend %neomorphism-in
+        @include square(30px, $radius: 50%)
+        &::after
+            font-size: 10px
+            @include flex(center)
+            color: $text
+        &:hover::after
+            font-weight: $black
+            color: $primary
+
+    .swiper-button-prev 
+        @extend .swiper-button-next
+        &::hover::after
+            @extend .swiper-button-next:hover::after
+        &::after 
+            @extend .swiper-button-next::after
+
+
+.swiper-button-disabled
+    display: none
+
+.none
+    display: none
+
+@media screen and ( max-width: 767px )
+    .card
+        padding: $mb-m 0 0 0
+
+
+@media screen and (min-width: 767px)
+    .card
+        &__content
+            grid-template-columns: (1fr) (1fr)
+            grid-template-rows: none
+        &__data
+            height: 450px
+            &-img
+            &-details
+                justify-content: center
+                position: relative
+        &__detail
+            padding: 0
+            box-shadow: none
+            margin-bottom: 6rem
+        &__img
+            width: 250px
+        &__info
+            padding: 1.5rem 1rem
+            border-radius: .75rem
+            box-shadow: -4px -4px 8px $shadow1,
+            4px 4px 8px $shadow2,
+            4px 4px 8px $shadow2 inset,
+            -4px -4px 8px $shadow1 inset
+        
+        &__buttons
+            position: absolute
+            width: 100%
+            bottom: 0
+            
+
+
+

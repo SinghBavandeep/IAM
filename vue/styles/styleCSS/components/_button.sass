@@ -1,0 +1,25 @@
+.button
+  @extend %title-color
+  @extend %neomorphism-out
+  @extend %transition
+  display: inline-block
+  text-align: center
+  padding: 1rem 1.75rem
+  border-radius: 1rem
+  font-weight: $medium
+  cursor: pointer
+  background-color: $body
+  
+  &:hover
+    @extend %neomorphism-in
+  &:active
+    @extend %neomorphism-out
+
+  &--link
+    display: inline-flex
+    color: $title
+    align-items: center
+    column-gap: .5rem
+
+  &__icon
+    font-size: 1.25rem

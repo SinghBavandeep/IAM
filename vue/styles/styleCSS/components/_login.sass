@@ -1,0 +1,149 @@
+
+
+.login
+
+    &__content
+        row-gap: 2rem
+        display: grid
+        max-width: 415px
+        margin: 0 auto
+
+    &__img
+        @extend %neomorphism-in
+        justify-self: center
+        width: 250px
+        border-radius: 50%
+
+    &__register
+        @extend %neomorphism-out
+        padding: $mb-m
+        border-radius: .75rem
+        text-align: center
+        animation-name: animate-login
+        animation-duration: .4s
+    
+    &__create
+        @extend .login__register
+
+    &__title
+        font-size: $size-xl
+        margin-bottom: $mb-xl
+
+    &__label
+        @extend %title-color
+        display: inline-block
+        width: 100%
+        text-align: left
+        padding-left: $mb-m
+
+    &__box
+        @extend %neomorphism-out
+        display: grid
+        grid-template-columns: max-content 1fr max-content
+        column-gap: .5rem
+        padding: $mb-m + .125rem $mb-m
+        margin-top: $mb-m
+        border-radius: .75rem
+
+    &__icon
+        color: $primary
+
+    &__togglePassword
+        font-size: 1.5rem
+        color: $text-light
+        cursor: pointer
+    
+    &__input
+        width: 100%
+        color: $text
+        font-size: $size-m
+        background: none
+        &::placeholder
+            font-family: $body-font
+            color: $text-light
+
+    &__forgot
+        display: block
+        width: max-content
+        margin-left: auto
+        margin-top: $mb-s
+        font-size: $size-s
+        color: $text-light
+        &:hover
+            color: $primary
+    
+    &__button
+        @extend %title-color
+        @extend .login__box
+        width: 100%
+        margin: $mb-xl 0
+        font-size: $size-m
+        font-weight: $medium
+        transition: none
+
+    &__account
+        color: $text
+        font-weight: $medium
+        font-size: $size-s
+
+    &__signin
+        @extend .login__account
+        color: $primary
+        &:hover
+            font-weight: $semi-bold
+
+    &__signup
+        @extend .login__signin
+
+@keyframes animate-login
+    0%
+        transform: scale(1,1)
+    50%
+        transform: scale(1.1,1.1)
+    100%
+        transform: scale(1,1)
+        
+
+@media screen and ( min-width: 767px )
+    .login
+        &__content
+            max-width: none
+            display: grid
+            grid-template-columns: max-content max-content
+            align-items: center
+            justify-content: center
+        &__img
+            width: 400px
+            height: 388px
+            border-radius: 0
+            padding-left: 1rem
+            box-shadow: none
+        &__register
+            left: -2rem
+
+@media screen and ( min-width: 992px )
+    .login
+        &__img
+            width: 500px
+            height: 488px
+
+@media screen and ( min-width: 1024px )
+    .login
+        &__img
+            width: 600px
+            height: 588px
+
+        &__register
+            left: -6rem
+
+
+
+
+
+
+
+
+
+
+
+
