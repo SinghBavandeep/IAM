@@ -1,12 +1,13 @@
 # IAM
 
--Create diffrent user(Clent, Admin and saler)
-
--Creat a Gant to manage the time
-
--crate the categorie spare part
-
--Admin interface
-
--correcte the add processe
-
+-   Create diferent user(Customer , Admin and seller)
+-   Creat a Gant to manage the time
+-   crate the categoris spare part
+-   Admin/seller interface
+-   correct the add processe
+-   Auctions (les enchaire)
+-   sub-category
+-   best auction(meilleur offre)
+-   Profile page
+-   Payment
+-   Change DataBase
