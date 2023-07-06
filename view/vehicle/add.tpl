@@ -24,11 +24,7 @@
                 </div>
                 <div class="login__box">
                     <i class="bx bxs-coin-stack login__icon" ></i>
-                    <input type="text" name="prixJ" value="<?php echo $prixJ; ?>" placeholder="Price / day" class="login__input">
-                </div>
-                <div class="login__box">
-                    <i class="bx bxs-coin-stack login__icon" ></i>
-                    <input type="text" name="prixM" value="<?php echo $prixM; ?>" placeholder="Price / Month" class="login__input">
+                    <input type="text" name="prixM" value="<?php echo $prixM; ?>" placeholder="Price " class="login__input">
                 </div>
                 <div class="login__box">
                     <i class="bx bx-link-alt login__icon"></i>

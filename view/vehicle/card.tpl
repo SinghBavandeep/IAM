@@ -4,6 +4,7 @@
     <h2 class="section__title">Vehicles</h2>
     <div class="card__container container">
         <div class="swiper card-swiper">
+        <br>
             <div class="swiper-wrapper">
                 <!-- NEW 1 -->
                 <?php 
@@ -14,8 +15,7 @@
                                 <img src="./view/image/'.$item['img'].'" alt="treat1" class="card__img">
                                 <h3 class="card__title">'.$item['nom'].'</h3>
                                 <div class="card__subtitle">'.$item['type'].'</div>
-                                <div class="card__price">'.$item['prixJ'].'€ / Jour</div>
-                                <div class="card__price">'.$item['prixM'].'€ / Mois</div>
+                                <div class="card__price">£'.$item['prixM'].'</div>
                                 <div class="swiper-button-next"></div>
                                 <div class="swiper-button-prev"></div>
                             </div>

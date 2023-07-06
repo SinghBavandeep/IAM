@@ -1,6 +1,6 @@
 <?php
 
-    function getVehicule_BD($id, $role, $rent) 
+    function getVehicle_BD($id, $role, $rent) 
     {
         require('./model/connectBD.php');
         try {
@@ -41,14 +41,13 @@
         require('./model/connectBD.php');
 
             $sql = "INSERT INTO `vehicle` (nom, type, caract, details, img, prixJ, prixM)
-                    VALUES (:nom, :type, :caract, :details, :img, :prixJ, :prixM )";
+                    VALUES (:nom, :type, :caract, :details, :img, :prixM )";
             $command = $pdo->prepare($sql);
             $command->bindParam(':nom', $nom);
             $command->bindParam(':type', $type);
             $command->bindParam(':caract', $caract);
             $command->bindParam(':details', $details);
             $command->bindParam(':img', $img);
-            $command->bindParam(':prixJ', $prixJ);
             $command->bindParam(':prixM', $prixM);        
             
             $bool = $command->execute();
@@ -148,14 +147,17 @@
         /*Bug lorsqu un customer a plusieurs vehicules ou quand le state est egal � 0*/
         foreach($clients as $customer) {
 
-            $sql = "SELECT nom, debutL, finL, prixJ, prixM FROM `vehicle` WHERE idC=:id AND state = 1 ";
+            $sql = "SELECT nom, debutL, finL, prixM FROM `vehicle` WHERE idC=:id AND state = 1 ";
             $command = $pdo->prepare($sql);
             $command->bindParam(':id', $customer['id']);
             $bool = $command->execute();
-
-           if ($bool) {
-               array_push ($vehicles, $command->fetchAll(PDO::FETCH_ASSOC)[0]);          
-            }      
+            
+            if ($bool) {
+                $vehicles = $command->fetchAll(PDO::FETCH_ASSOC);
+                if (!empty($vehicles) && isset($vehicles[0])) {
+                    array_push($vehicles, $vehicles[0]);
+                }
+            }
         }
         //var_dump($vehicules); die();
            return $vehicles;

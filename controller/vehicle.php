@@ -6,7 +6,7 @@
 function show() 
 {	
   require('./model/vehicleBD.php');
-  $_SESSION['vehicles'] = getVehicule_BD(1, 'admin', null);
+  $_SESSION['vehicles'] = getVehicle_BD(1, 'admin', null);
   $url = './index.php?controller=user&action=home';
   header('Location:' . $url);
 }
@@ -35,7 +35,7 @@ function get()
       $id = $_SESSION['profile']['id']; $role = $_SESSION['profile']['role'];
     }
 
-    $_SESSION['admin'] = getVehicule_BD($id, $role, $rent);
+    $_SESSION['admin'] = getVehicle_BD($id, $role, $rent);
     $controller = 'vehicle'; $action = 'card';
     require('./view/layout.tpl');
 
@@ -56,7 +56,6 @@ function add()
   $type = isset($_POST['type']) ? test_input($_POST['type']) : '';
   $caract = isset($_POST['caract']) ? test_input($_POST['caract']) : '';
   $details = isset($_POST['details']) ? test_input($_POST['details']) : '';
-  $prixJ = isset($_POST['prixJ']) ? test_input($_POST['prixJ']) : '';
   $prixM = isset($_POST['prixM']) ? test_input($_POST['prixM']) : '';
   $img = isset($_POST['img']) ? test_input($_POST['img']) : '';
   
@@ -70,12 +69,12 @@ function add()
   else {
     require('./model/vehicleBD.php');
     
-    if (!verif_ajout_input($nom, $type, $caract, $details, $prixJ, $prixM, $img)) {
+    if (!verif_ajout_input($nom, $type, $caract, $details, $prixM, $img)) {
         $msg = 'Erreur de saisie, veillez renseigner tous les champs s\'il vous plaît!';
         $controller = "vehicle"; $action = "add";
         require('./view/layout.tpl');
     }
-    else  ajouter_vehicule_BD($nom, $type, $caract, $details, $prixJ, $prixM, $img);
+    else  ajouter_vehicule_BD($nom, $type, $caract, $details, $prixM, $img);
   }
 
   $controller = 'vehicle'; $action = 'add';
@@ -85,17 +84,17 @@ function add()
 
 // Vérifie si tous les champs du formulaire d'inscription sont
 // correctement renseignés
-function verif_ajout_input($nom, $type, $caract, $details, $prixJ, $prixM, $img) //: bool
+function verif_ajout_input($nom, $type, $caract, $details, $prixM, $img) //: bool
 {
-  if (empty($nom) || empty($type) || empty($caract) || empty($details) || empty($prixJ) || empty($prixM) || empty($img) )
+  if (empty($nom) || empty($type) || empty($caract) || empty($details) || empty($prixM) || empty($img) )
     return false;
   if (!verif_alpha_num($nom))
     return false;
   if (!verif_alpha_num($type) || !verif_alpha_num($caract))
     return false;
-  if (!verif_num($prixJ) || !verif_num($prixM))
+  if (!verif_num($prixM))
     return false;
-  if (intval($prixJ) <= 0 || intval($prixM) < intval($prixJ))
+  if (intval($prixM) <= 0 )
     return false;
 
   return true;
@@ -214,18 +213,6 @@ function annuler()
 
 }
 
-function verif_dates_input($debutL, $finL) //: bool
-{
-  if (empty($debutL) || empty($finL)){
-    return false;
-  }
-
-  if (!verif_date($debutL) || !verif_date($finL)){
-    return false;
-  }
-  return true;
-}
-
 function verif_date($date)
 {
     return preg_match("/[0-9]{4}\-[0-9]{2}\-[0-9]{2}/", $date);
@@ -251,83 +238,19 @@ function bill()
 
     /*calcule et affiche le prix de location pour chaque vehicle ligne par ligne (A compléter)*/
     for ($i = 0 ; $i == count(getFacture($idE)) ; $i++) {
-        $debutL = getFacture($idE)['debutL'];
-        $finL = getFacture($idE)['finL'];
-        $prixJ = getFacture($idE)['prixJ'];
         $prixM = getFacture($idE)['prixM'];
         $nom = getFacture($idE)['nom'];
 
-        if ($finL != null && substr($finL, 3) == substr($today, 5, -3)) {
-            if (substr($finL, 5, -3) == substr($today, 5, -3) && substr($debutL, 5, -3) == substr($today, 5, -3)) {
-                $dureeL = intval(substr($finL, 1)) - intval(substr($debutL, 1));
-
-                if ($dureeL == 0)
-                    $prixL = $prixJ;
-                else if ($dureeL == getJoursMois(intval(substr($today, 5, -3))) - 1)
-                    $prixL = $prixM;
-                else
-                    $prixL =  $dureeL * $prixJ ;
-
-            }
-            else if (substr($finL, 5, -3) == substr($today, 5, -3) && intval(substr($debutL, 5, -3)) < intval(substr($today, 5, -3))) {
-                $dureeL = intval(substr($finL, 8, 0));
-                if ($dureeL == getJoursMois(intval(substr($today, 5, -3))) - 1)
-                    $prixL = $prixM;
-                else
-                    $prixL =  $dureeL * $prixJ ;
-            }
-            else if(intval(substr($finL, 5, -3)) > intval(substr($today, 5, -3)) 
-                    && intval(substr($debutL, 5, -3)) == intval(substr($today, 5, -3))) {
-                $dureeL = getJoursMois(intval(substr($today, 5, -3))) - intval(substr($today, 8, 0));
-                if ($dureeL == getJoursMois(intval(substr($today, 5, -3))) - 1)
-                    $prixL = $prixM;
-                else
-                    $prixL =  $dureeL * $prixJ ;
-            }
-            echo $nom . '          ' . $prixL;
-        }else{
-            $prixL = $prixM;
-                echo $nom . '          ' . $prixL;
-        }
+        $prixL = $prixM;
+        echo $nom . '          ' . $prixL;
+        
     }
     /*calcule le montant total de la flotte de admin*/
     foreach (getFacture($idE) as $vehicle) {
 
-        $debutL = $vehicle['debutL'];
-        $finL = $vehicle['finL'];
-        $prixJ = $vehicle['prixJ'];
         $prixM = $vehicle['prixM'];
-
-        if ($finL != null && substr($finL, 3) == substr($today, 5, -3)) {
-            if (substr($finL, 5, -3) == substr($today, 5, -3) && substr($debutL, 5, -3) == substr($today, 5, -3)) {
-                $dureeL = intval(substr($finL, 1)) - intval(substr($debutL, 1));
-
-                if ($dureeL == 0)
-                    $prixL += $prixJ;
-                else if ($dureeL == getJoursMois(intval(substr($today, 5, -3))) - 1)
-                    $prixL += $prixM;
-                else
-                    $prixL +=  $dureeL * $prixJ ;
-
-            }
-            else if (substr($finL, 5, -3) == substr($today, 5, -3) && intval(substr($debutL, 5, -3)) < intval(substr($today, 5, -3))) {
-                $dureeL = intval(substr($finL, 8, 0));
-                if ($dureeL == getJoursMois(intval(substr($today, 5, -3))) - 1)
-                    $prixL += $prixM;
-                else
-                    $prixL +=  $dureeL * $prixJ ;
-            }
-            else if(intval(substr($finL, 5, -3)) > intval(substr($today, 5, -3)) 
-                    && intval(substr($debutL, 5, -3)) == intval(substr($today, 5, -3))) {
-                $dureeL = getJoursMois(intval(substr($today, 5, -3))) - intval(substr($today, 8, 0));
-                if ($dureeL == getJoursMois(intval(substr($today, 5, -3))) - 1)
-                    $prixL += $prixM;
-                else
-                    $prixL +=  $dureeL * $prixJ ;
-            }
-        }else{
-            $prixL += $prixM;
-        }
+        $prixL += $prixM;
+       
     }
     if (count(getFacture($idE) >= 10)) {
         $prixT = $prixT - ($prixT*0.10);
