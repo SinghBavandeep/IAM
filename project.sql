@@ -154,10 +154,11 @@ CREATE TABLE IF NOT EXISTS `vehicle` (
 --
 
 INSERT INTO `vehicle` (`ref`, `nom`, `type`, `caract`, `details`, `state`, `img`, `prixJ`, `prixM`, `debutL`, `finL`, `idL`, `idC`) VALUES
-(3, 'Dacia Duster', 'Diesel', 'Nombre de places : 5\nBoîte de vitesse : automatique\nMoteur : 3.0d381', 'La Dacia Duster faisant partie de notre catégorie moyenne est une voiture familiale avec un confort et une fiabilité excellente.', 1, 'dacia duster (low coast).png', 14.99, 399.99, NULL, NULL, 1, 13),
-(4, 'Fiat Multipla', 'DIesel', 'Nombre de places : 6\nBoîte de vitesse : manuelle\nMoteur : 1.6 16v', 'La Fiat Multipla faisant partie de notre catégorie low coast est une voiture adaptée aux petits budgets permettant de faire des trajets quotidiens.', 0, 'Fiat Multipla (low coast).png', 9.99, 249.99, NULL, NULL, 1, 3),
-(5, 'Lamborghini Gallardo', 'Diesel', 'Nombre de place : 2\nBoîte de vitesse : manuelle\nMoteur : V10', 'La Lamborghini Gallardo faisant partie de notre catégorie luxe est une voiture de sport très rapide avec une excellente tenue de route.', 1, 'lamborghini gallardo (luxe).png', 99.99, 2699.99, NULL, NULL, 1, 4);
-COMMIT;
+(1, 'BMW X5', 'Diesel', 'Nombre de places : 5, \nBoÃ®te de vitesse : automatique, \nMoteur : 3.0d381', 'La BMW W5 faisant partie de notre catÃ©gorie moyenne est une voiture familiale avec un confort et une fiabilitÃ© excellente.', 1, 'BMW X5 (moyen).png', 19.99, 449.99, NULL, NULL, 1, 5),
+(2, 'Ferrari 488', 'Diesel', 'Nombre de places : 2, \nBoÃ®te de vitesse : manuelle, \nMoteur : V8', 'La Ferrari 488 faisant partie de notre catÃ©gorie luxe est une voiture de sport trÃ¨s rapide avec une excellente tenue de route.', 0, 'Ferrari-488 (luxe).png', 83.99, 2499.99, NULL, NULL, 1, 2),
+(3, 'Dacia Duster', 'Diesel', 'Nombre de places : 5\nBoÃ®te de vitesse : automatique\nMoteur : 3.0d381', 'La Dacia Duster faisant partie de notre catÃ©gorie moyenne est une voiture familiale avec un confort et une fiabilitÃ© excellente.', 1, 'dacia duster (low coast).png', 14.99, 399.99, NULL, NULL, 1, 13),
+(4, 'Fiat Multipla', 'DIesel', 'Nombre de places : 6\nBoÃ®te de vitesse : manuelle\nMoteur : 1.6 16v', 'La Fiat Multipla faisant partie de notre catÃ©gorie low coast est une voiture adaptÃ©e aux petits budgets permettant de faire des trajets quotidiens.', 0, 'Fiat Multipla (low coast).png', 9.99, 249.99, NULL, NULL, 1, 3),
+(5, 'Lamborghini Gallardo', 'Diesel', 'Nombre de place : 2\nBoÃ®te de vitesse : manuelle\nMoteur : V10', 'La Lamborghini Gallardo faisant partie de notre catÃ©gorie luxe est une voiture de sport trÃ¨s rapide avec une excellente tenue de route.', 1, 'lamborghini gallardo (luxe).png', 99.99, 2699.99, NULL, NULL, 1, 4);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
