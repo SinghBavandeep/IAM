@@ -4,7 +4,7 @@
     <div class="login__container container">
         <div class="login__content">
             <!-- FORM -->
-            <form action="./index.php?controle=vehicule&action=ajouter" method="post" class="login__create" id="login-in">
+            <form action="./index.php?controller=vehicle&action=ajouter" method="post" class="login__create" id="login-in">
                 <h3 class="login__title">Add a vehicle</h3>
                 <div class="login__box">
                     <i class="bx bxs-car login__icon"></i>

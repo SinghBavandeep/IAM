@@ -1,6 +1,6 @@
 <?php 
     if (!empty($msg)) {
-        $url = './index.php?controle=utilisateur&action=erreur&param1=utilisateur&param2=ident&arg='.$msg;
+        $url = './index.php?controller=user&action=erreur&param1=user&param2=ident&arg='.$msg;
         header('Location:' . $url);
     } 
 ?>
@@ -11,11 +11,11 @@
     <div class="login__container container">
         <div class="login__content">
             <div class="login__img">
-                <img src="./vue/image/login-img.svg" alt="login">
+                <img src="./view/image/login-img.svg" alt="login">
             </div>
             <!-- FORM -->
             <div class="login__form">
-                <form action="./index.php?controle=utilisateur&action=ident" method="post" class="login__register" id="login-in">
+                <form action="./index.php?controller=user&action=ident" method="post" class="login__register" id="login-in">
                     <h3 class="login__title">Authentification</h3>
                     <div class="login__box">
                         <i class="bx bxs-user login__icon"></i>
@@ -35,7 +35,7 @@
                     <!-- SIGN UP -->
                     <div>
                         <span class="login__account">You do not have an account?</span>
-                        <a href="./index.php?controle=utilisateur&action=inscr" class="login__signin">Sign up</a>
+                        <a href="./index.php?controller=user&action=inscr" class="login__signin">Sign up</a>
                     </div>
                 </form>
             </div>

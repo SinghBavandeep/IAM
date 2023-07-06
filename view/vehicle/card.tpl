@@ -11,7 +11,7 @@
                     echo '
                         <div class="card__content swiper-slide" id="'.$item['ref'].'">
                             <div class="card__data card__data-img">
-                                <img src="./vue/image/'.$item['img'].'" alt="treat1" class="card__img">
+                                <img src="./view/image/'.$item['img'].'" alt="treat1" class="card__img">
                                 <h3 class="card__title">'.$item['nom'].'</h3>
                                 <div class="card__subtitle">'.$item['type'].'</div>
                                 <div class="card__price">'.$item['prixJ'].'€ / Jour</div>
@@ -44,11 +44,11 @@
                                     </div>
                                     
                                 </div>';
-                                if (isset($_GET["param"]) && $_GET['param'] == 'vehicule-home') {
+                                if (isset($_GET["param"]) && $_GET['param'] == 'vehicle-home') {
                                     if (!isset($_SESSION['profil']) || $_SESSION['profil']['role'] != 'loueur') {
                                         echo '
                                         <div class="card__buttons">
-                                            <a href="./index.php?controle=vehicule&action=selection_flotte&param=' . $item['ref'] . '" class="button card__button">
+                                            <a href="./index.php?controller=vehicle&action=selection_flotte&param=' . $item['ref'] . '" class="button card__button">
                                                 <i class="bx bx-cart-alt "></i>
                                             </a>
                                         </div>';
@@ -60,34 +60,34 @@
                                         if ($_SESSION['profil']['role'] == 'client') {
                                             if (!empty($item['debutL']) || !empty($item['debutL'])) {
                                                 echo '
-                                                <a href="./index.php?controle=vehicule&action=deselection_flotte&param=' . $item['ref'] . '" class="button ">
+                                                <a href="./index.php?controller=vehicle&action=deselection_flotte&param=' . $item['ref'] . '" class="button ">
                                                     Cancel
                                                 </a>';
                                             }
                                             else {
                                                 echo '
-                                                <a href="./index.php?controle=vehicule&action=deselection_flotte&param=' . $item['ref'] . '" class="button ">
+                                                <a href="./index.php?controller=vehicle&action=deselection_flotte&param=' . $item['ref'] . '" class="button ">
                                                     Deselect
                                                 </a>';
                                             }
                                             echo '
-                                            <a href="./index.php?controle=vehicule&action=modifier_dates&param=' . $item['ref'] . '" class="button">
+                                            <a href="./index.php?controller=vehicle&action=modifier_dates&param=' . $item['ref'] . '" class="button">
                                                 Edit
                                             </a>';
                                         }
                                         if ($_SESSION['profil']['role'] == 'loueur') {
-                                            if (isset($_GET['param']) && $_GET['param'] == 'vehicule-stock') {
+                                            if (isset($_GET['param']) && $_GET['param'] == 'vehicle-stock') {
                                                 echo '
-                                                <a href="./index.php?controle=vehicule&action=ajouter" class="button ">
+                                                <a href="./index.php?controller=vehicle&action=ajouter" class="button ">
                                                     Add
                                                 </a>
-                                                <a href="./index.php?controle=vehicule&action=supprimer&param='.$item['ref'].'" class="button">
+                                                <a href="./index.php?controller=vehicle&action=supprimer&param='.$item['ref'].'" class="button">
                                                     Delete
                                                 </a>';
                                             }
-                                            if (isset($_GET['param']) && $_GET['param'] == 'vehicule-rent') {
+                                            if (isset($_GET['param']) && $_GET['param'] == 'vehicle-rent') {
                                                 echo '
-                                                <a href="./index.php?controle=vehicule&action=facturation" class="button ">
+                                                <a href="./index.php?controller=vehicle&action=facturation" class="button ">
                                                     Billing
                                                 </a>';
                                             }

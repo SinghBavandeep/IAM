@@ -4,7 +4,7 @@
     <div class="login__container container">
         <div class="login__content">
             <!-- FORM -->
-            <form <?php echo 'action="./index.php?controle=vehicule&action=modifier_dates&param='.$idv.'"'; ?> method="post" class="login__create" id="login-in">
+            <form <?php echo 'action="./index.php?controller=vehicle&action=modifier_dates&param='.$idv.'"'; ?> method="post" class="login__create" id="login-in">
                 <h3 class="login__title">Change date</h3>
                 <label class="login__label">Beginning</label>
                 <div class="login__box">

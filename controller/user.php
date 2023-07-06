@@ -8,25 +8,25 @@
 		$msg = '';
 
 		if (count($_POST)==0){
-			$controle = "utilisateur"; $action = "ident";
-			require('./vue/layout.tpl');
+			$controller = "user"; $action = "ident";
+			require('./view/layout.tpl');
 		}
 		
 		else{
-			require('./modele/utilisateurBD.php');
+			require('./model/userBD.php');
 			if (!verif_ident_input($ident, $mdp, $mdp_c) ||
-				!verif_ident_client_BD($ident, $mdp_c, $Profil) &&
-				!verif_ident_loueur_BD($ident, $mdp_c, $Profil)){
-				$msg = 'Identifiant ou mot de passe incorrect';
-				$controle = "utilisateur"; $action = "ident";
-				require('./vue/layout.tpl');
+				!verif_ident_client_BD($ident, $mdp_c, $Profile) &&
+				!verif_ident_loueur_BD($ident, $mdp_c, $Profile)){
+				$msg = 'Login or password incorrect';
+				$controller = "user"; $action = "ident";
+				require('./view/layout.tpl');
 			}
 
 			else{
             // authentification réussit
 				// die("Tous va bien!");
-				$_SESSION['profil'] = $Profil;
-				$url = './index.php?controle=utilisateur&action=accueil';
+				$_SESSION['profile'] = $Profile;
+				$url = './index.php?controller=user&action=accueil';
 				header('Location:' . $url);
 			}
 		}
@@ -46,18 +46,18 @@
 
 
       if (count($_POST)==0) {
-         $controle = "utilisateur"; $action = "inscr";
-         require('./vue/layout.tpl');
+         $controller = "user"; $action = "inscr";
+         require('./view/layout.tpl');
       }
       else {
-         require('./modele/utilisateurBD.php');
+         require('./model/userBD.php');
 
          if (!verif_inscr_input($nom, $pseudo, $email, $mdp, $nomE, $adresseE, $mdp_c) || 
              !verif_inscr_BD_valide_email($email) || 
              !verif_inscr_BD_valide_pseudo($pseudo)) {
-            $msg = 'Erreur de saisie, Reéssayez !';
-            $controle = "utilisateur"; $action = "inscr";
-            require('./vue/layout.tpl');
+            $msg = 'Input error, Retry!';
+            $controller = "user"; $action = "inscr";
+            require('./view/layout.tpl');
          }
          else {
             // Si l'entreprise n'existe pas dans la base de donné, alors on la crée.
@@ -69,14 +69,14 @@
             inscr_BD($nom, $pseudo, $email, $mdp_c, $idE);
 
             // inscription réussit, authentification automatique.
-            if (verif_ident_client_BD($email, $mdp_c, $Profil)) {
+            if (verif_ident_client_BD($email, $mdp_c, $Profile)) {
                // die("OK tous c'est bien passé.");
-               $_SESSION['profil'] = $Profil;
-               $url = './index.php?controle=utilisateur&action=accueil';
+               $_SESSION['profile'] = $Profile;
+               $url = './index.php?controller=user&action=accueil';
                header('Location:' . $url);
             }
             // inscription échoué : non implémenté
-            die("Quelque chos n'a pas fonctionnée.");
+            die("Something got wrong.");
          }
       }
    }
@@ -85,7 +85,7 @@
    function deconnexion() 
    {
       session_destroy();
-      $url = './index.php?controle=utilisateur&action=accueil';
+      $url = './index.php?controller=user&action=accueil';
       header('Location:' . $url);
    }
 
@@ -94,15 +94,15 @@
 	{
       
       if (!isset($_SESSION['vehicules']) ||
-          isset($_GET['param']) && $_GET['param'] == 'vehicule-home') {
-         $url = './index.php?controle=vehicule&action=show';
+          isset($_GET['param']) && $_GET['param'] == 'vehicle-home') {
+         $url = './index.php?controller=vehicle&action=show';
          header('Location:' . $url);
       }
 
-		$controle = 'accueil';
+		$controller = 'accueil';
 		$action = 'home';
 		
-		require ('./vue/layout.tpl');   
+		require ('./view/layout.tpl');   
 	}
 
    // Vérifie si tous les champs du formulaire d'authentification sont
@@ -167,10 +167,10 @@
 		return $data;
 	}
 
-   function erreur()
+   function error()
    {
-      $controle = 'erreur'; $action = 'flashMessage';
-      require ('./vue/layout.tpl');
+      $controller = 'error'; $action = 'flashMessage';
+      require ('./view/layout.tpl');
    }
 
 ?>
