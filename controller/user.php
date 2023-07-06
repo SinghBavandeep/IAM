@@ -26,7 +26,7 @@
             // authentification réussit
 				// die("Tous va bien!");
 				$_SESSION['profile'] = $Profile;
-				$url = './index.php?controller=user&action=accueil';
+				$url = './index.php?controller=user&action=home';
 				header('Location:' . $url);
 			}
 		}
@@ -72,7 +72,7 @@
             if (verif_ident_client_BD($email, $mdp_c, $Profile)) {
                // die("OK tous c'est bien passé.");
                $_SESSION['profile'] = $Profile;
-               $url = './index.php?controller=user&action=accueil';
+               $url = './index.php?controller=user&action=home';
                header('Location:' . $url);
             }
             // inscription échoué : non implémenté
@@ -85,22 +85,22 @@
    function deconnexion() 
    {
       session_destroy();
-      $url = './index.php?controller=user&action=accueil';
+      $url = './index.php?controller=user&action=home';
       header('Location:' . $url);
    }
 
-   // gère l'accueil
-	function accueil() 
+   // gère l'home
+	function home() 
 	{
       
-      if (!isset($_SESSION['vehicules']) ||
+      if (!isset($_SESSION['vehicles']) ||
           isset($_GET['param']) && $_GET['param'] == 'vehicle-home') {
          $url = './index.php?controller=vehicle&action=show';
          header('Location:' . $url);
       }
 
-		$controller = 'accueil';
-		$action = 'home';
+		$controller = 'home';
+		$action = 'home2';
 		
 		require ('./view/layout.tpl');   
 	}

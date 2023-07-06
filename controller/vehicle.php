@@ -6,20 +6,20 @@
 function show() 
 {	
   require('./model/vehicleBD.php');
-  $_SESSION['vehicules'] = getVehicule_BD(1, 'loueur', null);
-  $url = './index.php?controller=user&action=accueil';
+  $_SESSION['vehicles'] = getVehicule_BD(1, 'admin', null);
+  $url = './index.php?controller=user&action=home';
   header('Location:' . $url);
 }
 
 function get() 
 {
-  if (!isset($_SESSION['profil'])) {
+  if (!isset($_SESSION['profile'])) {
     $url = './index.php?controller=user&action=ident';
     header('Location:' . $url);
   }
   else {
     require('./model/vehicleBD.php');
-    // Affiche les vehicules en cours de location 
+    // Affiche les vehicles en cours de location 
 
     if (isset($_GET['param']) && $_GET['param'] == 'vehicle-rent')
       $rent = true;
@@ -28,18 +28,18 @@ function get()
 
     // Affiche vehicle en stock 
     if (isset($_GET['param']) && $_GET['param'] == 'vehicle-home') {
-      $id = "1"; $role = 'loueur';
+      $id = "1"; $role = 'admin';
     }
     // Affiche s vehicle en stock 
     else {
-      $id = $_SESSION['profil']['id']; $role = $_SESSION['profil']['role'];
+      $id = $_SESSION['profile']['id']; $role = $_SESSION['profile']['role'];
     }
 
-    $_SESSION['vehicules'] = getVehicule_BD($id, $role, $rent);
+    $_SESSION['admin'] = getVehicule_BD($id, $role, $rent);
     $controller = 'vehicle'; $action = 'card';
-    require('./vue/layout.tpl');
+    require('./view/layout.tpl');
 
-    if ($_SESSION['profil']['role'] == 'loueur') {
+    if ($_SESSION['profile']['role'] == 'admin') {
       // fonction pour le loueur
     }
     else {
@@ -65,7 +65,7 @@ function add()
 
   if (count($_POST)==0) {
     $controller = "vehicle"; $action = "add";
-    require('./vue/layout.tpl');
+    require('./view/layout.tpl');
   }
   else {
     require('./model/vehicleBD.php');
@@ -73,7 +73,7 @@ function add()
     if (!verif_ajout_input($nom, $type, $caract, $details, $prixJ, $prixM, $img)) {
         $msg = 'Erreur de saisie, veillez renseigner tous les champs s\'il vous plaît!';
         $controller = "vehicle"; $action = "add";
-        require('./vue/layout.tpl');
+        require('./view/layout.tpl');
     }
     else  ajouter_vehicule_BD($nom, $type, $caract, $details, $prixJ, $prixM, $img);
   }
@@ -105,7 +105,7 @@ function supprimer()
 {   
   $idv = $_GET['param'];
 
-  require('./model/vehiculeBD.php');
+  require('./model/vehicleBD.php');
 
   supprimer_vehicule_BD($idv);
 
@@ -144,15 +144,15 @@ function test_input(string $data) : string
 
 function selection_flotte()
 {
-  if(!isset($_SESSION['profil'])) {
+  if(!isset($_SESSION['profile'])) {
     $url = './index.php?controller=user&action=ident';
     header('Location:' . $url);
   }
 
-  $id = $_SESSION['profil']['id'];
+  $id = $_SESSION['profile']['id'];
   $idv = $_GET['param'];
 
-  require('./model/vehiculeBD.php');
+  require('./model/vehicleBD.php');
 
   selection_flotte_BD($id, $idv);
 
@@ -165,7 +165,7 @@ function deselection_flotte()
 {
   $idv = $_GET['param'];
 
-    require('./model/vehiculeBD.php');
+    require('./model/vehicleBD.php');
 
   deselection_flotte_BD($idv);
 
@@ -183,7 +183,7 @@ function modifier_dates()
 
   if (count($_POST)==0) {
     $controller = "vehicle"; $action = "modifier_dates";
-    require('./vue/layout.tpl');
+    require('./view/layout.tpl');
   }
   else {
     require('./model/vehicleBD.php');
@@ -191,7 +191,7 @@ function modifier_dates()
     if (!verif_dates_input($debutL, $finL)) {
       $msg = 'Erreur de saisie, Réessayer !';
       $controller = "vehicle"; $action = "modifier_dates";
-      require('./vue/layout.tpl');
+      require('./view/layout.tpl');
     }
     else {
       modifier_dates_BD($idv, $debutL, $finL);
@@ -233,7 +233,7 @@ function verif_date($date)
 
 
 
-function facture()
+function bill()
 {
     $idE = 1;
     //$idE = $_GET['param'];
@@ -290,7 +290,7 @@ function facture()
                 echo $nom . '          ' . $prixL;
         }
     }
-    /*calcule le montant total de la flotte de vehicules*/
+    /*calcule le montant total de la flotte de admin*/
     foreach (getFacture($idE) as $vehicle) {
 
         $debutL = $vehicle['debutL'];

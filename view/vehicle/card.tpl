@@ -7,7 +7,7 @@
             <div class="swiper-wrapper">
                 <!-- NEW 1 -->
                 <?php 
-                    foreach ($_SESSION['vehicules'] as $item) {
+                    foreach ($_SESSION['vehicles'] as $item) {
                     echo '
                         <div class="card__content swiper-slide" id="'.$item['ref'].'">
                             <div class="card__data card__data-img">
@@ -45,7 +45,7 @@
                                     
                                 </div>';
                                 if (isset($_GET["param"]) && $_GET['param'] == 'vehicle-home') {
-                                    if (!isset($_SESSION['profil']) || $_SESSION['profil']['role'] != 'loueur') {
+                                    if (!isset($_SESSION['profile']) || $_SESSION['profile']['role'] != 'admin') {
                                         echo '
                                         <div class="card__buttons">
                                             <a href="./index.php?controller=vehicle&action=selection_flotte&param=' . $item['ref'] . '" class="button card__button">
@@ -57,7 +57,7 @@
                                 else {
                                     echo '
                                     <div class="card__buttons">';
-                                        if ($_SESSION['profil']['role'] == 'client') {
+                                        if ($_SESSION['profile']['role'] == 'customer') {
                                             if (!empty($item['debutL']) || !empty($item['debutL'])) {
                                                 echo '
                                                 <a href="./index.php?controller=vehicle&action=deselection_flotte&param=' . $item['ref'] . '" class="button ">
@@ -75,7 +75,7 @@
                                                 Edit
                                             </a>';
                                         }
-                                        if ($_SESSION['profil']['role'] == 'loueur') {
+                                        if ($_SESSION['profile']['role'] == 'admin') {
                                             if (isset($_GET['param']) && $_GET['param'] == 'vehicle-stock') {
                                                 echo '
                                                 <a href="./index.php?controller=vehicle&action=ajouter" class="button ">
@@ -87,7 +87,7 @@
                                             }
                                             if (isset($_GET['param']) && $_GET['param'] == 'vehicle-rent') {
                                                 echo '
-                                                <a href="./index.php?controller=vehicle&action=facturation" class="button ">
+                                                <a href="./index.php?controller=vehicle&action=bill" class="button ">
                                                     Billing
                                                 </a>';
                                             }

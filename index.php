@@ -9,8 +9,8 @@
     }
     else {
         if (count($_GET)==0) {
-            $controller = 'utilisateur'; 
-            $action = 'accueil'; //ou d'un appel à index.php sans paramètre...
+            $controller = 'user'; 
+            $action = 'home'; //ou d'un appel à index.php sans paramètre...
         }
         
         if (isset($_GET['controller']) && isset($_GET['action'])) {

@@ -1,17 +1,17 @@
 <nav class="nav container">
     <!-- LOGO -->
-    <a href="./index.php?controller=user&action=accueil&param=vehicle-home" class="nav__logo">
+    <a href="./index.php?controller=user&action=home&param=vehicle-home" class="nav__logo">
         <img src="./view/image/logo_final.png" alt="logo" class="nav__logo-img">
-        <p class="nav__logo-title"><?php echo isset($_SESSION['profil']) ? $_SESSION['profil']['pseudo'] : ''; ?></p>
+        <p class="nav__logo-title"><?php echo isset($_SESSION['profile']) ? $_SESSION['profile']['pseudo'] : ''; ?></p>
     </a>
     <!-- MENU -->
     <div class="nav__menu" id="nav-menu">
         <ul class="nav__list">
             <li class="nav__item">
-                <a href="./index.php?controller=user&action=accueil&param=vehicle-home" class="nav__link">Home</a>
+                <a href="./index.php?controller=user&action=home&param=vehicle-home" class="nav__link">Home</a>
             </li>
             <?php 
-                if ($controller == 'accueil') {
+                if ($controller == 'home') {
                     echo '
                     <!-- <li class="nav__item">
                         <a href="#about" class="nav__link">About</a>
@@ -24,7 +24,7 @@
                     </li> -->
                     ';
                 }
-                if (!isset($_SESSION['profil'])) {
+                if (!isset($_SESSION['profile'])) {
                     echo '
                     <li class="nav__item">
                         <a href="./index.php?controller=user&action=inscr" class="nav__link">Inscription</a>
@@ -34,7 +34,7 @@
                     </li>';
 
                 }else{
-                    if ($_SESSION['profil']['role'] == 'client') {
+                    if ($_SESSION['profile']['role'] == 'customer') {
                         echo'
                         <li class="nav__item">
                             <a href="./index.php?controller=vehicle&action=get" class="nav__link">Vehicles</a>
@@ -43,7 +43,7 @@
                             <a href="./index.php?controller=vehicle&action=get" class="nav__link">Spare part</a>
                         </li>';
                     }
-                    if ($_SESSION['profil']['role'] == 'loueur') {
+                    if ($_SESSION['profile']['role'] == 'admin') {
                         echo'
                         <li class="nav__item">
                             <a href="./index.php?controller=vehicle&action=get&param=vehicle-stock" class="nav__link">Stock</a>

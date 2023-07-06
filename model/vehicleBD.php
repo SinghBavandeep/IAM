@@ -6,12 +6,12 @@
         try {
             if ($rent) {
                 $sql = "SELECT * FROM `vehicle` WHERE ref = (
-                        SELECT idv FROM `facture` GROUP BY idv);";
+                        SELECT idv FROM `bill` GROUP BY idv);";
                 $command = $pdo->prepare($sql);
                 $bool = $command->execute();
             }
             else {
-                if ($role == 'loueur')
+                if ($role == 'admin')
                     $sql = "SELECT * FROM `vehicle` WHERE idL=:id";
                 else
                     $sql = "SELECT * FROM `vehicle` WHERE idC=:id";
@@ -133,7 +133,7 @@
     {
         require('./model/connectBD.php');
 
-        $sql = "SELECT id FROM `client` WHERE idE =:idE";
+        $sql = "SELECT id FROM `customer` WHERE idE =:idE";
         $command = $pdo->prepare($sql);
         $command->bindParam(':idE', $idE);
         $bool = $command->execute();
@@ -145,12 +145,12 @@
 
         $vehicules = array();
 
-        /*Bug lorsqu un client a plusieurs vehicules ou quand le state est egal � 0*/
-        foreach($clients as $client) {
+        /*Bug lorsqu un customer a plusieurs vehicules ou quand le state est egal � 0*/
+        foreach($clients as $customer) {
 
             $sql = "SELECT nom, debutL, finL, prixJ, prixM FROM `vehicle` WHERE idC=:id AND state = 1 ";
             $command = $pdo->prepare($sql);
-            $command->bindParam(':id', $client['id']);
+            $command->bindParam(':id', $customer['id']);
             $bool = $command->execute();
 
            if ($bool) {

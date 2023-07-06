@@ -27,7 +27,7 @@
 
     <!-- FOOTER -->
     <footer class="footer section">
-        <?php if ($action == 'accueil') require('./view/footer/footer.tpl'); ?>
+        <?php require('./view/footer/footer.tpl'); ?>
     </footer>
 
     <!-- SCROLL UP -->

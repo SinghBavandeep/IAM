@@ -64,4 +64,4 @@
         </ul>
     </div>
 </div>
-<p class="footer__copy">&#169; PWEB PROJECT. All rights reserved</p>
+<p class="footer__copy">&#169; DYNAMIC WEB PROJECT. All rights reserved</p>
