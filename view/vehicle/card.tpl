@@ -78,7 +78,7 @@
                                         if ($_SESSION['profile']['role'] == 'admin') {
                                             if (isset($_GET['param']) && $_GET['param'] == 'vehicle-stock') {
                                                 echo '
-                                                <a href="./index.php?controller=vehicle&action=ajouter" class="button ">
+                                                <a href="./index.php?controller=vehicle&action=add" class="button ">
                                                     Add
                                                 </a>
                                                 <a href="./index.php?controller=vehicle&action=supprimer&param='.$item['ref'].'" class="button">
