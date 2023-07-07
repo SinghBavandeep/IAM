@@ -109,12 +109,13 @@
 
 function account()
 {
-    if (!isset($_SESSION['profile']['pseudo'])) {
+    if (isset($_SESSION['profile']['pseudo'])) {
         $controller = 'user';
         $action = 'account';
 
         require ('./view/layout.tpl');
     }
+
 }
 
    // Vérifie si tous les champs du formulaire d'authentification sont
