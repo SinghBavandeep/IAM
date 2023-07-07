@@ -2,7 +2,7 @@
     <!-- CONTENT 1 -->
     <div class="footer__content">
         <a href="#" class="footer__logo">
-            <img src="./vue/image/logo_final.png" alt="logo" class="footer__logo-img">
+            <img src="./view/image/logo_final.png" alt="logo" class="footer__logo-img">
             IAM
         </a>
         <p class="footer__description">Enjoy the your <br>life with IAM.</p>
