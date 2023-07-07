@@ -1,3 +1,3 @@
 <div class="msg__error">
-    <h1>Erroeur : messages ...</h1>
+    <h1>Error : messages ...</h1>
 </div>

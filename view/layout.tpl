@@ -27,7 +27,7 @@
 
     <!-- FOOTER -->
     <footer class="footer section">
-        <?php require('./view/footer/footer.tpl'); ?>
+        <?php if ($action !== 'flashMessage') require('./view/footer/footer.tpl'); ?>
     </footer>
 
     <!-- SCROLL UP -->

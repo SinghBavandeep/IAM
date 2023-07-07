@@ -36,11 +36,11 @@
             return $Resultat;
     }
 
-    function ajouter_vehicule_BD($nom, $type, $caract, $details, $prixJ, $prixM, $img) {
+    function ajouter_vehicule_BD($nom, $type, $caract, $details, $prixM, $img) {
     
         require('./model/connectBD.php');
 
-            $sql = "INSERT INTO `vehicle` (nom, type, caract, details, img, prixJ, prixM)
+            $sql = "INSERT INTO `vehicle` (nom, type, caract, details, img, prixM)
                     VALUES (:nom, :type, :caract, :details, :img, :prixM )";
             $command = $pdo->prepare($sql);
             $command->bindParam(':nom', $nom);

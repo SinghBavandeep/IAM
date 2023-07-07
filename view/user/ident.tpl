@@ -1,6 +1,6 @@
 <?php 
     if (!empty($msg)) {
-        $url = './index.php?controller=user&action=erreur&param1=user&param2=ident&arg='.$msg;
+        $url = './index.php?controller=user&action=error&param1=user&param2=ident&arg='.$msg;
         header('Location:' . $url);
     } 
 ?>
