@@ -2,6 +2,9 @@
     <!-- LOGO -->
     <a href="./index.php?controller=user&action=home&param=vehicle-home" class="nav__logo">
         <img src="./view/image/logo_final.png" alt="logo" class="nav__logo-img">
+    </a>
+    <a href="./index.php?controller=user&action=account" class="nav__logo">
+        <img src="./view/image/profile-icon.png" width="40px" height="40px" alt="profile" >
         <p class="nav__logo-title"><?php echo isset($_SESSION['profile']) ? $_SESSION['profile']['pseudo'] : ''; ?></p>
     </a>
     <!-- MENU -->
@@ -10,24 +13,12 @@
             <li class="nav__item">
                 <a href="./index.php?controller=user&action=home&param=vehicle-home" class="nav__link">Home</a>
             </li>
-            <?php 
-                if ($controller == 'home') {
-                    echo '
-                    <!-- <li class="nav__item">
-                        <a href="#about" class="nav__link">About</a>
-                    </li>
-                    <li class="nav__item">
-                        <a href="#trick" class="nav__link">Candy</a>
-                    </li>
-                    <li class="nav__item">
-                        <a href="#new" class="nav__link">New</a>
-                    </li> -->
-                    ';
-                }
+            <?php
+
                 if (!isset($_SESSION['profile'])) {
                     echo '
                     <li class="nav__item">
-                        <a href="./index.php?controller=user&action=inscr" class="nav__link">Inscription</a>
+                        <a href="./index.php?controller=user&action=inscr" class="nav__link">Sign up</a>
                     </li>
                     <li class="nav__item">
                         <a href="./index.php?controller=user&action=ident" class="nav__link">Login</a>

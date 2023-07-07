@@ -100,10 +100,22 @@
       }
 
 		$controller = 'home';
-		$action = 'home2';
-		
-		require ('./view/layout.tpl');   
-	}
+		$action = 'home';
+
+        require ('./view/layout.tpl');
+
+
+    }
+
+function account()
+{
+    if (!isset($_SESSION['profile']['pseudo'])) {
+        $controller = 'user';
+        $action = 'account';
+
+        require ('./view/layout.tpl');
+    }
+}
 
    // Vérifie si tous les champs du formulaire d'authentification sont
    // correctement renseignés
