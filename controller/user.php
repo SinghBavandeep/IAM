@@ -4,7 +4,7 @@
 	function ident() 
 	{
 		$ident = isset($_POST['ident']) ? test_input($_POST['ident']) : '';
-		$mdp = isset($_POST['mdp']) ? test_input($_POST['mdp']) : '';
+		$password = isset($_POST['password']) ? test_input($_POST['password']) : '';
 		$msg = '';
 
 		if (count($_POST)==0){
@@ -14,9 +14,9 @@
 		
 		else{
 			require('./model/userBD.php');
-			if (!verif_ident_input($ident, $mdp, $mdp_c) ||
-				!verif_ident_client_BD($ident, $mdp_c, $Profile) &&
-				!verif_ident_loueur_BD($ident, $mdp_c, $Profile)){
+			if (!verif_ident_input($ident, $password, $password_c) ||
+				!verif_ident_client_BD($ident, $password, $profile) &&
+				!verif_ident_loueur_BD($ident, $password, $profile)){
 				$msg = 'Login or password incorrect';
 				$controller = "user"; $action = "ident";
 				require('./view/layout.tpl');
@@ -25,7 +25,7 @@
 			else{
             // authentification réussit
 				// die("Tous va bien!");
-				$_SESSION['profile'] = $Profile;
+				$_SESSION['profile'] = $profile;
 				$url = './index.php?controller=user&action=home';
 				header('Location:' . $url);
 			}
@@ -36,12 +36,11 @@
 	function inscr()
    {
       // Définition des variables
-      $nom = isset($_POST['nom']) ? test_input($_POST['nom']) : '';
-      $pseudo = isset($_POST['pseudo']) ? test_input($_POST['pseudo']) : '';
+      $name = isset($_POST['name']) ? test_input($_POST['name']) : '';
+      $username = isset($_POST['username']) ? test_input($_POST['username']) : '';
       $email = isset($_POST['email']) ? test_input($_POST['email']) : '';
-      $mdp = isset($_POST['mdp']) ? test_input($_POST['mdp']) : '';
-      $nomE = isset($_POST['nomE']) ? test_input($_POST['nomE']) : '';
-      $adresseE = isset($_POST['adresseE']) ? test_input($_POST['adresseE']) : '';
+      $password = isset($_POST['password']) ? test_input($_POST['password']) : '';
+      $adress = isset($_POST['adress']) ? test_input($_POST['adress']) : '';
       $msg = '';
 
 
@@ -52,26 +51,21 @@
       else {
          require('./model/userBD.php');
 
-         if (!verif_inscr_input($nom, $pseudo, $email, $mdp, $nomE, $adresseE, $mdp_c) || 
-             !verif_inscr_BD_valide_email($email) || 
-             !verif_inscr_BD_valide_pseudo($pseudo)) {
+         if (!verif_inscr_input($name, $username, $email, $password, $adress, $password_c) ||
+             !verif_inscr_BD_valid_email($email) ||
+             !verif_inscr_BD_valid_username($username)) {
             $msg = 'Input error, Retry!';
             $controller = "user"; $action = "inscr";
             require('./view/layout.tpl');
          }
          else {
-            // Si l'entreprise n'existe pas dans la base de donné, alors on la crée.
-            if (count(getId_entreprise_BD($nomE)) == 0) 
-               create_entreprise_BD($nomE, $adresseE);
 
-            $idE = getId_entreprise_BD($nomE)['id'];
-
-            inscr_BD($nom, $pseudo, $email, $mdp_c, $idE);
+            inscr_BD($name, $username, $email, $password_c);
 
             // inscription réussit, authentification automatique.
-            if (verif_ident_client_BD($email, $mdp_c, $Profile)) {
+            if (verif_ident_client_BD($email, $password_c, $profile)) {
                // die("OK tous c'est bien passé.");
-               $_SESSION['profile'] = $Profile;
+               $_SESSION['profile'] = $profile;
                $url = './index.php?controller=user&action=home';
                header('Location:' . $url);
             }
@@ -79,6 +73,10 @@
             die("Something got wrong.");
          }
       }
+   }
+
+   function modify(){
+
    }
 
    // gère la déconnexion 
@@ -120,29 +118,29 @@ function account()
 
    // Vérifie si tous les champs du formulaire d'authentification sont
    // correctement renseignés
-	function verif_ident_input($ident, $mdp, &$mdp_c='') 
+	function verif_ident_input($ident, $password, &$mdp_c='')
    {
-		if (empty($ident) || empty($mdp))
+		if (empty($ident) || empty($password))
 			return false;
-		$mdp_c = crypt($mdp, '$6$rounds=5000$anexamplestringforsalt$');
+		$mdp_c = crypt($password, '$6$rounds=5000$anexamplestringforsalt$');
 		return true;
 	}
 
    // Vérifie si tous les champs du formulaire d'inscription sont
    // correctement renseignés
-	function verif_inscr_input($nom, $pseudo, $email , $mdp, $nomE, $adresseE, &$mdp_c='') : bool
+	function verif_inscr_input($name, $username, $email , $password, $adress, &$password_c='') : bool
    {
-      if (empty($nom) || empty($pseudo) || empty($mdp) || empty($email) || empty($nomE) || empty($adresseE))
+      if (empty($name) || empty($username) || empty($password) || empty($email) || empty($adress))
          return false;
-      if (!verif_alpha($nom))
+      if (!verif_alpha($name))
          return false;
-      if (!verif_input_size($pseudo, 3) || !verif_alpha($pseudo[0]) || !verif_alpha_num($pseudo))
+      if (!verif_input_size($username, 3) || !verif_alpha($username[0]) || !verif_alpha_num($username))
          return false;
       if (!verif_email($email))
          return false;
-      if (!verif_alpha_num($nomE) || !verif_alpha_num($adresseE))
+      if (!verif_alpha_num($adress))
          return false;
-      $mdp_c = crypt($mdp, '$6$rounds=5000$anexamplestringforsalt$');
+      $password_c = crypt($password, '$6$rounds=5000$anexamplestringforsalt$');
       return true;
    }
 

@@ -1,52 +1,51 @@
 <?php 
 
     // vérifie si le customer est présent dans la base de donnée.
-    function verif_ident_client_BD($ident, $mdp, &$Profile) 
+    function verif_ident_customer_BD($ident, $password, &$profile)
     {
         require('./model/connectBD.php');
         try {
-            $sql = "SELECT * FROM `customer` WHERE pseudo=:ident AND mdp=:mdp OR email=:ident AND mdp=:mdp";
+            $sql = "SELECT * FROM `customer` WHERE username=:ident AND password=:password OR email=:ident AND password=:password";
             $command = $pdo->prepare($sql);
             $command->bindParam(':ident', $ident);
-            $command->bindParam(':mdp', $mdp);
+            $command->bindParam(':password', $password);
             $bool = $command->execute();
     
             if ($bool) {
-                $Resultat = $command->fetchAll(PDO::FETCH_ASSOC);
-                if (count($Resultat) != 0) $Resultat[0]['role'] = 'customer';
-                // var_dump($Resultat); die();
+                $result = $command->fetchAll(PDO::FETCH_ASSOC);
+                if (count($result) != 0) $result[0]['role'] = 'customer';
             }
         }
         catch (PDOException $e) {
             echo utf8_encode('Echec de select : ' . $e->getMessage() . '\n');
             die();
         }
-        if (count($Resultat)==0) {
-            $Profile = array(); // retourne un tableau vide
+        if (count($result)==0) {
+            $profile = array(); // retourne un tableau vide
             return false;
         }
         else {
-            $Profile = $Resultat[0];
+            $profile = $result[0];
             return true;
         }
     }
 
     // vérifie si le loueur est présent dans la base de donnée.
-    function verif_ident_loueur_BD($ident, $mdp, &$Profile)  
+    function verif_ident_admin_BD($ident, $password, &$profile)
     {
         require('./model/connectBD.php');
         try {
-            $sql = "SELECT * FROM `admin` WHERE pseudo=:ident AND mdp=:mdp OR email=:ident AND mdp=:mdp";
+            $sql = "SELECT * FROM `admin` WHERE username=:ident AND password=:password OR email=:ident AND password=:password";
             $command = $pdo->prepare($sql);
             $command->bindParam(':ident', $ident);
-            $command->bindParam(':mdp', $mdp);
+            $command->bindParam(':mdp', $password);
             $bool = $command->execute();
     
             if ($bool) {
-                $Resultat = $command->fetchAll(PDO::FETCH_ASSOC);
-                if (count($Resultat) != 0)
-                    $Resultat[0]['role'] = 'admin';
-                // var_dump($Resultat); die();
+                $result = $command->fetchAll(PDO::FETCH_ASSOC);
+                if (count($result) != 0)
+                    $result[0]['role'] = 'admin';
+                // var_dump($result); die();
             }
         }
         catch (PDOException $e) {
@@ -54,51 +53,28 @@
             die();
         }
 
-        if (count($Resultat)==0) {
-            $Profile = array(); // retourne un tableau vide
+        if (count($result)==0) {
+            $profile = array(); // retourne un tableau vide
             return false;
         }
         else {
-            $Profile = $Resultat[0];
+            $profile = $result[0];
             return true;
         }
     }
 
     // insère un nouveau customer dans la base de donnée.
-    function inscr_BD($nom, $pseudo, $email, $mdp, $idE)
+    function inscr_BD($name, $username, $email, $password)
     {
         require('./model/connectBD.php');
-        $sql = "INSERT INTO `` (nom, pseudo, email, mdp, idE)
-                 VALUES (:nom, :pseudo, :email, :mdp, :idE)";
+        $sql = "INSERT INTO `customer` (name, username, email, password)
+                 VALUES (:name, :username, :email, :password)";
         try {
             $command = $pdo->prepare($sql);
-            $command->bindParam(':nom', $nom);
-            $command->bindParam(':pseudo', $pseudo);
+            $command->bindParam(':name', $name);
+            $command->bindParam(':username', $username);
             $command->bindParam(':email', $email);
-            $command->bindParam(':mdp', $mdp);
-            $command->bindParam(':idE', $idE);
-            $bool = $command->execute();
-
-            if ($bool) return true;
-            else return false;
-        }
-
-        catch (PDOException $e) {
-            echo utf8_encode('Echec de insert into : ' . $e->getMessage() . '.\n');
-            die();
-        }
-    }
-
-    // insère une nouvelle entreprise dans la base de donnée.
-    function create_entreprise_BD($nom, $adresse) 
-    {
-        require('./model/connectBD.php');
-        $sql = "INSERT INTO `company` (nom, adresse)
-                VALUES (:nom, :adresse)";
-        try {
-            $command = $pdo->prepare($sql);
-            $command->bindParam(':nom', $nom);
-            $command->bindParam(':adresse', $adresse);
+            $command->bindParam(':password', $password);
             $bool = $command->execute();
 
             if ($bool) return true;
@@ -112,7 +88,7 @@
     }
 
     // renvoie l'id de l'entreprise ayant le nom passé en paramètre
-    function getId_entreprise_BD($nom)
+    /*function getId_entreprise_BD($nom)
     {
         require('./model/connectBD.php');
         $sql = "SELECT id FROM `company` WHERE nom = :nom";
@@ -137,10 +113,10 @@
         else {
             return $Resultat[0];
         }
-    }
+    }*/
 
     // vérifie si un email est présent dans la base de donnée.
-    function verif_inscr_BD_valide_email($email) 
+    function verif_inscr_BD_valid_email($email)
     {
         require('./model/connectBD.php');
         try {
@@ -150,7 +126,7 @@
             $bool = $command->execute();
     
             if ($bool) {
-                $Resultat = $command->fetchAll(PDO::FETCH_ASSOC);
+                $result = $command->fetchAll(PDO::FETCH_ASSOC);
                 // var_dump($Resultat); die();
             }
         }
@@ -159,22 +135,22 @@
             die();
         }
 
-        if (count($Resultat)==0) return true;
+        if (count($result)==0) return true;
         else return false;
     }
 
     // vérifie si un pseudo est présent dans la base de donnée.
-    function verif_inscr_BD_valide_pseudo($pseudo) 
+    function verif_inscr_BD_valide_pseudo($username)
     {
         require('./model/connectBD.php');
         try {
-            $sql = "SELECT * FROM `customer` WHERE pseudo=:pseudo";
+            $sql = "SELECT * FROM `customer` WHERE username=:username";
             $command = $pdo->prepare($sql);
-            $command->bindParam(':pseudo', $pseudo);
+            $command->bindParam(':pseudo', $username);
             $bool = $command->execute();
     
             if ($bool) {
-                $Resultat = $command->fetchAll(PDO::FETCH_ASSOC);
+                $result = $command->fetchAll(PDO::FETCH_ASSOC);
                 // var_dump($Resultat); die();
             }
         }
@@ -183,7 +159,7 @@
             die();
         }
 
-        if (count($Resultat)==0) return true;
+        if (count($result)==0) return true;
         else return false;
     }
     

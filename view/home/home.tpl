@@ -18,7 +18,7 @@
                             <!-- HOME DATA -->
                             <div class="home__data">
                                 <h3 class="home__subtitle">'.$item['type'].'</h3>
-                                <h1 class="home__title">'.$item['nom'].'</h1>
+                                <h1 class="home__title">'.$item['name'].'</h1>
                                 <p class="home__description">'.$item['details'].'</p>
                                 <div class="home__buttons">
                                     <a href="./index.php?controller=vehicle&action=selection_flotte&param='.$item['ref'].'" class="button">Select</a>
