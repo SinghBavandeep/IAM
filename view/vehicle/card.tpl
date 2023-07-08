@@ -13,7 +13,7 @@
                         <div class="card__content swiper-slide" id="'.$item['ref'].'">
                             <div class="card__data card__data-img">
                                 <img src="./view/image/'.$item['img'].'" alt="treat1" class="card__img">
-                                <h3 class="card__title">'.$item['nom'].'</h3>
+                                <h3 class="card__title">'.$item['name'].'</h3>
                                 <div class="card__subtitle">'.$item['type'].'</div>
                                 <div class="card__price">£'.$item['prixM'].'</div>
                                 <div class="swiper-button-next"></div>
