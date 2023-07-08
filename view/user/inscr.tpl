@@ -20,11 +20,11 @@
                     <h3 class="login__title">Registration</h3>
                     <div class="login__box">
                         <i class="bx bxs-user login__icon"></i>
-                        <input type="text" name="name" value="<?php echo $nom; ?>" placeholder="Name" class="login__input">
+                        <input type="text" name="name" value="<?php echo $name; ?>" placeholder="Name" class="login__input">
                     </div>
                     <div class="login__box">
                         <i class="bx bxs-user login__icon"></i>
-                        <input type="text" name="pseudo" value="<?php echo $pseudo; ?>" placeholder="Username" class="login__input">
+                        <input type="text" name="username" value="<?php echo $username; ?>" placeholder="Username" class="login__input">
                     </div>
                     <div class="login__box">
                         <i class="bx bx-at login__icon"></i>
@@ -32,12 +32,12 @@
                     </div>
                     <div class="login__box">
                         <i class="bx bxs-lock login__icon"></i>
-                        <input type="password" name="mdp" value="<?php echo $mdp; ?>" placeholder="Password" class="login__input" id="password">
+                        <input type="password" name="password" value="<?php echo $password; ?>" placeholder="Password" class="login__input" id="password">
                         <i class='bx bxs-show login__togglePassword' id="toggle-password"></i>
                     </div>
                     <div class="login__box">
                         <i class='bx bxs-business login__icon' ></i>
-                        <input type="text" name="adresseE" value="<?php echo $adresseE; ?>" placeholder="Address" class="login__input">
+                        <input type="text" name="adress" value="<?php echo $adress; ?>" placeholder="Address" class="login__input">
                     </div>
                     <!-- SIGN IN -->
                     <input type="submit" value="Register" class="button login__button"></input>

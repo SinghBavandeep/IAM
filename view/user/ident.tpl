@@ -23,7 +23,7 @@
                     </div>
                     <div class="login__box">
                         <i class="bx bxs-lock login__icon"></i>
-                        <input type="password" name="mdp" value="<?php echo $mdp; ?>" placeholder="Password" class="login__input" id="password">
+                        <input type="password" name="password" value="<?php echo $password; ?>" placeholder="Password" class="login__input" id="password">
                         <i class='bx bxs-show login__togglePassword' id="toggle-password"></i>
                     </div>
                     <!-- FORGOT PASSWORD -->

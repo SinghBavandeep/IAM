@@ -15,8 +15,8 @@
 		else{
 			require('./model/userBD.php');
 			if (!verif_ident_input($ident, $password, $password_c) ||
-				!verif_ident_client_BD($ident, $password, $profile) &&
-				!verif_ident_loueur_BD($ident, $password, $profile)){
+				!verif_ident_customer_BD($ident, $password, $profile) &&
+				!verif_ident_admin_BD($ident, $password, $profile)){
 				$msg = 'Login or password incorrect';
 				$controller = "user"; $action = "ident";
 				require('./view/layout.tpl');
