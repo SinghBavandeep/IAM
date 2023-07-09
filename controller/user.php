@@ -40,7 +40,7 @@
       $username = isset($_POST['username']) ? test_input($_POST['username']) : '';
       $email = isset($_POST['email']) ? test_input($_POST['email']) : '';
       $password = isset($_POST['password']) ? test_input($_POST['password']) : '';
-      $adress = isset($_POST['adress']) ? test_input($_POST['adress']) : '';
+      $address = isset($_POST['address']) ? test_input($_POST['address']) : '';
       $msg = '';
 
 
@@ -51,7 +51,7 @@
       else {
          require('./model/userBD.php');
 
-         if (!verif_inscr_input($name, $username, $email, $password, $adress, $password_c) ||
+         if (!verif_inscr_input($name, $username, $email, $password, $address, $password_c) ||
              !verif_inscr_BD_valid_email($email) ||
              !verif_inscr_BD_valid_username($username)) {
             $msg = 'Input error, Retry!';
@@ -128,9 +128,9 @@ function account()
 
    // Vérifie si tous les champs du formulaire d'inscription sont
    // correctement renseignés
-	function verif_inscr_input($name, $username, $email , $password, $adress, &$password_c='') : bool
+	function verif_inscr_input($name, $username, $email , $password, $address, &$password_c='') : bool
    {
-      if (empty($name) || empty($username) || empty($password) || empty($email) || empty($adress))
+      if (empty($name) || empty($username) || empty($password) || empty($email) || empty($address))
          return false;
       if (!verif_alpha($name))
          return false;
@@ -138,7 +138,7 @@ function account()
          return false;
       if (!verif_email($email))
          return false;
-      if (!verif_alpha_num($adress))
+      if (!verif_alpha_num($address))
          return false;
       $password_c = crypt($password, '$6$rounds=5000$anexamplestringforsalt$');
       return true;

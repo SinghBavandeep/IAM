@@ -19,7 +19,7 @@
                     <h3 class="login__title">Authentification</h3>
                     <div class="login__box">
                         <i class="bx bxs-user login__icon"></i>
-                        <input type="text" name="ident" value="<?php echo $ident; ?>" placeholder="Username"class="login__input">
+                        <input type="text" name="ident" value="<?php echo $ident; ?>" placeholder="ID" class="login__input">
                     </div>
                     <div class="login__box">
                         <i class="bx bxs-lock login__icon"></i>

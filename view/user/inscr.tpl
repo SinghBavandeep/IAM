@@ -28,7 +28,7 @@
                     </div>
                     <div class="login__box">
                         <i class="bx bx-at login__icon"></i>
-                        <input type="email" name="email" value="<?php echo $email; ?>" placeholder="E-Mail" class="login__input">
+                        <input type="email" name="email" value="<?php echo $email; ?>" placeholder="EMail" class="login__input">
                     </div>
                     <div class="login__box">
                         <i class="bx bxs-lock login__icon"></i>
@@ -37,7 +37,7 @@
                     </div>
                     <div class="login__box">
                         <i class='bx bxs-business login__icon' ></i>
-                        <input type="text" name="adress" value="<?php echo $adress; ?>" placeholder="Address" class="login__input">
+                        <input type="text" name="address" value="<?php echo $address; ?>" placeholder="Address" class="login__input">
                     </div>
                     <!-- SIGN IN -->
                     <input type="submit" value="Register" class="button login__button"></input>
