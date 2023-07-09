@@ -63,7 +63,7 @@
             inscr_BD($name, $username, $email, $password_c);
 
             // inscription réussit, authentification automatique.
-            if (verif_ident_client_BD($email, $password_c, $profile)) {
+            if (verif_ident_customer_BD($email, $password_c, $profile)) {
                // die("OK tous c'est bien passé.");
                $_SESSION['profile'] = $profile;
                $url = './index.php?controller=user&action=home';

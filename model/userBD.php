@@ -140,7 +140,7 @@
     }
 
     // vérifie si un pseudo est présent dans la base de donnée.
-    function verif_inscr_BD_valide_pseudo($username)
+    function verif_inscr_BD_valid_username($username)
     {
         require('./model/connectBD.php');
         try {
