@@ -34,10 +34,10 @@ include('includes/header.php');
                 <form class="user" action="logincode.php" method="POST">
 
                     <div class="form-group">
-                    <input type="email" name="emaill" class="form-control form-control-user" placeholder="Enter Email Address...">
+                    <input type="email" name="email" class="form-control form-control-user" placeholder="Enter Email Address...">
                     </div>
                     <div class="form-group">
-                    <input type="password" name="passwordd" class="form-control form-control-user" placeholder="Password">
+                    <input type="password" name="password" class="form-control form-control-user" placeholder="Password">
                     </div>
             
                     <button type="submit" name="login_btn" class="btn btn-primary btn-user btn-block"> Login </button>

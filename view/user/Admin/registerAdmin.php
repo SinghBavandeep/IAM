@@ -19,12 +19,12 @@ include('includes/navbar.php');
         <div class="modal-body">
 
             <div class="form-group">
-                <label> Username </label>
-                <input type="text" name="username" class="form-control" placeholder="Enter Username">
+                <label> Name </label>
+                <input type="text" name="name" class="form-control" placeholder="Enter Name">
             </div>
             <div class="form-group">
-                <label> Pseudo </label>
-                <input type="text" name="pseudo" class="form-control" placeholder="Enter Pseudo">
+                <label> Username </label>
+                <input type="text" name="ps" class="form-control" placeholder="Enter Username">
             </div>
             <div class="form-group">
                 <label>Email</label>
@@ -87,8 +87,8 @@ include('includes/navbar.php');
         <thead>
           <tr>
             <th> ID </th>
-            <th> Username </th>
-            <th>Pseudo</th>
+            <th> Name </th>
+            <th>Username</th>
             <th>Email </th>
             <th>EDIT </th>
             <th>DELETE </th>
@@ -101,8 +101,8 @@ include('includes/navbar.php');
                     ?>
                     <tr>
                         <td><?php echo $row['id'];?></td>
-                        <td><?php echo $row['nom'];?></td>
-                        <td><?php echo $row['pseudo'];?></td>
+                        <td><?php echo $row['name'];?></td>
+                        <td><?php echo $row['username'];?></td>
                         <td><?php echo $row['email'];?></td>
                         <td>
                             <form action="registerEdit.php" method="post">
