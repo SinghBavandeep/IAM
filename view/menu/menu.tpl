@@ -4,7 +4,7 @@
         <img src="./view/image/logo_final.png" alt="logo" class="nav__logo-img">
     </a>
     <a href="./index.php?controller=user&action=account" class="nav__logo">
-        <p class="nav__logo-title"><?php echo isset($_SESSION['profile']) ? $_SESSION['profile']['pseudo'] : ''; ?></p>
+        <p class="nav__logo-title"><?php echo isset($_SESSION['profile']) ? $_SESSION['profile']['username'] : ''; ?></p>
     </a>
     <!-- MENU -->
     <div class="nav__menu" id="nav-menu">

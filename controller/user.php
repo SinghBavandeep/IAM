@@ -122,7 +122,7 @@ function account()
    {
 		if (empty($ident) || empty($password))
 			return false;
-		$password_c = crypt($password, '$6$rounds=5000$anexamplestringforsalt$');
+        $password_c = password_hash($password, PASSWORD_DEFAULT);
 		return true;
 	}
 
@@ -140,7 +140,7 @@ function account()
          return false;
       if (!verif_alpha_num($address))
          return false;
-      $password_c = crypt($password, '$6$rounds=5000$anexamplestringforsalt$');
+      $password_c = password_hash($password, PASSWORD_DEFAULT);
       return true;
    }
 
