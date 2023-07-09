@@ -37,3 +37,26 @@
         <div class="swiper-pagination"></div>
     </div>
 </section>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Accepter les cookies</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="cookie-popup" class="cookie-popup">
+    <div class="cookie-content">
+        <h2>Ce site utilise des cookies</h2>
+        <p>Nous utilisons des cookies pour améliorer votre expérience sur notre site. En continuant à naviguer, vous acceptez notre utilisation des cookies.</p>
+        <div class="button-container">
+            <button id="accept-cookie-btn">Accepter</button>
+            <button id="decline-cookie-btn">Refuser</button>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

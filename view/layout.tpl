@@ -17,7 +17,7 @@
     <!-- HEADER -->
 
     <header class="header" id="header">
-        <?php require ('./view/menu/menu.tpl'); ?>	
+        <?php require ('./view/menu/menu.tpl'); ?>
     </header>
     <!-- MAIN -->
     <main class="main">
@@ -28,12 +28,6 @@
     <footer class="footer section" style="background-color: #d7d0db">
         <?php if ($action !== 'flashMessage') require('./view/footer/footer.tpl'); ?>
     </footer>
-
-    <!-- SCROLL UP -->
-
-    <!-- SCROLL REVEAL -->
-
-    <!-- SWIPER JS -->
 
     <!-- SWIPER JS -->
     <script src="./view/styles/styleJS/swiper-bundle.min.js"></script>
