@@ -46,11 +46,15 @@
 
 
 <li class="nav-item">
-  <a class="nav-link" href="register.php">
+  <a class="nav-link" href="registerAdmin.php">
     <i class="fas fa-fw fa-chart-area"></i>
     <span>Admin Profile</span></a>
 </li>
-
+<li class="nav-item">
+   <a class="nav-link" href="registerSeller.php">
+       <i class="fas fa-fw fa-chart-area"></i>
+       <span>Seller Profile</span></a>
+</li>
 
 
 <!-- Nav Item - Utilities Collapse Menu -->

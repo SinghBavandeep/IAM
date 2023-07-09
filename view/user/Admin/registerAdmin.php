@@ -42,7 +42,7 @@ include('includes/navbar.php');
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" name="registerbtn" class="btn btn-primary">Save</button>
+            <button type="submit" name="registeradminbtn" class="btn btn-primary">Save</button>
         </div>
       </form>
 
@@ -67,12 +67,12 @@ include('includes/navbar.php');
 
       <?php
         if (isset($_SESSION['success']) && $_SESSION['success'] !=""){
-            echo '<h2>'.$_SESSION['success'].'</h2>';
+            echo '<h2 class="bg-primary">'.$_SESSION['success'].'</h2>';
             unset($_SESSION['success']);
         }
 
       if (isset($_SESSION['status']) && $_SESSION['status'] !=""){
-          echo '<h2 class="bg-info">'.$_SESSION['status'].'</h2>';
+          echo '<h2 class="bg-danger">'.$_SESSION['status'].'</h2>';
           unset($_SESSION['status']);
       }
       ?>
@@ -107,14 +107,18 @@ include('includes/navbar.php');
                         <td>
                             <form action="registerEdit.php" method="post">
                                 <input type="hidden" name="edit_id" value="<?php echo $row['id']?>">
-                            <button type="submit" class="btn btn-success" name="edit_btn">EDIT</button>
+                            <button type="submit" class="btn btn-success" name="edit_admin_btn">EDIT</button>
                             </form>
                         </td>
                         <td>
-                            <button type="submit" class="btn btn-danger">DELETE</button>
+                            <form action="code.php" method="post">
+                                <input type="hidden" name="delete_id" value="<?php $row['id'];?>">
+                                <button type="submit" name="delete_admin_btn" class="btn btn-danger">DELETE</button>
+                            </form>
                         </td>
                     </tr>
                     <?php
+
                 }
             }
             else{
