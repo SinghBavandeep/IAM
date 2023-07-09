@@ -107,7 +107,7 @@
 
 function account()
 {
-    if (isset($_SESSION['profile']['pseudo'])) {
+    if (isset($_SESSION['profile']['username'])) {
         $controller = 'user';
         $action = 'account';
 
@@ -118,11 +118,11 @@ function account()
 
    // Vérifie si tous les champs du formulaire d'authentification sont
    // correctement renseignés
-	function verif_ident_input($ident, $password, &$mdp_c='')
+	function verif_ident_input($ident, $password, &$password_c='')
    {
 		if (empty($ident) || empty($password))
 			return false;
-		$mdp_c = crypt($password, '$6$rounds=5000$anexamplestringforsalt$');
+		$password_c = crypt($password, '$6$rounds=5000$anexamplestringforsalt$');
 		return true;
 	}
 

@@ -38,7 +38,7 @@
             $sql = "SELECT * FROM `admin` WHERE username=:ident AND password=:password OR email=:ident AND password=:password";
             $command = $pdo->prepare($sql);
             $command->bindParam(':ident', $ident);
-            $command->bindParam(':mdp', $password);
+            $command->bindParam(':password', $password);
             $bool = $command->execute();
     
             if ($bool) {
@@ -146,7 +146,7 @@
         try {
             $sql = "SELECT * FROM `customer` WHERE username=:username";
             $command = $pdo->prepare($sql);
-            $command->bindParam(':pseudo', $username);
+            $command->bindParam(':username', $username);
             $bool = $command->execute();
     
             if ($bool) {
