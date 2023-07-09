@@ -37,20 +37,20 @@ if(isset($_POST['registerbtn']))
         {
             echo "done";
             $_SESSION['success'] =  "Admin is Added Successfully";
-            header('Location: register.php');
+            header('Location: registerAdmin.php');
         }
         else 
         {
             echo "not done";
             $_SESSION['status'] =  "Admin is Not Added";
-            header('Location: register.php');
+            header('Location: registerAdmin.php');
         }
     }
     else 
     {
         echo "pass no match";
         $_SESSION['status'] =  "Password and Confirm Password Does not Match";
-        header('Location: register.php');
+        header('Location: registerAdmin.php');
     }
 
 }

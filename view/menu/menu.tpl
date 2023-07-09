@@ -36,6 +36,9 @@
                     if ($_SESSION['profile']['role'] == 'admin') {
                         echo'
                         <li class="nav__item">
+                            <a href="./view\user\Admin\index.php" class="nav__link">Panel</a>
+                        </li>
+                        <li class="nav__item">
                             <a href="./index.php?controller=vehicle&action=get&param=vehicle-stock" class="nav__link">Stock</a>
                         </li>
                         <li class="nav__item">
@@ -52,7 +55,7 @@
                 }
 
             ?>
-            
+
         </ul>
         <!-- NAV-CLOSE -->
         <div class="nav__close" id="nav-close">
