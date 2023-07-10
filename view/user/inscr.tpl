@@ -39,6 +39,10 @@
                         <i class='bx bxs-business login__icon' ></i>
                         <input type="text" name="address" value="<?php echo $address; ?>" placeholder="Address" class="login__input">
                     </div>
+                    <div class="login__box">
+                        <label for="profile_img">Profile Picture:</label>
+                        <input type="file" name="profile_img" id="profile_img" required >
+                    </div>
                     <!-- SIGN IN -->
                     <input type="submit" value="Register" class="button login__button"></input>
                     <!-- <p style="color: red;"><?php echo $msg; ?></p> -->

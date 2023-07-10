@@ -9,17 +9,11 @@
             if (!isset($_SESSION['profile'])) {
                 echo "./view/image/profile-icon.png";
             }else{
-                if ($_SESSION['profile']['role'] == 'customer') {
-                    $image= isset($_SESSION['profile']) ? $_SESSION['profile']['photo'] : '';
+                if (isset($_SESSION['profile']['role'])) {
+                    $image = isset($_SESSION['profile']['photo']) ? $_SESSION['profile']['photo'] : '';
                     echo "./view/image/$image";
-                }else{
-                    if ($_SESSION['profile']['role'] == 'admin') {
-                        $image= isset($_SESSION['profile']) ? $_SESSION['profile']['photo'] : '';
-                        echo "./view/image/$image";
-                    }else{
-                        $image= isset($_SESSION['profile']) ? $_SESSION['profile']['photo'] : '';
-                        echo "./view/image/$image";
-                    }
+                    } else {
+                        echo "./view/image/profile-icon.png";
                 }
             }
 

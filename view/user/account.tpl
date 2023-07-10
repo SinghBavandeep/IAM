@@ -15,18 +15,13 @@
                                 if (!isset($_SESSION['profile'])) {
                                     echo "./view/image/profile-icon.png";
                                 }else{
-                                    if ($_SESSION['profile']['role'] == 'customer') {
-                                        $image= isset($_SESSION['profile']) ? $_SESSION['profile']['photo'] : '';
-                                        echo "./view/image/$image";
-                                    }else{
-                                        if ($_SESSION['profile']['role'] == 'admin') {
-                                            $image= isset($_SESSION['profile']) ? $_SESSION['profile']['photo'] : '';
-                                            echo "./view/image/$image";
-                                        }else{
-                                            $image= isset($_SESSION['profile']) ? $_SESSION['profile']['photo'] : '';
-                                            echo "./view/image/$image";
-                                        }
-                                    }
+                        if (isset($_SESSION['profile']['role'])) {
+                        $image = isset($_SESSION['profile']['photo']) ? $_SESSION['profile']['photo'] : '';
+                        echo "./view/image/$image";
+                        } else {
+                        // Gérer le cas où la clé 'role' n'est pas définie dans le tableau $_SESSION['profile']
+                        echo "Role is not defined.";
+                        }
                                 }
                         ?>"width="140px" height="140px" class="image-ronde">
                         <h3 class="display-4 "><?php echo isset($_SESSION['profile']) ? $_SESSION['profile']['username'] : ''; ?></h3>
