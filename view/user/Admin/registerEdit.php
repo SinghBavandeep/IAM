@@ -7,16 +7,24 @@
 <div class="container-fluid">
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h5 class="m-0 font-weight-bold text-primary">Edit Admin Profile</h5>
+            <h5 class="m-0 font-weight-bold text-primary">Edit Profile</h5>
         </div>
         <div class="card-body">
+
+
             <?php
             $connection= mysqli_connect("localhost","root","","project");
-                if (isset($_POST['edit_btn'])){
+                if (isset($_POST['edit_admin_btn'])){
                     $id= $_POST['edit_id'];
                     $query="SELECT * FROM admin WHERE id='$id'";
                     $query_run= mysqli_query($connection,$query);
                 }
+                if (isset($_POST['edit_Seller_btn'])){
+                    $id= $_POST['edit_id'];
+                    $query="SELECT * FROM seller WHERE id='$id'";
+                    $query_run= mysqli_query($connection,$query);
+                }
+
                 foreach ($query_run as $row){
                     ?>
                     <form action="code.php" method="post">
@@ -37,12 +45,15 @@
                             <label>Password</label>
                             <input type="password" value="<?php echo $row['password'];?>"  name="edit_password" class="form-control" placeholder="Enter Password">
                         </div>
-                        <a href="registerAdmin.php" class="btn btn-danger"> CANCEL</a>
+                        <a href="<?php if (isset($_POST['edit_admin_btn'])){echo "registerAdmin.php";}else{echo "registerSeller.php";}?>" class="btn btn-danger"> CANCEL</a>
                         <button type="submit" name="update_Admin_btn" class="btn btn-success"> Update</button>
                     </form>
                     <?php
                 }
             ?>
+
+
+
 
         </div>
     </div>

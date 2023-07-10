@@ -107,13 +107,13 @@ include('includes/navbar.php');
                         <td>
                             <form action="registerEdit.php" method="post">
                                 <input type="hidden" name="edit_id" value="<?php echo $row['id']?>">
-                            <button type="submit" class="btn btn-success" name="edit_btn">EDIT</button>
+                            <button type="submit" class="btn btn-success" name="edit_Seller_btn">EDIT</button>
                             </form>
                         </td>
                         <td>
                             <form action="code.php" method="post">
-                                <input type="hidden" name="delete_id" value="<?php $row['id'];?>">
-                                <button type="submit" name="delete_btn" class="btn btn-danger">DELETE</button>
+                                <input type="hidden" name="delete_id" value="<?php echo $row['id'];?>">
+                                <button type="submit" name="delete_seller_btn" class="btn btn-danger">DELETE</button>
                             </form>
                         </td>
                     </tr>

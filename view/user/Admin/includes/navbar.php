@@ -2,11 +2,12 @@
    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
 <!-- Sidebar - Brand -->
-<a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-  <div class="sidebar-brand-icon rotate-n-15">
-    <i class="fas fa-laugh-wink"></i>
+<a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
+  <div class="sidebar-brand-icon ">
+      <img src="./img/logo_final.png" style="width: 80px; height: 80px">
+
   </div>
-  <div class="sidebar-brand-text mx-3">FUNDA <sup>WEB IT</sup></div>
+  <div class="sidebar-brand-text mx-3">IAM</div>
 </a>
 
 <!-- Divider -->
@@ -28,9 +29,6 @@
 </div>
 
 
-
-
-
 <li class="nav-item">
   <a class="nav-link" href="registerAdmin.php">
     <i class="fas fa-fw fa-chart-area"></i>
@@ -40,6 +38,11 @@
    <a class="nav-link" href="registerSeller.php">
        <i class="fas fa-fw fa-chart-area"></i>
        <span>Seller Profile</span></a>
+</li>
+<li class="nav-item">
+   <a class="nav-link" href="registerUser.php">
+       <i class="fas fa-fw fa-chart-area"></i>
+       <span>User Profile</span></a>
 </li>
 
 
@@ -100,6 +103,12 @@
   <a class="nav-link" href="tables.html">
     <i class="fas fa-fw fa-table"></i>
     <span>Tables</span></a>
+</li>
+
+<li class="nav-item">
+   <a class="nav-link" href="index.php">
+       <i class="fas fa-fw fa-home"></i>
+       <span>HOME</span></a>
 </li>
 
 <!-- Divider -->
