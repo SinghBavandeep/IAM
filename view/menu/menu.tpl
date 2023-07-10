@@ -3,6 +3,7 @@
     <a href="./index.php?controller=user&action=home&param=vehicle-home" class="nav__logo">
         <img src="./view/image/logo_final.png" alt="logo" class="nav__logo-img">
     </a>
+    <img src="./view/image/profile-icon.png" width="40px" height="40px" alt="profile" >
     <a href="./index.php?controller=user&action=account" class="nav__logo">
         <p class="nav__logo-title"><?php echo isset($_SESSION['profile']) ? $_SESSION['profile']['username'] : ''; ?></p>
     </a>
