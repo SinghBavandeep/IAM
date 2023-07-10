@@ -5,11 +5,11 @@
     <h2 class="section__title">My Account</h2>
 
     <div class="login__form">
-        <form action="./index.php?controller=user&action=modify" method="post" class="login__create" id="login-in">
+        <form action="./index.php?controller=user&action=update" method="post" class="login__create" id="login-in">
             <h3 class="login__title">Personal Informations</h3>
             <div class="login__box">
                 <i class="bx bxs-user login__icon"></i>
-                <input type="text" name="name" value="admin"placeholder="Name" class="login__input">
+                <input type="text" name="name" value="" placeholder="Name" class="login__input">
             </div>
             <div class="login__box">
                 <i class="bx bxs-user login__icon"></i>
@@ -29,7 +29,7 @@
                 <input type="text" name="adresse" value="" placeholder="Address" class="login__input">
             </div>
             <!-- MODIFY -->
-            <input type="submit" value="Modify" class="button login__button"></input>
+            <input type="submit" value="Update" class="button login__button"></input>
             <!-- RESET -->
             <input type="reset" value="Reset" class="button login__button"></input>
         </form>

@@ -19,11 +19,12 @@
     <header class="header" id="header">
         <?php require ('./view/menu/menu.tpl'); ?>
     </header>
+    <br>
     <!-- MAIN -->
     <main class="main">
         <?php require('./view/' . $controller . '/' . $action . '.tpl'); ?>
     </main>
-    <br><br><br><br><br><br>
+    <br><br><br><br><br>
     <!-- FOOTER -->
     <footer class="footer section" style="background-color: #d7d0db">
         <?php if ($action !== 'flashMessage') require('./view/footer/footer.tpl'); ?>

@@ -1,7 +1,8 @@
 
 <!-- HOME -->
 <section class="home container" id="home">
-    <br><br><br>
+    <br><br>
+    <h2 class="section__title">Welcome to IAM!</h2>
     <div class="swiper home-swiper">
         <div class="swiper-wrapper">
             <!-- #Home 1# -->

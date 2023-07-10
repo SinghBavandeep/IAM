@@ -75,7 +75,7 @@
       }
    }
 
-   function modify(){
+   function update(){
 
    }
 
