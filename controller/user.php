@@ -184,4 +184,43 @@ function account()
       require ('./view/layout.tpl');
    }
 
+   if (isset($_POST['Update_img'])){
+       $connection= mysqli_connect("localhost","root","","project");
+       $Profile=$_POST['profile_img'];
+       $id=$_POST['id'];
+       $Type="admin";
+
+       if (!isset($_SESSION['profile'])) {
+           $Type="customer";
+       }else{
+           if ($_SESSION['profile']['role'] == 'customer') {
+               $Type="customer";
+           }else{
+               if ($_SESSION['profile']['role'] == 'admin') {
+                   $Type="admin";
+               }else{
+                   $image= isset($_SESSION['profile']) ? $_SESSION['profile']['photo'] : '';
+                   $Type="seller";
+               }
+           }
+       }
+
+
+
+       $query="UPDATE `$Type` SET `photo` = '$Profile' WHERE `admin`.`id` = $id";
+
+       $query_run=mysqli_query($connection,$query);
+
+       if ($query_run) {
+           // echo "Saved";
+           $_SESSION['success'] = "Admin Profile Added";
+
+       } else {
+           $_SESSION['status'] = "Admin Profile Not Added";header('Location: registerAdmin.php');
+       }
+       echo '<script>window.history.back();</script>';
+   }
+
+
+
 ?>

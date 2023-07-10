@@ -3,8 +3,28 @@
     <a href="./index.php?controller=user&action=home&param=vehicle-home" class="nav__logo">
         <img src="./view/image/logo_final.png" alt="logo" class="nav__logo-img">
     </a>
-    <img src="./view/image/profile-icon.png" width="40px" height="40px" alt="profile" >
     <a href="./index.php?controller=user&action=account" class="nav__logo">
+        <img src="
+        <?php
+            if (!isset($_SESSION['profile'])) {
+                echo "./view/image/profile-icon.png";
+            }else{
+                if ($_SESSION['profile']['role'] == 'customer') {
+                    $image= isset($_SESSION['profile']) ? $_SESSION['profile']['photo'] : '';
+                    echo "./view/image/$image";
+                }else{
+                    if ($_SESSION['profile']['role'] == 'admin') {
+                        $image= isset($_SESSION['profile']) ? $_SESSION['profile']['photo'] : '';
+                        echo "./view/image/$image";
+                    }else{
+                        $image= isset($_SESSION['profile']) ? $_SESSION['profile']['photo'] : '';
+                        echo "./view/image/$image";
+                    }
+                }
+            }
+
+
+        ?>"width="40px" height="40px" alt="profile" >
         <p class="nav__logo-title"><?php echo isset($_SESSION['profile']) ? $_SESSION['profile']['username'] : ''; ?></p>
     </a>
     <!-- MENU -->

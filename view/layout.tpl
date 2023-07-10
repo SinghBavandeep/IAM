@@ -12,6 +12,7 @@
     <!-- STYLE CSS -->
     <link rel="stylesheet" href="./view/styles/styleCSS/style.css">
     <link rel="icon" type="image/x-icon" href="./view/image/favicon_final.ico">
+
 </head>
 <body>
     <!-- HEADER -->

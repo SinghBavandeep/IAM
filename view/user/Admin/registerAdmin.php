@@ -24,7 +24,7 @@ include('includes/navbar.php');
             </div>
             <div class="form-group">
                 <label> Username </label>
-                <input type="text" name="ps" class="form-control" placeholder="Enter Username">
+                <input type="text" name="username" class="form-control" placeholder="Enter Username">
             </div>
             <div class="form-group">
                 <label>Email</label>
@@ -118,18 +118,12 @@ include('includes/navbar.php');
                         </td>
                     </tr>
                     <?php
-
                 }
             }
             else{
                 echo "NO Recorde Found";
             }
         ?>
-
-
-
-
-
         </tbody>
       </table>
 

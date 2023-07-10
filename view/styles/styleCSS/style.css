@@ -1467,4 +1467,10 @@ input, button {
   color: var(--text-color);
   font-size: var(--font-xs);
 }
-/*# sourceMappingURL=style.css.map */
+.image-ronde{
+  width : 150px; height : 150px;
+  border: none;
+  -moz-border-radius : 75px;
+  -webkit-border-radius : 75px;
+  border-radius : 75px;
+}
