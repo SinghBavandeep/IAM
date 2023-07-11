@@ -1,4 +1,3 @@
-
 <!-- ACCOUNT -->
 <section class="account container" id="account">
     <br><br><br>
@@ -30,6 +29,7 @@
 
             <div class="login__box">
                 <i class="bx bxs-user login__icon"></i>
+<<<<<<< Updated upstream
                 <input type="text" name="name" value="<?php echo isset($_SESSION['profile']) ? $_SESSION['profile']['name'] : ''; ?>" placeholder="Name" class="login__input">
             </div>
             <div class="login__box">
@@ -43,10 +43,26 @@
             <div class="login__box">
                 <i class="bx bxs-lock login__icon"></i>
                 <input type="password" name="mdp" value="<?php echo isset($_SESSION['profile']) ? $_SESSION['profile']['password'] : ''; ?>" placeholder="Password" class="login__input" id="password">
+=======
+                <input type="text" name="name" value="<?php echo $_SESSION['profile']['name']; ?>" placeholder="Name" class="login__input">
+            </div>
+            <div class="login__box">
+                <i class="bx bxs-user login__icon"></i>
+                <input type="text" name="username" value="<?php echo $_SESSION['profile']['username']; ?>" placeholder="Username" class="login__input">
+            </div>
+            <div class="login__box">
+                <i class="bx bx-at login__icon"></i>
+                <input type="email" name="email" value="<?php echo $_SESSION['profile']['email']; ?>" placeholder="E-Mail" class="login__input">
+            </div>
+            <div class="login__box">
+                <i class="bx bxs-lock login__icon"></i>
+                <input type="password" name="password" value="" placeholder="Enter New Password" class="login__input" id="password">
+>>>>>>> Stashed changes
                 <i class='bx bxs-show login__togglePassword' id="toggle-password"></i>
             </div>
             <div class="login__box">
                 <i class='bx bxs-business login__icon' ></i>
+<<<<<<< Updated upstream
                 <input type="text" name="adresse" value="<?php echo isset($_SESSION['profile']) ? $_SESSION['profile']['id'] : ''; ?>" placeholder="Address" class="login__input">
             </div>
             <div class="login__box">
@@ -56,6 +72,9 @@
                     <input type="file" name="profile_img" id="profile_img" required >
                     <button type="submit" name="Update_img" class="btn btn-primary">Save</button>
                 </form>
+=======
+                <input type="text" name="address" value="<?php echo $_SESSION['profile']['address']; ?>" placeholder="Address" class="login__input">
+>>>>>>> Stashed changes
             </div>
             <!-- MODIFY -->
             <input type="submit" value="Update" class="button login__button"></input>
@@ -63,9 +82,4 @@
             <input type="reset" value="Reset" class="button login__button"></input>
         </form>
     </div>
-</section>
-
-
-<div class="swiper-pagination"></div>
-</div>
 </section>

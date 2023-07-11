@@ -63,17 +63,18 @@ function verif_ident_admin_BD($ident, $password, &$profile)
 
 
 // insère un nouveau customer dans la base de donnée.
-    function inscr_BD($name, $username, $email, $password)
+    function inscr_BD($name, $username, $email, $password, $address)
     {
         require('./model/connectBD.php');
-        $sql = "INSERT INTO `customer` (name, username, email, password)
-                 VALUES (:name, :username, :email, :password)";
+        $sql = "INSERT INTO `customer` (name, username, email, password, address)
+                 VALUES (:name, :username, :email, :password, :address)";
         try {
             $command = $pdo->prepare($sql);
             $command->bindParam(':name', $name);
             $command->bindParam(':username', $username);
             $command->bindParam(':email', $email);
             $command->bindParam(':password', $password);
+            $command->bindParam(':address', $address);
             $bool = $command->execute();
 
             if ($bool) return true;
@@ -85,6 +86,28 @@ function verif_ident_admin_BD($ident, $password, &$profile)
             die();
         }
     }
+
+function update_BD($name, $username, $email, $password, $address)
+{
+    require('./model/connectBD.php');
+    $sql = "UPDATE `customer` SET name = :name, email = :email, password = :password, address = :address WHERE username = :username";
+    try {
+        $command = $pdo->prepare($sql);
+        $command->bindParam(':name', $name);
+        $command->bindParam(':username', $username);
+        $command->bindParam(':email', $email);
+        $command->bindParam(':password', $password);
+        $command->bindParam(':address', $address);
+        $bool = $command->execute();
+
+        if ($bool) return true;
+        else return false;
+    } catch (PDOException $e) {
+        echo utf8_encode('Échec de la requête UPDATE : ' . $e->getMessage() . '.\n');
+        die();
+    }
+}
+
 
     // vérifie si un email est présent dans la base de donnée.
     function verif_inscr_BD_valid_email($email)

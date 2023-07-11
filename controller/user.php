@@ -60,7 +60,7 @@
          }
          else {
 
-            inscr_BD($name, $username, $email, $password_c);
+            inscr_BD($name, $username, $email, $password_c, $address);
 
             // inscription réussit, authentification automatique.
             if (verif_ident_customer_BD($email, $password_c, $profile)) {
@@ -76,7 +76,44 @@
    }
 
    function update(){
+       // Définition des variables
+       $name = isset($_POST['name']) ? test_input($_POST['name']) : '';
+       $username = isset($_POST['username']) ? test_input($_POST['username']) : '';
+       $email = isset($_POST['email']) ? test_input($_POST['email']) : '';
+       $password = isset($_POST['password']) ? test_input($_POST['password']) : '';
+       $address = isset($_POST['address']) ? test_input($_POST['address']) : '';
+       $msg = '';
 
+
+       if (count($_POST)==0) {
+           $controller = "user"; $action = "inscr";
+           require('./view/layout.tpl');
+       }
+       else {
+           require('./model/userBD.php');
+
+           if (!verif_inscr_input($name, $username, $email, $password, $address, $password_c) ||
+               !verif_inscr_BD_valid_email($email) ||
+               !verif_inscr_BD_valid_username($username)) {
+               $msg = 'Input error, Retry!';
+               $controller = "user"; $action = "update";
+               require('./view/layout.tpl');
+           }
+           else {
+
+               update_BD($name, $username, $email, $password_c, $address);
+
+               // inscription réussit, authentification automatique.
+               if (verif_ident_customer_BD($email, $password_c, $profile)) {
+                   // die("OK tous c'est bien passé.");
+                   $_SESSION['profile'] = $profile;
+                   $url = './index.php?controller=user&action=home';
+                   header('Location:' . $url);
+               }
+               // inscription échoué : non implémenté
+               die("Something got wrong.");
+           }
+       }
    }
 
    // gère la déconnexion 
@@ -102,13 +139,12 @@
 
         require ('./view/layout.tpl');
 
-
     }
 
 function account()
 {
     if (isset($_SESSION['profile']['username'])) {
-        $controller = 'user';
+       $controller = 'user';
         $action = 'account';
 
         require ('./view/layout.tpl');
