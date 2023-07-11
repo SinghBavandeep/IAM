@@ -54,6 +54,9 @@
                             <a href="./view\user\Admin\index.php" class="nav__link">Panel</a>
                         </li>
                         <li class="nav__item">
+                            <a href="./index.php?controller=user&action=adminpanel"" class="nav__link">Paneltest</a>
+                        </li>
+                        <li class="nav__item">
                             <a href="./index.php?controller=vehicle&action=get&param=vehicle-stock" class="nav__link">Stock</a>
                         </li>
                         <li class="nav__item">

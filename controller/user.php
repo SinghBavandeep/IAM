@@ -115,6 +115,16 @@ function account()
     }
 
 }
+function adminpanel()
+{
+    if (isset($_SESSION['profile']['username'])) {
+        $controller = 'user';
+        $action = 'adminpanel';
+
+        require ('./view/layout.tpl');
+    }
+
+}
 
    // Vérifie si tous les champs du formulaire d'authentification sont
    // correctement renseignés
