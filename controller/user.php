@@ -41,6 +41,7 @@
       $email = isset($_POST['email']) ? test_input($_POST['email']) : '';
       $password = isset($_POST['password']) ? test_input($_POST['password']) : '';
       $address = isset($_POST['address']) ? test_input($_POST['address']) : '';
+      $photo = isset($_POST['photo']) ? test_input($_POST['photo']) : '';
       $msg = '';
 
 
@@ -51,7 +52,7 @@
       else {
          require('./model/userBD.php');
 
-         if (!verif_inscr_input($name, $username, $email, $password, $address, $password_c) ||
+         if (!verif_inscr_input($name, $username, $email, $password, $address, $password_c, $photo) ||
              !verif_inscr_BD_valid_email($email) ||
              !verif_inscr_BD_valid_username($username)) {
             $msg = 'Input error, Retry!';
@@ -60,7 +61,7 @@
          }
          else {
 
-            inscr_BD($name, $username, $email, $password_c, $address);
+            inscr_BD($name, $username, $email, $password_c, $address, $photo);
 
             // inscription réussit, authentification automatique.
             if (verif_ident_customer_BD($email, $password_c, $profile)) {
@@ -76,12 +77,14 @@
    }
 
    function update(){
-       // Définition des variables
+
+     /* // Définition des variables
        $name = isset($_POST['name']) ? test_input($_POST['name']) : '';
        $username = isset($_POST['username']) ? test_input($_POST['username']) : '';
        $email = isset($_POST['email']) ? test_input($_POST['email']) : '';
        $password = isset($_POST['password']) ? test_input($_POST['password']) : '';
        $address = isset($_POST['address']) ? test_input($_POST['address']) : '';
+       $photo = isset($_POST['photo']);
        $msg = '';
 
 
@@ -92,28 +95,30 @@
        else {
            require('./model/userBD.php');
 
-           if (!verif_inscr_input($name, $username, $email, $password, $address, $password_c) ||
+          if (!verif_inscr_input($name, $username, $email, $password, $address, $password_c) ||
                !verif_inscr_BD_valid_email($email) ||
                !verif_inscr_BD_valid_username($username)) {
                $msg = 'Input error, Retry!';
-               $controller = "user"; $action = "update";
+               $controller = "user"; $action = "home";
                require('./view/layout.tpl');
            }
            else {
 
-               update_BD($name, $username, $email, $password_c, $address);
+               update_BD($name, $username, $email, $password_c, $address, $photo);
 
                // inscription réussit, authentification automatique.
-               if (verif_ident_customer_BD($email, $password_c, $profile)) {
+               if (verif_ident_admin_BD($email, $password_c, $profile)) {
                    // die("OK tous c'est bien passé.");
                    $_SESSION['profile'] = $profile;
-                   $url = './index.php?controller=user&action=home';
+                   $url = './index.php?controller=user&action=account';
                    header('Location:' . $url);
                }
                // inscription échoué : non implémenté
                die("Something got wrong.");
            }
-       }
+       }*/
+
+
    }
 
    // gère la déconnexion 
@@ -174,9 +179,9 @@ function adminpanel()
 
    // Vérifie si tous les champs du formulaire d'inscription sont
    // correctement renseignés
-	function verif_inscr_input($name, $username, $email , $password, $address, &$password_c='') : bool
+	function verif_inscr_input($name, $username, $email , $password, $address, &$password_c='', $photo) : bool
    {
-      if (empty($name) || empty($username) || empty($password) || empty($email) || empty($address))
+      if (empty($name) || empty($username) || empty($password) || empty($email) || empty($address) || empty($photo))
          return false;
       if (!verif_alpha($name))
          return false;
@@ -229,44 +234,5 @@ function adminpanel()
       $controller = 'error'; $action = 'flashMessage';
       require ('./view/layout.tpl');
    }
-
-   if (isset($_POST['Update_img'])){
-       $connection= mysqli_connect("localhost","root","","project");
-       $Profile=$_POST['profile_img'];
-       $id=$_POST['id'];
-       $Type="admin";
-
-       if (!isset($_SESSION['profile'])) {
-           $Type="customer";
-       }else{
-           if ($_SESSION['profile']['role'] == 'customer') {
-               $Type="customer";
-           }else{
-               if ($_SESSION['profile']['role'] == 'admin') {
-                   $Type="admin";
-               }else{
-                   $image= isset($_SESSION['profile']) ? $_SESSION['profile']['photo'] : '';
-                   $Type="seller";
-               }
-           }
-       }
-
-
-
-       $query="UPDATE `$Type` SET `photo` = '$Profile' WHERE `admin`.`id` = $id";
-
-       $query_run=mysqli_query($connection,$query);
-
-       if ($query_run) {
-           // echo "Saved";
-           $_SESSION['success'] = "Admin Profile Added";
-
-       } else {
-           $_SESSION['status'] = "Admin Profile Not Added";header('Location: registerAdmin.php');
-       }
-       echo '<script>window.history.back();</script>';
-   }
-
-
 
 ?>
