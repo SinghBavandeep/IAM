@@ -1,4 +1,4 @@
-<?php 
+<?php
     if (!empty($msg)) {
         $url = './index.php?controller=user&action=error&param1=user&param2=ident&arg='.$msg;
         header('Location:' . $url);
@@ -19,11 +19,11 @@
                     <h3 class="login__title">Authentification</h3>
                     <div class="login__box">
                         <i class="bx bxs-user login__icon"></i>
-                        <input type="text" name="ident" value="<?php echo $ident; ?>" placeholder="ID" class="login__input">
+                        <input type="text" name="ident" value="<?php echo $ident; ?>" placeholder="ID" class="login__input" required>
                     </div>
                     <div class="login__box">
                         <i class="bx bxs-lock login__icon"></i>
-                        <input type="password" name="password" value="<?php echo $password; ?>" placeholder="Password" class="login__input" id="password" autocomplete="off">
+                        <input type="password" name="password" value="<?php echo $password; ?>" placeholder="Password" class="login__input" id="password" required>
                         <i class='bx bxs-show login__togglePassword' id="toggle-password"></i>
                     </div>
                     <!-- FORGOT PASSWORD -->
