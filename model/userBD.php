@@ -87,10 +87,10 @@ function verif_ident_admin_BD($ident, $password, &$profile)
         }
     }
 
-function update_BD($name, $username, $email, $password, $address)
+function update_BD($name, $username, $email, $password, $address, $photo)
 {
     require('./model/connectBD.php');
-    $sql = "UPDATE `customer` SET name = :name, email = :email, password = :password, address = :address WHERE username = :username";
+    $sql = "UPDATE `admin` SET name = :name, email = :email, password = :password, address = :address, photo = :photo WHERE $username = :username";
     try {
         $command = $pdo->prepare($sql);
         $command->bindParam(':name', $name);
@@ -98,6 +98,7 @@ function update_BD($name, $username, $email, $password, $address)
         $command->bindParam(':email', $email);
         $command->bindParam(':password', $password);
         $command->bindParam(':address', $address);
+        $command->bindParam(':photo', $photo);
         $bool = $command->execute();
 
         if ($bool) return true;
@@ -106,6 +107,8 @@ function update_BD($name, $username, $email, $password, $address)
         echo utf8_encode('Échec de la requête UPDATE : ' . $e->getMessage() . '.\n');
         die();
     }
+
+
 }
 
 
