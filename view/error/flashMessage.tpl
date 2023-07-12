@@ -1,5 +1,5 @@
 
-<!-- FHASH MESSAGE -->
+<!-- FlASH MESSAGE -->
 <section class="section flash">
     <div class="flash__container container grid">
         <div class="flash__content">

@@ -1,5 +1,6 @@
 <?php
 // Vérifie si le client est présent dans la base de données
+// vérifie si le customer est présent dans la base de données.
 function verif_ident_customer_BD($ident, $password, &$profile)
 {
     require('./model/connectBD.php');
@@ -12,7 +13,8 @@ function verif_ident_customer_BD($ident, $password, &$profile)
         if ($bool) {
             $result = $command->fetchAll(PDO::FETCH_ASSOC);
             if (count($result) != 0 && password_verify($password, $result[0]['password'])) {
-                $result[0]['role'] = 'customer';
+                $profile = $result[0];
+                return true;
             }
         }
     } catch (PDOException $e) {
@@ -20,14 +22,10 @@ function verif_ident_customer_BD($ident, $password, &$profile)
         die();
     }
 
-    if (count($result) == 0) {
-        $profile = array();
-        return false;
-    } else {
-        $profile = $result[0];
-        return true;
-    }
+    $profile = array();
+    return false;
 }
+
 
 // Vérifie si l'administrateur est présent dans la base de données
 // Vérifie si l'administrateur est présent dans la base de données
