@@ -29,15 +29,15 @@
 
             <div class="login__box">
                 <i class="bx bxs-user login__icon"></i>
-                <input type="text" name="name" value="<?php echo isset($_SESSION['profile']) ? $_SESSION['profile']['name'] : ''; ?>" placeholder="Name" class="login__input">
+                <input type="text" name="name" value="<?php echo isset($_SESSION['profile']) ? $_SESSION['profile']['name'] : ''; ?>" placeholder="Name" class="login__input" required>
             </div>
             <div class="login__box">
                 <i class="bx bxs-user login__icon"></i>
-                <input type="text" name="username" value="<?php echo isset($_SESSION['profile']) ? $_SESSION['profile']['username'] : ''; ?>" placeholder="Username" class="login__input">
+                <input type="text" name="username" value="<?php echo isset($_SESSION['profile']) ? $_SESSION['profile']['username'] : ''; ?>" placeholder="Username" class="login__input" required>
             </div>
             <div class="login__box">
                 <i class="bx bx-at login__icon"></i>
-                <input type="email" name="email" value="<?php echo isset($_SESSION['profile']) ? $_SESSION['profile']['email'] : ''; ?>" placeholder="E-Mail" class="login__input">
+                <input type="email" name="email" value="<?php echo isset($_SESSION['profile']) ? $_SESSION['profile']['email'] : ''; ?>" placeholder="E-Mail" class="login__input" required>
             </div>
             <div class="login__box">
                 <i class="bx bxs-lock login__icon"></i>
@@ -46,11 +46,11 @@
             </div>
             <div class="login__box">
                 <i class='bx bxs-business login__icon' ></i>
-                <input type="text" name="address" value="<?php echo isset($_SESSION['profile']) ? $_SESSION['profile']['address'] : ''; ?>" placeholder="Address" class="login__input">
+                <input type="text" name="address" value="<?php echo isset($_SESSION['profile']) ? $_SESSION['profile']['address'] : ''; ?>" placeholder="Address" class="login__input" required>
             </div>
             <div class="login__box">
                     <label for="photo">Profile Picture:</label>
-                    <input type="file" name="photo" id="photo" >
+                    <input type="file" name="photo" value="<?php echo isset($_SESSION['profile']) ? $_SESSION['profile']['photo'] : ''; ?>" id="photo" >
             </div>
             <!-- MODIFY -->
             <input type="submit" value="Update" class="button login__button"></input>
