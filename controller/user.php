@@ -37,6 +37,7 @@ function inscr()
     $email = isset($_POST['email']) ? test_input($_POST['email']) : '';
     $password = isset($_POST['password']) ? test_input($_POST['password']) : '';
     $address = isset($_POST['address']) ? test_input($_POST['address']) : '';
+    $photo = isset($_POST['photo']) ? test_input($_POST['photo']) : '';
     $msg = '';
 
     if (count($_POST) == 0) {
@@ -54,7 +55,7 @@ function inscr()
             $action = "inscr";
             require('./view/layout.tpl');
         } else {
-            inscr_BD($name, $username, $email, $password, $address);
+            inscr_BD($name, $username, $email, $password, $address, $photo);
 
             // Inscription réussie, authentification automatique.
             if (verif_ident_customer_BD($email, $password, $profile)) {
@@ -86,6 +87,7 @@ function account()
 // Gère la mise à jour des informations du profil de l'utilisateur
 function update()
 {
+    $role = $_SESSION['profile']['role'];
     $name = isset($_POST['name']) ? test_input($_POST['name']) : '';
     $username = isset($_POST['username']) ? test_input($_POST['username']) : '';
     $email = isset($_POST['email']) ? test_input($_POST['email']) : '';
@@ -118,7 +120,7 @@ function update()
                 $photo = $_SESSION['profile']['photo'];
             }
 
-            if (update_BD($name, $username, $email, $password, $address, $photo)) {
+            if (update_BD($role, $name, $username, $email, $password, $address, $photo)) {
                 // Mise à jour réussie
                 $_SESSION['profile']['name'] = $name;
                 $_SESSION['profile']['username'] = $username;
