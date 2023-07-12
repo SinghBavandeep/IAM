@@ -160,4 +160,34 @@ function verif_inscr_BD_valid_username($username)
         return false;
     }
 }
+function add_BD($name, $username, $email, $password, $address,$type)
+{
+    require('./model/connectBD.php');
+    if ($type=="Admin"){
+        $sql = "INSERT INTO `admin` (name, username, email, password, address)
+                VALUES (:name, :username, :email, :password, :address)";
+    }else{
+        $sql = "INSERT INTO `seller` (name, username, email, password, address)
+                VALUES (:name, :username, :email, :password, :address)";
+    }
+
+    try {
+        $command = $pdo->prepare($sql);
+        $command->bindParam(':name', $name);
+        $command->bindParam(':username', $username);
+        $command->bindParam(':email', $email);
+        $command->bindParam(':password', $password);
+        $command->bindParam(':address', $address);
+        $bool = $command->execute();
+
+        if ($bool) {
+            return true;
+        } else {
+            return false;
+        }
+    } catch (PDOException $e) {
+        echo utf8_encode('Echec de insert into : ' . $e->getMessage() . '.\n');
+        die();
+    }
+}
 ?>

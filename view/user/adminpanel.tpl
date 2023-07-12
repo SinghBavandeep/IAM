@@ -2,7 +2,7 @@
 <!-- ACCOUNT -->
 <section class="account container" id="account">
 	<br><br><br>
-	<h2 class="section__title">All User Information</h2>
+	<h2 class="section__title">All Web Information</h2>
 	<?php include('Menu_Admin.tpl')?><br>
 	<!-- View all admin-->
 	<div id="Vadmin" class="login__form">
@@ -53,13 +53,13 @@
 								<td style="border: 1px solid black; padding: 8px;">
 									<form action="registerEdit.php" method="post">
 										<input type="hidden" name="edit_id" value="<?php echo $row['id']?>">
-										<button type="submit" class="btn btn-success" name="edit_admin_btn">EDIT</button>
+										<button type="submit" class="nav__link" name="edit_admin_btn">EDIT</button>
 									</form>
 								</td>
 								<td style="border: 1px solid black; padding: 8px;">
 									<form action="code.php" method="post">
 										<input type="hidden" name="delete_id" value="<?php echo $row['id'];?>">
-										<button type="submit" name="delete_admin_btn" class="btn btn-danger">DELETE</button>
+										<button type="submit" name="delete_admin_btn" class="nav__link">DELETE</button>
 									</form>
 								</td>
 							</tr>
@@ -127,13 +127,13 @@
 								<td style="border: 1px solid black; padding: 8px;">
 									<form action="registerEdit.php" method="post">
 										<input type="hidden" name="edit_id" value="<?php echo $row['id']?>">
-										<button type="submit" class="btn btn-success" name="edit_admin_btn">EDIT</button>
+										<button type="submit" class="nav__link" name="edit_admin_btn">EDIT</button>
 									</form>
 								</td>
 								<td style="border: 1px solid black; padding: 8px;">
 									<form action="code.php" method="post">
 										<input type="hidden" name="delete_id" value="<?php echo $row['id'];?>">
-										<button type="submit" name="delete_admin_btn" class="btn btn-danger">DELETE</button>
+										<button type="submit" name="delete_admin_btn" class="nav__link">DELETE</button>
 									</form>
 								</td>
 							</tr>
@@ -185,7 +185,6 @@
 								<th style="border: 1px solid black; padding: 8px;"> Name </th>
 								<th style="border: 1px solid black; padding: 8px;">Username</th>
 								<th style="border: 1px solid black; padding: 8px;">Email </th>
-								<th style="border: 1px solid black; padding: 8px;">EDIT </th>
 								<th style="border: 1px solid black; padding: 8px;">DELETE </th>
 							</tr>
 							</thead>
@@ -200,15 +199,9 @@
 								<td style="border: 1px solid black; padding: 8px;"><?php echo $row['username'];?></td>
 								<td style="border: 1px solid black; padding: 8px;"><?php echo $row['email'];?></td>
 								<td style="border: 1px solid black; padding: 8px;">
-									<form action="registerEdit.php" method="post">
-										<input type="hidden" name="edit_id" value="<?php echo $row['id']?>">
-										<button type="submit" class="btn btn-success" name="edit_admin_btn">EDIT</button>
-									</form>
-								</td>
-								<td style="border: 1px solid black; padding: 8px;">
 									<form action="code.php" method="post">
 										<input type="hidden" name="delete_id" value="<?php echo $row['id'];?>">
-										<button type="submit" name="delete_admin_btn" class="btn btn-danger">DELETE</button>
+										<button type="submit" name="delete_admin_btn" class="nav__link">DELETE</button>
 									</form>
 								</td>
 							</tr>
@@ -227,10 +220,5 @@
 			</div>
 		</div
 	</div><br>
-
-
-
-
-
 
 </section>

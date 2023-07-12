@@ -18,6 +18,9 @@
 							<li class="nav__item">
 								<a href="./index.php?controller=user&action=AddAS" class="nav__link">Add Admin/Seller</a>
 							</li><br>
+							<li class="nav__item">
+								<a href="./index.php?controller=user&action=color" class="nav__link">Change color</a>
+							</li><br>
 
 
 						</ul>
