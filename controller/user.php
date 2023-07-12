@@ -83,6 +83,34 @@ function account()
     }
 }
 
+function AdminPanel()
+{
+    if (isset($_SESSION['profile']['username'])) {
+        $controller = 'user';
+        $action = 'adminpanel';
+
+        require('./view/layout.tpl');
+    } else {
+        // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
+        $url = './index.php?controller=user&action=adminpanel';
+        header('Location:' . $url);
+    }
+}
+function AddAS()
+{
+    if (isset($_SESSION['profile']['username'])) {
+        $controller = 'user';
+        $action = 'AddAS';
+
+        require('./view/layout.tpl');
+    } else {
+        // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
+        $url = './index.php?controller=user&action=AddAS';
+        header('Location:' . $url);
+    }
+}
+
+
 // Gère la mise à jour des informations du profil de l'utilisateur
 function update()
 {
@@ -244,5 +272,44 @@ function error()
     $controller = 'error';
     $action = 'flashMessage';
     require('./view/layout.tpl');
+}
+function AddnewAS()
+{
+    // Définition des variables
+    $name = isset($_POST['name']) ? test_input($_POST['name']) : '';
+    $username = isset($_POST['username']) ? test_input($_POST['username']) : '';
+    $email = isset($_POST['email']) ? test_input($_POST['email']) : '';
+    $password = isset($_POST['password']) ? test_input($_POST['password']) : '';
+    $address = isset($_POST['address']) ? test_input($_POST['address']) : '';
+    $msg = '';
+
+    if (count($_POST) == 0) {
+        $controller = "user";
+        $action = "inscr";
+        require('./view/layout.tpl');
+    } else {
+        require('./model/userBD.php');
+
+        if (!verif_inscr_input($name, $username, $email, $password, $address) ||
+            !verif_inscr_BD_valid_email($email) ||
+            !verif_inscr_BD_valid_username($username)) {
+            $msg = 'Input error, Retry!';
+            $controller = "user";
+            $action = "inscr";
+            require('./view/layout.tpl');
+        } else {
+            inscr_BD($name, $username, $email, $password, $address);
+
+            // Inscription réussie, authentification automatique.
+            if (verif_ident_customer_BD($email, $password, $profile)) {
+                $_SESSION['profile'] = $profile;
+                $url = './index.php?controller=user&action=home';
+                header('Location:' . $url);
+            } else {
+                // Inscription échouée : non implémenté
+                die("Something went wrong.");
+            }
+        }
+    }
 }
 ?>

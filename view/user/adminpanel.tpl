@@ -3,56 +3,17 @@
 <section class="account container" id="account">
 	<br><br><br>
 	<h2 class="section__title">All User Information</h2>
-	<div class="login__form">
-		<form action="" method="post" class="login__create" id="login-in">
-			<h3 class="login__title">Add Admin</h3>
-			<div class="login__box">
-				<i class="bx bxs-user login__icon"></i>
-				<input type="text" name="name" class="login__input" placeholder="Name">
-			</div>
-			<div class="login__box">
-				<i class="bx bxs-user login__icon"></i>
-				<input type="text" name="username" class="login__input" placeholder="Enter Username">
-			</div>
-			<div class="login__box">
-				<i class="bx bx-at login__icon"></i>
-				<input type="email" name="email" class="login__input" placeholder="Enter Email">
-			</div>
-			<div class="login__box">
-				<i class="bx bxs-lock login__icon"></i>
-				<input type="password" name="password" class="login__input" placeholder="Enter Password">
-			</div>
-			<div class="login__box">
-				<i class="bx bxs-lock login__icon"></i>
-				<input type="password" name="confirmpassword" class="login__input" placeholder="Confirm Password">
-			</div>
-			<div class="login__box">
-				<i class='bx bxs-business login__icon' ></i>
-				<input type="text" name="adresse" value="<?php echo isset($_SESSION['profile']) ? $_SESSION['profile']['id'] : ''; ?>" placeholder="Address" class="login__input">
-			</div>
-			<div class="login__box">
-				<label for="profile_img">Profile Picture:</label>
-				<input type="file" name="profile_img" id="profile_img" required >
-			</div>
-			<div class="nav container">
-				<!-- RESET -->
-				<input type="reset" value="Reset" class="button login__box"></input>
-				<!-- Add -->
-				<input type="submit" value="Add   " class="button login__box"></input>
-			</div>
-		</form>
-	</div><br>
-
+	<?php include('Menu_Admin.tpl')?><br>
 	<!-- View all admin-->
-	<div class="login__form">
+	<div id="Vadmin" class="login__form">
 		<div class="login__create">
 			<h3 class="login__title">All Admin</h3>
 			<div class="container-fluid">
 				<div class="card-body">
 
 					<?php
-        if (isset($_SESSION['success']) && $_SESSION['success'] !=""){
-            echo '<h2 class="bg-primary">'.$_SESSION['success'].'</h2>';
+                if (isset($_SESSION['success']) && $_SESSION['success'] !=""){
+                    echo '<h2 class="bg-primary">'.$_SESSION['success'].'</h2>';
 					unset($_SESSION['success']);
 					}
 
@@ -63,11 +24,11 @@
 					?>
 					<div class="table-responsive">
 						<?php
-            $connection= mysqli_connect("localhost","root","","project");
-            $query="SELECT * FROM admin";
-            $query_run= mysqli_query($connection, $query);
+                    $connection= mysqli_connect("localhost","root","","project");
+                    $query="SELECT * FROM admin";
+                    $query_run= mysqli_query($connection, $query);
 
-        ?>
+                    ?>
 						<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" >
 							<thead>
 							<tr>
@@ -81,7 +42,7 @@
 							</thead>
 							<tbody>
 							<?php
-            if (mysqli_num_rows($query_run)>0){
+                        if (mysqli_num_rows($query_run)>0){
 							while ($row=mysqli_fetch_assoc($query_run)){
 							?>
 							<tr>
@@ -103,12 +64,12 @@
 								</td>
 							</tr>
 							<?php
-                }
-            }
-            else{
-                echo "NO Recorde Found";
-            }
-        ?>
+                            }
+                        }
+                        else{
+                            echo "NO Recorde Found";
+                        }
+                        ?>
 							</tbody>
 						</table>
 
@@ -117,17 +78,16 @@
 			</div>
 		</div
 	</div><br>
-
 	<!-- View all Seller-->
-	<div class="login__form">
+	<div id="Vseller" class="login__form">
 		<div class="login__create">
 			<h3 class="login__title">All Seller</h3>
 			<div class="container-fluid">
 				<div class="card-body">
 
 					<?php
-        if (isset($_SESSION['success']) && $_SESSION['success'] !=""){
-            echo '<h2 class="bg-primary">'.$_SESSION['success'].'</h2>';
+                if (isset($_SESSION['success']) && $_SESSION['success'] !=""){
+                    echo '<h2 class="bg-primary">'.$_SESSION['success'].'</h2>';
 					unset($_SESSION['success']);
 					}
 
@@ -138,11 +98,11 @@
 					?>
 					<div class="table-responsive">
 						<?php
-            $connection= mysqli_connect("localhost","root","","project");
-            $query="SELECT * FROM seller";
-            $query_run= mysqli_query($connection, $query);
+                    $connection= mysqli_connect("localhost","root","","project");
+                    $query="SELECT * FROM seller";
+                    $query_run= mysqli_query($connection, $query);
 
-        ?>
+                    ?>
 						<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" >
 							<thead>
 							<tr>
@@ -156,7 +116,7 @@
 							</thead>
 							<tbody>
 							<?php
-            if (mysqli_num_rows($query_run)>0){
+                        if (mysqli_num_rows($query_run)>0){
 							while ($row=mysqli_fetch_assoc($query_run)){
 							?>
 							<tr>
@@ -178,12 +138,12 @@
 								</td>
 							</tr>
 							<?php
-                }
-            }
-            else{
-                echo "NO Recorde Found";
-            }
-        ?>
+                            }
+                        }
+                        else{
+                            echo "NO Recorde Found";
+                        }
+                        ?>
 							</tbody>
 						</table>
 
@@ -194,15 +154,15 @@
 	</div><br>
 
 	<!-- View all user-->
-	<div class="login__form">
+	<div id="Vcustomer" class="login__form">
 		<div class="login__create">
 			<h3 class="login__title">All Customer</h3>
 			<div class="container-fluid">
 				<div class="card-body">
 
 					<?php
-        if (isset($_SESSION['success']) && $_SESSION['success'] !=""){
-            echo '<h2 class="bg-primary">'.$_SESSION['success'].'</h2>';
+                if (isset($_SESSION['success']) && $_SESSION['success'] !=""){
+                    echo '<h2 class="bg-primary">'.$_SESSION['success'].'</h2>';
 					unset($_SESSION['success']);
 					}
 
@@ -213,11 +173,11 @@
 					?>
 					<div class="table-responsive">
 						<?php
-            $connection= mysqli_connect("localhost","root","","project");
-            $query="SELECT * FROM customer";
-            $query_run= mysqli_query($connection, $query);
+                    $connection= mysqli_connect("localhost","root","","project");
+                    $query="SELECT * FROM customer";
+                    $query_run= mysqli_query($connection, $query);
 
-        ?>
+                    ?>
 						<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" >
 							<thead>
 							<tr>
@@ -231,7 +191,7 @@
 							</thead>
 							<tbody>
 							<?php
-            if (mysqli_num_rows($query_run)>0){
+                        if (mysqli_num_rows($query_run)>0){
 							while ($row=mysqli_fetch_assoc($query_run)){
 							?>
 							<tr>
@@ -253,12 +213,12 @@
 								</td>
 							</tr>
 							<?php
-                }
-            }
-            else{
-                echo "NO Recorde Found";
-            }
-        ?>
+                            }
+                        }
+                        else{
+                            echo "NO Recorde Found";
+                        }
+                        ?>
 							</tbody>
 						</table>
 
@@ -269,9 +229,8 @@
 	</div><br>
 
 
-</section>
 
 
-<div class="swiper-pagination"></div>
-</div>
+
+
 </section>
