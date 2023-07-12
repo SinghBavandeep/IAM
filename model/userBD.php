@@ -13,9 +13,8 @@ function verif_ident_customer_BD($ident, $password, &$profile)
         if ($bool) {
             $result = $command->fetchAll(PDO::FETCH_ASSOC);
             if (count($result) != 0 && password_verify($password, $result[0]['password'])) {
-                $result[0]['role'] = 'customer';
-            } else {
-                return false; // Mot de passe incorrect
+                $profile = $result[0];
+                return true;
             }
         }
     } catch (PDOException $e) {
@@ -23,13 +22,8 @@ function verif_ident_customer_BD($ident, $password, &$profile)
         die();
     }
 
-    if (count($result) == 0) {
-        $profile = array();
-        return false;
-    } else {
-        $profile = $result[0];
-        return true;
-    }
+    $profile = array();
+    return false;
 }
 
 
@@ -68,11 +62,11 @@ function verif_ident_admin_BD($ident, $password, &$profile)
 
 
 // Insère un nouveau client dans la base de données
-function inscr_BD($name, $username, $email, $password, $address, $photo)
+function inscr_BD($name, $username, $email, $password, $address)
 {
     require('./model/connectBD.php');
-    $sql = "INSERT INTO `customer` (name, username, email, password, address, photo)
-                VALUES (:name, :username, :email, :password, :address, :photo)";
+    $sql = "INSERT INTO `customer` (name, username, email, password, address)
+                VALUES (:name, :username, :email, :password, :address)";
     try {
         $command = $pdo->prepare($sql);
         $command->bindParam(':name', $name);
@@ -80,7 +74,6 @@ function inscr_BD($name, $username, $email, $password, $address, $photo)
         $command->bindParam(':email', $email);
         $command->bindParam(':password', $password);
         $command->bindParam(':address', $address);
-        $command->bindParam(':photo', $photo);
         $bool = $command->execute();
 
         if ($bool) {
@@ -95,10 +88,10 @@ function inscr_BD($name, $username, $email, $password, $address, $photo)
 }
 
 // Met à jour les informations du profil de l'utilisateur dans la base de données
-function update_BD($role, $name, $username, $email, $password, $address, $photo)
+function update_BD($name, $username, $email, $password, $address, $photo)
 {
     require('./model/connectBD.php');
-    $sql = "UPDATE `$role` SET name = :name, username = :username, email = :email, password = :password, address = :address, photo = :photo WHERE id = :id";
+    $sql = "UPDATE `admin` SET name = :name, username = :username, email = :email, password = :password, address = :address, photo = :photo WHERE id = :id";
     try {
         $command = $pdo->prepare($sql);
         $command->bindParam(':name', $name);

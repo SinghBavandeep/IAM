@@ -3,7 +3,21 @@
     <a href="./index.php?controller=user&action=home&param=vehicle-home" class="nav__logo">
         <img src="./view/image/logo_final.png" alt="logo" class="nav__logo-img">
     </a>
-
+    <a href="./index.php?controller=user&action=account" class="nav__logo">
+        <img src="<?php
+            if (!isset($_SESSION['profile'])) {
+                echo "./view/image/profile-icon.png";
+        } else {
+        if (isset($_SESSION['profile']['role'])) {
+        $image = isset($_SESSION['profile']['photo']) ? $_SESSION['profile']['photo'] : '';
+        echo "./view/image/$image";
+        } else {
+        echo "./view/image/profile-icon.png";
+        }
+        }
+        ?>" width="40px" height="40px" alt="profile">
+        <p class="nav__logo-title"><?php echo isset($_SESSION['profile']) ? $_SESSION['profile']['username'] : ''; ?></p>
+    </a>
     <!-- MENU -->
     <div class="nav__menu" id="nav-menu">
         <ul class="nav__list">
@@ -59,22 +73,6 @@
             <i class="bx bx-x"></i>
         </div>
     </div>
-
-    <a href="./index.php?controller=user&action=account" class="nav__logo">
-        <img src="<?php
-            if (!isset($_SESSION['profile'])) {
-                echo "./view/image/profile-icon.png";
-        } else {
-        if (isset($_SESSION['profile']['role'])) {
-        $image = isset($_SESSION['profile']['photo']) ? $_SESSION['profile']['photo'] : '';
-        echo "./view/image/$image";
-        } else {
-        echo "./view/image/profile-icon.png";
-        }
-        }
-        ?>" width="40px" height="40px" alt="profile">
-        <p class="nav__logo-title"><?php echo isset($_SESSION['profile']) ? $_SESSION['profile']['username'] : ''; ?></p>
-    </a>
     <!-- NAV BUTTONS -->
     <div class="nav__btns">
         <!-- THEME CHANGE BUTTON -->
