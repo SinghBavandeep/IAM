@@ -40,7 +40,7 @@
                 <a href="./index.php?controller=vehicle&action=get" class="nav__link">Vehicles</a>
             </li>
             <li class="nav__item">
-                <a href="./index.php?controller=vehicle&action=get" class="nav__link">Spare part</a>
+                <a href="./index.php?controller=sparepart&action=get" class="nav__link">Spare part</a>
             </li>';
             }
             if (isset($_SESSION['profile']['role']) && $_SESSION['profile']['role'] == 'admin') {

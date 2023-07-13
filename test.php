@@ -47,7 +47,7 @@ $resultat = $mysqli->query($requete);
 
 if ($resultat->num_rows > 0) {
     while ($ligne = $resultat->fetch_assoc()) {
-        echo $ligne['type'] . ' | ' . $ligne['nom']  . ' ';
+        echo $ligne['type'] . ' | ' . $ligne['name']  . ' ';
         // Print the image
         echo '<img src="./view/image/' . $ligne['img'] . '" alt="Image" width="200"><br>';
     }

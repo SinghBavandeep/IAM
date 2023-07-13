@@ -32,7 +32,7 @@
                     $orderBy = '';
             }
 
-            $sql = "SELECT * FROM vehicle $orderBy";
+            $sql = "SELECT * FROM spares-parts $orderBy";
             $result = mysqli_query($conn, $sql);
 
             // Check if any products were found
