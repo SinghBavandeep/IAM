@@ -5,7 +5,7 @@
 
 function show() 
 {	
-  require('./model/vehicleBD.php');
+  require('./model/sparepartBD.php');
   $_SESSION['SparePart'] = getSparePart_BD(1, 'admin', null);
   $url = './index.php?controller=user&action=home';
   header('Location:' . $url);
@@ -26,11 +26,11 @@ function get()
     else 
       $rent = false;
 
-    // Affiche vehicle en stock 
+    // Affiche sparepart en stock 
     if (isset($_GET['param']) && $_GET['param'] == 'sparepart-home') {
       $id = "1"; $role = 'admin';
     }
-    // Affiche s vehicle en stock 
+    // Affiche s sparepart en stock 
     else {
       $id = $_SESSION['profile']['id']; $role = $_SESSION['profile']['role'];
     }
@@ -67,18 +67,18 @@ function add()
     require('./view/layout.tpl');
   }
   else {
-    require('./model/vehicleBD.php');
+    require('./model/sparepartBD.php');
     
     if (!verif_ajout_input($nom, $type, $caract, $details, $prixM, $img)) {
         $msg = 'Erreur de saisie, veillez renseigner tous les champs s\'il vous plaît!';
-        $controller = "vehicle"; $action = "add";
+        $controller = "sparepart"; $action = "add";
         require('./view/layout.tpl');
     }
     else  ajouter_vehicule_BD($nom, $type, $caract, $details, $prixM, $img);
   }
 
-  $controller = 'vehicle'; $action = 'add';
-  $url = "./index.php?controller=vehicle&action=get&param=vehicle-stock";
+  $controller = 'sparepart'; $action = 'add';
+  $url = "./index.php?controller=sparepart&action=get&param=sparepart-stock";
   header('Location:' . $url);
 }
 
@@ -104,12 +104,12 @@ function supprimer()
 {   
   $idv = $_GET['param'];
 
-  require('./model/vehicleBD.php');
+  require('./model/sparepartBD.php');
 
   supprimer_vehicule_BD($idv);
 
-  $controller = 'vehicle'; $action = 'add';
-  $url = "./index.php?controller=vehicle&action=get&param=vehicle-stock";
+  $controller = 'sparepart'; $action = 'add';
+  $url = "./index.php?controller=sparepart&action=get&param=sparepart-stock";
   header('Location:' . $url);
 }
 
@@ -151,11 +151,11 @@ function selection_flotte()
   $id = $_SESSION['profile']['id'];
   $idv = $_GET['param'];
 
-  require('./model/vehicleBD.php');
+  require('./model/sparepartBD.php');
 
   selection_flotte_BD($id, $idv);
 
-  $controller = 'vehicle'; $action = 'get'; $param = 'vehicle-home';
+  $controller = 'sparepart'; $action = 'get'; $param = 'sparepart-home';
   $url = "./index.php?controller=$controller&action=$action&param=$param";
   header('Location:' . $url);
 }
@@ -164,12 +164,12 @@ function deselection_flotte()
 {
   $idv = $_GET['param'];
 
-    require('./model/vehicleBD.php');
+    require('./model/sparepartBD.php');
 
   deselection_flotte_BD($idv);
 
-  $controller = 'vehicle'; $action = 'get';
-  $url = "./index.php?controller=vehicle&action=get";
+  $controller = 'sparepart'; $action = 'get';
+  $url = "./index.php?controller=sparepart&action=get";
   header('Location:' . $url);
 }
 
@@ -181,21 +181,21 @@ function modifier_dates()
   $finL = isset($_POST['fin']) ? test_input($_POST['fin']) : '';
 
   if (count($_POST)==0) {
-    $controller = "vehicle"; $action = "modifier_dates";
+    $controller = "sparepart"; $action = "modifier_dates";
     require('./view/layout.tpl');
   }
   else {
-    require('./model/vehicleBD.php');
+    require('./model/sparepartBD.php');
 
     if (!verif_dates_input($debutL, $finL)) {
       $msg = 'Erreur de saisie, Réessayer !';
-      $controller = "vehicle"; $action = "modifier_dates";
+      $controller = "sparepart"; $action = "modifier_dates";
       require('./view/layout.tpl');
     }
     else {
       modifier_dates_BD($idv, $debutL, $finL);
-      $controller = 'vehicle'; $action = 'get';
-      $url = "./index.php?controller=vehicle&action=get";
+      $controller = 'sparepart'; $action = 'get';
+      $url = "./index.php?controller=sparepart&action=get";
       header('Location:' . $url);
     }
   }
@@ -205,7 +205,7 @@ function annuler()
 {
   $idv = $_GET['param'];
 
-  require('./model/vehicleBD.php');
+  require('./model/sparepartBD.php');
 
   annuler_location_BD($idv);
 
@@ -225,7 +225,7 @@ function bill()
     $idE = 1;
     //$idE = $_GET['param'];
 
-    require('./model/vehicleBD.php');
+    require('./model/sparepartBD.php');
 
     /*prix d'une location*/
     $prixL = 0;
@@ -236,7 +236,7 @@ function bill()
     /*date d'aujourd'hui*/
     $today = date('Y-m-d');
 
-    /*calcule et affiche le prix de location pour chaque vehicle ligne par ligne (A compléter)*/
+    /*calcule et affiche le prix de location pour chaque sparepart ligne par ligne (A compléter)*/
     for ($i = 0 ; $i == count(getFacture($idE)) ; $i++) {
         $prixM = getFacture($idE)['prixM'];
         $nom = getFacture($idE)['nom'];
@@ -246,9 +246,9 @@ function bill()
         
     }
     /*calcule le montant total de la flotte de admin*/
-    foreach (getFacture($idE) as $vehicle) {
+    foreach (getFacture($idE) as $sparepart) {
 
-        $prixM = $vehicle['prixM'];
+        $prixM = $sparepart['prixM'];
         $prixL += $prixM;
        
     }
