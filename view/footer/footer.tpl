@@ -23,7 +23,7 @@
         <h3 class="footer__title">About</h3>
         <ul class="footer__links">
             <li>
-                <a href="#" class="footer__link">About Us</a>
+                <a href="./index.php?controller=user&action=about" class="footer__link">About Us</a>
             </li>
             <li>
                 <a href="#" class="footer__link">Features</a>
