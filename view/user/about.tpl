@@ -44,14 +44,19 @@
     *:after {
         box-sizing: inherit;
     }
-
+    .Contrie_box{
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
     .grid {
         width: 100%;
         max-width: 60rem;
         margin-left: auto;
         margin-right: auto;
 
-        display: flex;
         -webkit-box-orient: horizontal;
         -webkit-box-direction: normal;
         flex-direction: row;
@@ -201,26 +206,25 @@
                 group at IAM has such huge numbers of faithful and long-haul customers
                 since we meet due dates, surpass guarantees, and go well beyond inevitably.</p>
 
-            <div class="Contrie_box">
-                <div class="grid image-grid">
 
-                    <div class="grid-block">
-                        <div class="tile">
-                            <a class="tile-link" href="#">
-                                <img class="tile-img tile-img1" src="./view/image/schooroom3.jpg" alt="Image">
-                            </a>
-                        </div>
+            <div class="grid image-grid Contrie_box">
+                <div class="grid-block">
+                    <div class="tile">
+                        <a class="tile-link" href="#">
+                            <img class="tile-img tile-img1" src="./view/image/schooroom3.jpg" alt="Image">
+                        </a>
                     </div>
+                </div>
 
-                    <div class="grid-block">
-                        <div class="tile">
-                            <a class="tile-link" href="#">
-                                <img class="tile-img tile-img1" src="./view/image/schooroom2.jpg" alt="Image">
-                            </a>
-                        </div>
+                <div class="grid-block">
+                    <div class="tile">
+                        <a class="tile-link" href="#">
+                            <img class="tile-img tile-img1" src="./view/image/schooroom2.jpg" alt="Image">
+                        </a>
                     </div>
-                </div><br>
-            </div>
+                </div>
+            </div><br>
+
 
 
             <p class="home__description" style="text-align: justify;">Vehicle proprietors in the Lafayette, IN territory,
