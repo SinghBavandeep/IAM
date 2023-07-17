@@ -135,6 +135,45 @@ function about()
         header('Location:' . $url);
     }
 }
+function news()
+{
+    if (isset($_SESSION['profile']['username'])) {
+        $controller = 'user';
+        $action = 'news';
+
+        require('./view/layout.tpl');
+    } else {
+        // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
+        $url = './index.php?controller=user&action=news';
+        header('Location:' . $url);
+    }
+}
+function features()
+{
+    if (isset($_SESSION['profile']['username'])) {
+        $controller = 'user';
+        $action = 'features';
+
+        require('./view/layout.tpl');
+    } else {
+        // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
+        $url = './index.php?controller=user&action=features';
+        header('Location:' . $url);
+    }
+}
+function chipping()
+{
+    if (isset($_SESSION['profile']['username'])) {
+        $controller = 'user';
+        $action = 'chipping';
+
+        require('./view/layout.tpl');
+    } else {
+        // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
+        $url = './index.php?controller=user&action=chipping';
+        header('Location:' . $url);
+    }
+}
 
 
 // Gère la mise à jour des informations du profil de l'utilisateur

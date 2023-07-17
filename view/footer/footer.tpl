@@ -26,10 +26,10 @@
                 <a href="./index.php?controller=user&action=about" class="footer__link">About Us</a>
             </li>
             <li>
-                <a href="#" class="footer__link">Features</a>
+                <a href="./index.php?controller=user&action=features" class="footer__link">Features</a>
             </li>
             <li>
-                <a href="#" class="footer__link">News</a>
+                <a href="./index.php?controller=user&action=news" class="footer__link" class="footer__link">News</a>
             </li>
         </ul>
     </div>
@@ -44,7 +44,7 @@
                 <a href="#" class="footer__link">Discount</a>
             </li>
             <li>
-                <a href="#" class="footer__link">Shipping mode</a>
+                <a href="./index.php?controller=user&action=chipping" class="footer__link">Shipping mode</a>
             </li>
         </ul>
     </div>
