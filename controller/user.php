@@ -109,6 +109,19 @@ function AddAS()
         header('Location:' . $url);
     }
 }
+function vehicle_stock()
+{
+    if (isset($_SESSION['profile']['username'])) {
+        $controller = 'user';
+        $action = 'vehicle_stock';
+
+        require('./view/layout.tpl');
+    } else {
+        // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
+        $url = './index.php?controller=user&action=vehicle_stock';
+        header('Location:' . $url);
+    }
+}
 function color()
 {
     if (isset($_SESSION['profile']['username'])) {

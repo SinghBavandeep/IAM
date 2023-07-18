@@ -52,7 +52,7 @@
                 <a href="./index.php?controller=user&action=adminpanel" class="nav__link">Paneltest</a>
             </li>
             <li class="nav__item">
-                <a href="./index.php?controller=vehicle&action=get&param=vehicle-stock" class="nav__link">Stock</a>
+                <a href="./index.php?controller=user&action=vehicle_stock" class="nav__link">Stock</a>
             </li>
             <li class="nav__item">
                 <a href="./index.php?controller=vehicle&action=get&param=vehicle-rent" class="nav__link">Vehicles</a>
