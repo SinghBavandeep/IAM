@@ -14,6 +14,33 @@ function verif_ident_customer_BD($ident, $password, &$profile)
             $result = $command->fetchAll(PDO::FETCH_ASSOC);
             if (count($result) != 0 && password_verify($password, $result[0]['password'])) {
                 $profile = $result[0];
+                $profile['role'] = 'customer';
+                return true;
+            }
+        }
+    } catch (PDOException $e) {
+        echo utf8_encode('Echec de select : ' . $e->getMessage() . '\n');
+        die();
+    }
+
+    $profile = array();
+    return false;
+}
+
+function verif_ident_seller_BD($ident, $password, &$profile)
+{
+    require('./model/connectBD.php');
+    try {
+        $sql = "SELECT * FROM `seller` WHERE username=:ident OR email=:ident";
+        $command = $pdo->prepare($sql);
+        $command->bindParam(':ident', $ident);
+        $bool = $command->execute();
+
+        if ($bool) {
+            $result = $command->fetchAll(PDO::FETCH_ASSOC);
+            if (count($result) != 0 && password_verify($password, $result[0]['password'])) {
+                $profile = $result[0];
+                $profile['role'] = 'seller';
                 return true;
             }
         }
@@ -62,18 +89,21 @@ function verif_ident_admin_BD($ident, $password, &$profile)
 
 
 // Insère un nouveau client dans la base de données
-function inscr_BD($name, $username, $email, $password, $address)
+// Insère un nouveau client dans la base de données
+function inscr_BD($name, $username, $email, $password, $address, $photo)
 {
     require('./model/connectBD.php');
-    $sql = "INSERT INTO `customer` (name, username, email, password, address)
-                VALUES (:name, :username, :email, :password, :address)";
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT); // Cryptage du mot de passe
+
+    $sql = "INSERT INTO `customer` (name, username, email, password, address, photo) VALUES (:name, :username, :email, :password, :address, :photo)";
     try {
         $command = $pdo->prepare($sql);
         $command->bindParam(':name', $name);
         $command->bindParam(':username', $username);
         $command->bindParam(':email', $email);
-        $command->bindParam(':password', $password);
+        $command->bindParam(':password', $hashedPassword); // Enregistrement du mot de passe crypté
         $command->bindParam(':address', $address);
+        $command->bindParam(':photo', $photo);
         $bool = $command->execute();
 
         if ($bool) {
@@ -86,6 +116,9 @@ function inscr_BD($name, $username, $email, $password, $address)
         die();
     }
 }
+
+
+
 
 // Met à jour les informations du profil de l'utilisateur dans la base de données
 function update_BD($name, $username, $email, $password, $address, $photo)

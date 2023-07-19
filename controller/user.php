@@ -13,8 +13,9 @@ function ident()
     } else {
         require('./model/userBD.php');
         if (!verif_ident_input($ident, $password) ||
-            (!verif_ident_customer_BD($ident, $password, $profile) &&
-                !verif_ident_admin_BD($ident, $password, $profile))) {
+            (!verif_ident_admin_BD($ident, $password, $profile) &&
+                !verif_ident_seller_BD($ident, $password, $profile) &&
+                !verif_ident_customer_BD($ident, $password, $profile))) {
             $msg = 'Login or password incorrect';
             $controller = "user";
             $action = "ident";
@@ -29,6 +30,7 @@ function ident()
 }
 
 // Gère l'inscription d'un nouveau client
+// Gère l'inscription d'un nouveau client
 function inscr()
 {
     // Définition des variables
@@ -37,6 +39,7 @@ function inscr()
     $email = isset($_POST['email']) ? test_input($_POST['email']) : '';
     $password = isset($_POST['password']) ? test_input($_POST['password']) : '';
     $address = isset($_POST['address']) ? test_input($_POST['address']) : '';
+    $photo = isset($_POST['photo']) ? test_input($_POST['photo']) : '';
     $msg = '';
 
     if (count($_POST) == 0) {
@@ -54,7 +57,7 @@ function inscr()
             $action = "inscr";
             require('./view/layout.tpl');
         } else {
-            inscr_BD($name, $username, $email, $password, $address);
+            inscr_BD($name, $username, $email, $password, $address, $photo);
 
             // Inscription réussie, authentification automatique.
             if (verif_ident_customer_BD($email, $password, $profile)) {
@@ -68,6 +71,7 @@ function inscr()
         }
     }
 }
+
 
 function account()
 {
@@ -342,6 +346,68 @@ function verif_update_input($name, $username, $email, $password, $address, &$pas
     }
 
     return true;
+}
+
+// Gère la capture des détails de livraison
+function delivery_details()
+{
+    if (isset($_SESSION['profile']['username'])) {
+        $controller = 'user';
+        $action = 'delivery_details';
+
+        require('./view/delivery_details.tpl');
+    } else {
+        // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
+        $url = './index.php?controller=user&action=ident';
+        header('Location:' . $url);
+    }
+}
+
+// Gère la soumission des détails de livraison et le traitement du paiement
+function process_payment()
+{
+    if (isset($_SESSION['profile']['username'])) {
+        $customerId = $_SESSION['profile']['id'];
+
+        // Capture des détails de livraison depuis le formulaire
+        $name = isset($_POST['name']) ? test_input($_POST['name']) : '';
+        $addressLine1 = isset($_POST['address_line1']) ? test_input($_POST['address_line1']) : '';
+        $addressLine2 = isset($_POST['address_line2']) ? test_input($_POST['address_line2']) : '';
+        $city = isset($_POST['city']) ? test_input($_POST['city']) : '';
+        $postalCode = isset($_POST['postal_code']) ? test_input($_POST['postal_code']) : '';
+        $country = isset($_POST['country']) ? test_input($_POST['country']) : '';
+        $phoneNumber = isset($_POST['phone_number']) ? test_input($_POST['phone_number']) : '';
+
+        require('./model/userBD.php');
+        insert_delivery_details($customerId, $name, $addressLine1, $addressLine2, $city, $postalCode, $country, $phoneNumber);
+
+        // Capture des détails de paiement depuis le formulaire
+        $cardType = isset($_POST['card_type']) ? test_input($_POST['card_type']) : '';
+        $cardNumber = isset($_POST['card_number']) ? test_input($_POST['card_number']) : '';
+        $cardName = isset($_POST['card_name']) ? test_input($_POST['card_name']) : '';
+        $expirationDate = isset($_POST['expiration_date']) ? test_input($_POST['expiration_date']) : '';
+        $securityCode = isset($_POST['security_code']) ? test_input($_POST['security_code']) : '';
+
+        $paymentSuccess = handle_payment($customerId, $cardType, $cardNumber, $cardName, $expirationDate, $securityCode);
+
+        if ($paymentSuccess) {
+            // Paiement réussi
+            // Effectuer les actions nécessaires (par exemple, mettre à jour l'état de l'achat, envoyer un e-mail de confirmation, etc.)
+            $msg = 'Payment successful!';
+        } else {
+            // Paiement échoué
+            $msg = 'Payment failed!';
+        }
+
+        $controller = 'user';
+        $action = 'payment_result';
+
+        require('./view/payment_result.tpl');
+    } else {
+        // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
+        $url = './index.php?controller=user&action=ident';
+        header('Location:' . $url);
+    }
 }
 
 

@@ -11,7 +11,7 @@ function show()
   header('Location:' . $url);
 }
 
-function get() 
+function getVehicles()
 {
   if (!isset($_SESSION['profile'])) {
     $url = './index.php?controller=user&action=ident';
@@ -36,7 +36,7 @@ function get()
     }
 
     $_SESSION['admin'] = getVehicle_BD($id, $role, $rent);
-    $controller = 'vehicle'; $action = 'card';
+    $controller = 'vehicle'; $action = 'vehicle';
     require('./view/layout.tpl');
 
     if ($_SESSION['profile']['role'] == 'admin') {
@@ -52,7 +52,7 @@ function get()
 function add()
 {
   // Définition des variables
-  $nom = isset($_POST['nom']) ? test_input($_POST['nom']) : '';
+  $name = isset($_POST['name']) ? test_input($_POST['name']) : '';
   $type = isset($_POST['type']) ? test_input($_POST['type']) : '';
   $caract = isset($_POST['caract']) ? test_input($_POST['caract']) : '';
   $details = isset($_POST['details']) ? test_input($_POST['details']) : '';
@@ -69,26 +69,26 @@ function add()
   else {
     require('./model/vehicleBD.php');
     
-    if (!verif_ajout_input($nom, $type, $caract, $details, $prixM, $img)) {
+    if (!verif_ajout_input($name, $type, $caract, $details, $prixM, $img)) {
         $msg = 'Erreur de saisie, veillez renseigner tous les champs s\'il vous plaît!';
         $controller = "vehicle"; $action = "add";
         require('./view/layout.tpl');
     }
-    else  ajouter_vehicule_BD($nom, $type, $caract, $details, $prixM, $img);
+    else  ajouter_vehicule_BD($name, $type, $caract, $details, $prixM, $img);
   }
 
   $controller = 'vehicle'; $action = 'add';
-  $url = "./index.php?controller=vehicle&action=get&param=vehicle-stock";
+  $url = "./index.php?controller=vehicle&action=getVehicle&param=vehicle-stock";
   header('Location:' . $url);
 }
 
 // Vérifie si tous les champs du formulaire d'inscription sont
 // correctement renseignés
-function verif_ajout_input($nom, $type, $caract, $details, $prixM, $img) //: bool
+function verif_ajout_input($name, $type, $caract, $details, $prixM, $img) //: bool
 {
-  if (empty($nom) || empty($type) || empty($caract) || empty($details) || empty($prixM) || empty($img) )
+  if (empty($name) || empty($type) || empty($caract) || empty($details) || empty($prixM) || empty($img) )
     return false;
-  if (!verif_alpha_num($nom))
+  if (!verif_alpha_num($name))
     return false;
   if (!verif_alpha_num($type) || !verif_alpha_num($caract))
     return false;
@@ -109,7 +109,7 @@ function supprimer()
   supprimer_vehicule_BD($idv);
 
   $controller = 'vehicle'; $action = 'add';
-  $url = "./index.php?controller=vehicle&action=get&param=vehicle-stock";
+  $url = "./index.php?controller=vehicle&action=getVehicle&param=vehicle-stock";
   header('Location:' . $url);
 }
 
@@ -155,7 +155,7 @@ function selection_flotte()
 
   selection_flotte_BD($id, $idv);
 
-  $controller = 'vehicle'; $action = 'get'; $param = 'vehicle-home';
+  $controller = 'vehicle'; $action = 'getVehicle'; $param = 'vehicle-home';
   $url = "./index.php?controller=$controller&action=$action&param=$param";
   header('Location:' . $url);
 }
@@ -168,8 +168,8 @@ function deselection_flotte()
 
   deselection_flotte_BD($idv);
 
-  $controller = 'vehicle'; $action = 'get';
-  $url = "./index.php?controller=vehicle&action=get";
+  $controller = 'vehicle'; $action = 'getVehicle';
+  $url = "./index.php?controller=vehicle&action=getVehicle";
   header('Location:' . $url);
 }
 
@@ -194,8 +194,8 @@ function modifier_dates()
     }
     else {
       modifier_dates_BD($idv, $debutL, $finL);
-      $controller = 'vehicle'; $action = 'get';
-      $url = "./index.php?controller=vehicle&action=get";
+      $controller = 'vehicle'; $action = 'getVehicle';
+      $url = "./index.php?controller=vehicle&action=getVehicle";
       header('Location:' . $url);
     }
   }
@@ -239,10 +239,10 @@ function bill()
     /*calcule et affiche le prix de location pour chaque vehicle ligne par ligne (A compléter)*/
     for ($i = 0 ; $i == count(getFacture($idE)) ; $i++) {
         $prixM = getFacture($idE)['prixM'];
-        $nom = getFacture($idE)['nom'];
+        $name = getFacture($idE)['name'];
 
         $prixL = $prixM;
-        echo $nom . '          ' . $prixL;
+        echo $name . '          ' . $prixL;
         
     }
     /*calcule le montant total de la flotte de admin*/

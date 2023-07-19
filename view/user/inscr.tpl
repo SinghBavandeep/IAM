@@ -5,7 +5,6 @@
     }
 ?>
 
-
 <section class="section login">
     <!-- TITLE -->
     <h2 class="section__title">Sign up</h2>
@@ -40,8 +39,8 @@
                         <input type="text" name="address" value="<?php echo $address; ?>" placeholder="Address" class="login__input" required>
                     </div>
                     <div class="login__box">
-                        <label for="profile_img">Profile Picture:</label>
-                        <input type="file" name="profile_img" id="profile_img" required >
+                        <label for="photo">Profile Picture:</label>
+                        <input type="file" name="photo" id="photo" required >
                     </div>
                     <!-- SIGN IN -->
                     <input type="submit" value="Register" class="button login__button"></input>

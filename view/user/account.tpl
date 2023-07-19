@@ -49,8 +49,8 @@
                 <input type="text" name="address" value="<?php echo isset($_SESSION['profile']) ? $_SESSION['profile']['address'] : ''; ?>" placeholder="Address" class="login__input" required>
             </div>
             <div class="login__box">
-                    <label for="photo">Profile Picture:</label>
-                    <input type="file" name="photo" value="<?php echo isset($_SESSION['profile']) ? $_SESSION['profile']['photo'] : ''; ?>" id="photo" >
+                <label for="photo">Profile Picture:</label>
+                <input type="file" name="photo" value="<?php echo isset($_SESSION['profile']) ? $_SESSION['profile']['photo'] : ''; ?>" id="photo" >
             </div>
             <!-- MODIFY -->
             <input type="submit" value="Update" class="button login__button"></input>

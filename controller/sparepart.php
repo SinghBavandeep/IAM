@@ -1,29 +1,29 @@
-<?php 
+<?php
 /*controleur c2.php :
   fonctions-action de gestion (c2) 
 */
 
-function show() 
-{	
+function show()
+{
   require('./model/sparepartBD.php');
   $_SESSION['SparePart'] = getSparePart_BD(1, 'admin', null);
   $url = './index.php?controller=user&action=home';
   header('Location:' . $url);
 }
 
-function get() 
+function getSpareParts()
 {
   if (!isset($_SESSION['profile'])) {
     $url = './index.php?controller=user&action=ident';
     header('Location:' . $url);
   }
   else {
-    require('./model/sparepart.php');
+    require('./model/sparepartBD.php');
     // Affiche les SparePart en cours de location
 
     if (isset($_GET['param']) && $_GET['param'] == 'sparepart-rent')
       $rent = true;
-    else 
+    else
       $rent = false;
 
     // Affiche sparepart en stock 
@@ -36,7 +36,7 @@ function get()
     }
 
     $_SESSION['admin'] = getSparePart_BD($id, $role, $rent);
-    $controller = 'sparepart'; $action = 'spare_part';
+    $controller = 'sparepart'; $action = 'sparepart';
     require('./view/layout.tpl');
 
     if ($_SESSION['profile']['role'] == 'admin') {
@@ -52,14 +52,14 @@ function get()
 function add()
 {
   // Définition des variables
-  $nom = isset($_POST['nom']) ? test_input($_POST['nom']) : '';
+  $name = isset($_POST['name']) ? test_input($_POST['name']) : '';
   $type = isset($_POST['type']) ? test_input($_POST['type']) : '';
   $caract = isset($_POST['caract']) ? test_input($_POST['caract']) : '';
   $details = isset($_POST['details']) ? test_input($_POST['details']) : '';
   $prixM = isset($_POST['prixM']) ? test_input($_POST['prixM']) : '';
   $img = isset($_POST['img']) ? test_input($_POST['img']) : '';
-  
-  
+
+
   $msg = '';
 
   if (count($_POST)==0) {
@@ -68,27 +68,27 @@ function add()
   }
   else {
     require('./model/sparepartBD.php');
-    
-    if (!verif_ajout_input($nom, $type, $caract, $details, $prixM, $img)) {
-        $msg = 'Erreur de saisie, veillez renseigner tous les champs s\'il vous plaît!';
-        $controller = "sparepart"; $action = "add";
-        require('./view/layout.tpl');
+
+    if (!verif_ajout_input($name, $type, $caract, $details, $prixM, $img)) {
+      $msg = 'Erreur de saisie, veuillez renseigner tous les champs s\'il vous plaît!';
+      $controller = "sparepart"; $action = "add";
+      require('./view/layout.tpl');
     }
-    else  ajouter_vehicule_BD($nom, $type, $caract, $details, $prixM, $img);
+    else  ajouter_vehicule_BD($name, $type, $caract, $details, $prixM, $img);
   }
 
   $controller = 'sparepart'; $action = 'add';
-  $url = "./index.php?controller=sparepart&action=get&param=sparepart-stock";
+  $url = "./index.php?controller=sparepart&action=getSparePart&param=sparepart-stock";
   header('Location:' . $url);
 }
 
 // Vérifie si tous les champs du formulaire d'inscription sont
 // correctement renseignés
-function verif_ajout_input($nom, $type, $caract, $details, $prixM, $img) //: bool
+function verif_ajout_input($name, $type, $caract, $details, $prixM, $img) //: bool
 {
-  if (empty($nom) || empty($type) || empty($caract) || empty($details) || empty($prixM) || empty($img) )
+  if (empty($name) || empty($type) || empty($caract) || empty($details) || empty($prixM) || empty($img) )
     return false;
-  if (!verif_alpha_num($nom))
+  if (!verif_alpha_num($name))
     return false;
   if (!verif_alpha_num($type) || !verif_alpha_num($caract))
     return false;
@@ -101,7 +101,7 @@ function verif_ajout_input($nom, $type, $caract, $details, $prixM, $img) //: boo
 }
 
 function supprimer()
-{   
+{
   $idv = $_GET['param'];
 
   require('./model/sparepartBD.php');
@@ -109,7 +109,7 @@ function supprimer()
   supprimer_vehicule_BD($idv);
 
   $controller = 'sparepart'; $action = 'add';
-  $url = "./index.php?controller=sparepart&action=get&param=sparepart-stock";
+  $url = "./index.php?controller=sparepart&action=getSparePart&param=sparepart-stock";
   header('Location:' . $url);
 }
 
@@ -155,7 +155,7 @@ function selection_flotte()
 
   selection_flotte_BD($id, $idv);
 
-  $controller = 'sparepart'; $action = 'get'; $param = 'sparepart-home';
+  $controller = 'sparepart'; $action = 'getSparePart'; $param = 'sparepart-home';
   $url = "./index.php?controller=$controller&action=$action&param=$param";
   header('Location:' . $url);
 }
@@ -164,12 +164,12 @@ function deselection_flotte()
 {
   $idv = $_GET['param'];
 
-    require('./model/sparepartBD.php');
+  require('./model/sparepartBD.php');
 
   deselection_flotte_BD($idv);
 
-  $controller = 'sparepart'; $action = 'get';
-  $url = "./index.php?controller=sparepart&action=get";
+  $controller = 'sparepart'; $action = 'getSparePart';
+  $url = "./index.php?controller=sparepart&action=getSparePart";
   header('Location:' . $url);
 }
 
@@ -194,8 +194,8 @@ function modifier_dates()
     }
     else {
       modifier_dates_BD($idv, $debutL, $finL);
-      $controller = 'sparepart'; $action = 'get';
-      $url = "./index.php?controller=sparepart&action=get";
+      $controller = 'sparepart'; $action = 'getSparePart';
+      $url = "./index.php?controller=sparepart&action=getSparePart";
       header('Location:' . $url);
     }
   }
@@ -215,68 +215,59 @@ function annuler()
 
 function verif_date($date)
 {
-    return preg_match("/[0-9]{4}\-[0-9]{2}\-[0-9]{2}/", $date);
+  return preg_match("/[0-9]{4}\-[0-9]{2}\-[0-9]{2}/", $date);
 }
 
 
 
 function bill()
 {
-    $idE = 1;
-    //$idE = $_GET['param'];
+  $idE = 1;
+  //$idE = $_GET['param'];
 
-    require('./model/sparepartBD.php');
+  require('./model/sparepartBD.php');
 
-    /*prix d'une location*/
-    $prixL = 0;
+  /*prix d'une location*/
+  $prixL = 0;
 
-    /*prix total de la flotte*/
-    $prixT = 0;
+  /*prix total de la flotte*/
+  $prixT = 0;
 
-    /*date d'aujourd'hui*/
-    $today = date('Y-m-d');
+  /*date d'aujourd'hui*/
+  $today = date('Y-m-d');
 
-    /*calcule et affiche le prix de location pour chaque sparepart ligne par ligne (A compléter)*/
-    for ($i = 0 ; $i == count(getFacture($idE)) ; $i++) {
-        $prixM = getFacture($idE)['prixM'];
-        $nom = getFacture($idE)['nom'];
+  /*calcule et affiche le prix de location pour chaque sparepart ligne par ligne (A compléter)*/
+  for ($i = 0 ; $i == count(getFacture($idE)) ; $i++) {
+    $prixM = getFacture($idE)['prixM'];
+    $name = getFacture($idE)['name'];
 
-        $prixL = $prixM;
-        echo $nom . '          ' . $prixL;
-        
-    }
-    /*calcule le montant total de la flotte de admin*/
-    foreach (getFacture($idE) as $sparepart) {
+    $prixL = $prixM;
+    echo $name . '          ' . $prixL;
 
-        $prixM = $sparepart['prixM'];
-        $prixL += $prixM;
-       
-    }
-    if (count(getFacture($idE) >= 10)) {
-        $prixT = $prixT - ($prixT*0.10);
-    }
- 
-    $_SESSION['montant'] = $prixT;
+  }
+  /*calcule le montant total de la flotte de admin*/
+  foreach (getFacture($idE) as $sparepart) {
+
+    $prixM = $sparepart['prixM'];
+    $prixL += $prixM;
+
+  }
+  if (count(getFacture($idE) >= 10)) {
+    $prixT = $prixT - ($prixT*0.10);
+  }
+
+  $_SESSION['montant'] = $prixT;
 }
 
 function getJoursMois($mois) {
 
-    if ($mois == 02)
-        return 28;
-    else if  ($mois == 1 || $mois == 2 || $mois == 5 || $mois == 7 || $mois == 8 || $mois == 10 || $mois == 12)
-        return 31;
+  if ($mois == 02)
+    return 28;
+  else if  ($mois == 1 || $mois == 2 || $mois == 5 || $mois == 7 || $mois == 8 || $mois == 10 || $mois == 12)
+    return 31;
 
-    return 30;
+  return 30;
 }
 
 
 ?>
-
-
-
-
-
-
-
-
-
