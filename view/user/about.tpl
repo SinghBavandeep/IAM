@@ -1,6 +1,7 @@
 <style>
     .banner {
-        width: 935px;
+        width: 100%;
+        max-width: 935px;
         height: 200px;
         display: flex;
         overflow: hidden;
@@ -9,8 +10,8 @@
     }
 
     .banner img {
-        width: 200px;
-        height: 200px;
+        width: 100%;
+        height: auto;
         object-fit: cover;
     }
 
@@ -22,17 +23,27 @@
         background-color: black; /* Couleur de la barre diagonale */
         z-index: 1;
     }
+
     .gallery {
         display: flex;
         overflow: hidden;
-        width: 935px; /* Ajustez la largeur de la galerie selon vos besoins */
+        width: 100%;
+        max-width: 935px; /* Ajustez la largeur de la galerie selon vos besoins */
         margin: 0 auto;
-        border-radius: 90px
+        border-radius: 90px;
     }
 
     .gallery img {
-        max-width: 100%;
+        width: 100%;
         height: auto;
+        object-fit: cover;
+    }
+
+    /* Add mobile-specific styles using media queries */
+    @media (max-width: 768px) {
+        .banner, .gallery {
+            border-radius: 50px; /* Adjust the border-radius for smaller screens */
+        }
     }
     html {
         box-sizing: border-box;

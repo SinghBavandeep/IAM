@@ -44,7 +44,7 @@
                 <a href="#" class="footer__link">Discount</a>
             </li>
             <li>
-                <a href="./index.php?controller=user&action=chipping" class="footer__link">Shipping mode</a>
+                <a href="./index.php?controller=user&action=chipping" class="footer__link">Contact-Us</a>
             </li>
         </ul>
     </div>
