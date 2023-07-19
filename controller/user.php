@@ -113,6 +113,10 @@ function AddAS()
         header('Location:' . $url);
     }
 }
+
+function AddNewAS(){
+
+}
 function vehicle_stock()
 {
     if (isset($_SESSION['profile']['username'])) {
@@ -417,4 +421,6 @@ function error()
     $action = 'flashMessage';
     require('./view/layout.tpl');
 }
+
+
 ?>

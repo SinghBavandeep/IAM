@@ -8,7 +8,7 @@
 
 <section class="section login">
 	<!-- TITLE -->
-	<h2 class="section__title">Add_Admin</h2>
+	<h2 class="section__title">Add Admin/Seller</h2>
 	<div class="login__container container">
 		<div class="login__content">
 			<div class="login__img">
@@ -16,7 +16,7 @@
 			</div>
 			<!-- FORM -->
 			<div class="login__form">
-				<form action="./index.php?controller=user&action=AddnewAS" method="post" class="login__create" id="login-in">
+				<form action="./index.php?controller=user&action=AddNewAS" method="post" class="login__create" id="login-in">
 					<h3 class="login__title">Registration</h3>
 					<div class="login__box">
 						<i class="bx bxs-user login__icon"></i>

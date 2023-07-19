@@ -34,10 +34,7 @@
             if (isset($_SESSION['profile']['role']) && $_SESSION['profile']['role'] == 'admin') {
             echo '
             <li class="nav__item">
-                <a href="./view/user/Admin/index.php" class="nav__link">Panel</a>
-            </li>
-            <li class="nav__item">
-                <a href="./index.php?controller=user&action=adminpanel" class="nav__link">Paneltest</a>
+                <a href="./index.php?controller=user&action=adminpanel" class="nav__link">Panel</a>
             </li>
             <li class="nav__item">
                 <a href="./index.php?controller=user&action=vehicle_stock" class="nav__link">Stock</a>
