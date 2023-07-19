@@ -11,7 +11,7 @@ function show()
   header('Location:' . $url);
 }
 
-function get() 
+function getVehicles()
 {
   if (!isset($_SESSION['profile'])) {
     $url = './index.php?controller=user&action=ident';
@@ -36,7 +36,7 @@ function get()
     }
 
     $_SESSION['admin'] = getVehicle_BD($id, $role, $rent);
-    $controller = 'vehicle'; $action = 'card';
+    $controller = 'vehicle'; $action = 'vehicle';
     require('./view/layout.tpl');
 
     if ($_SESSION['profile']['role'] == 'admin') {
@@ -78,7 +78,7 @@ function add()
   }
 
   $controller = 'vehicle'; $action = 'add';
-  $url = "./index.php?controller=vehicle&action=get&param=vehicle-stock";
+  $url = "./index.php?controller=vehicle&action=getVehicle&param=vehicle-stock";
   header('Location:' . $url);
 }
 
@@ -109,7 +109,7 @@ function supprimer()
   supprimer_vehicule_BD($idv);
 
   $controller = 'vehicle'; $action = 'add';
-  $url = "./index.php?controller=vehicle&action=get&param=vehicle-stock";
+  $url = "./index.php?controller=vehicle&action=getVehicle&param=vehicle-stock";
   header('Location:' . $url);
 }
 
@@ -155,7 +155,7 @@ function selection_flotte()
 
   selection_flotte_BD($id, $idv);
 
-  $controller = 'vehicle'; $action = 'get'; $param = 'vehicle-home';
+  $controller = 'vehicle'; $action = 'getVehicle'; $param = 'vehicle-home';
   $url = "./index.php?controller=$controller&action=$action&param=$param";
   header('Location:' . $url);
 }
@@ -168,8 +168,8 @@ function deselection_flotte()
 
   deselection_flotte_BD($idv);
 
-  $controller = 'vehicle'; $action = 'get';
-  $url = "./index.php?controller=vehicle&action=get";
+  $controller = 'vehicle'; $action = 'getVehicle';
+  $url = "./index.php?controller=vehicle&action=getVehicle";
   header('Location:' . $url);
 }
 
@@ -194,8 +194,8 @@ function modifier_dates()
     }
     else {
       modifier_dates_BD($idv, $debutL, $finL);
-      $controller = 'vehicle'; $action = 'get';
-      $url = "./index.php?controller=vehicle&action=get";
+      $controller = 'vehicle'; $action = 'getVehicle';
+      $url = "./index.php?controller=vehicle&action=getVehicle";
       header('Location:' . $url);
     }
   }

@@ -23,10 +23,10 @@
             if (isset($_SESSION['profile']['role']) && $_SESSION['profile']['role'] == 'customer') {
             echo '
             <li class="nav__item">
-                <a href="./index.php?controller=vehicle&action=get" class="nav__link">Vehicles</a>
+                <a href="./index.php?controller=vehicle&action=getVehicles" class="nav__link">Vehicles</a>
             </li>
             <li class="nav__item">
-                <a href="./index.php?controller=sparepart&action=get" class="nav__link">Spare parts</a>
+                <a href="./index.php?controller=sparepart&action=getSpareParts" class="nav__link">Spare parts</a>
             </li>';
             }
 
@@ -53,8 +53,8 @@
             <li class="nav__item">
                 <a href="./index.php?controller=user&action=account" class="nav__logo">
                     <img src="<?php
-                    if (!isset($_SESSION['profile'])) {
-                        echo "./view/image/profile-icon.png";
+            if (!isset($_SESSION['profile'])) {
+                echo "./view/image/profile-icon.png";
                     } else {
                     if (isset($_SESSION['profile']['role'])) {
                     $image = isset($_SESSION['profile']['photo']) ? $_SESSION['profile']['photo'] : '';
@@ -64,9 +64,10 @@
                     }
                     }
                     ?>" width="40px" height="40px" alt="profile">
-                    <p class="nav__logo-title"><?php echo isset($_SESSION['profile']) ? $_SESSION['profile']['username'] : ''; ?></p>
+                    <p class="nav__logo-title"><?php echo isset($_SESSION['profile']) ? $_SESSION['profile']['username'] : 'Your Account'; ?></p>
                 </a>
             </li>
+
         </ul>
         <!-- NAV-CLOSE -->
         <div class="nav__close" id="nav-close">
