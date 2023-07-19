@@ -52,7 +52,7 @@ function get()
 function add()
 {
   // Définition des variables
-  $nom = isset($_POST['nom']) ? test_input($_POST['nom']) : '';
+  $name = isset($_POST['name']) ? test_input($_POST['name']) : '';
   $type = isset($_POST['type']) ? test_input($_POST['type']) : '';
   $caract = isset($_POST['caract']) ? test_input($_POST['caract']) : '';
   $details = isset($_POST['details']) ? test_input($_POST['details']) : '';
@@ -69,12 +69,12 @@ function add()
   else {
     require('./model/vehicleBD.php');
     
-    if (!verif_ajout_input($nom, $type, $caract, $details, $prixM, $img)) {
+    if (!verif_ajout_input($name, $type, $caract, $details, $prixM, $img)) {
         $msg = 'Erreur de saisie, veillez renseigner tous les champs s\'il vous plaît!';
         $controller = "vehicle"; $action = "add";
         require('./view/layout.tpl');
     }
-    else  ajouter_vehicule_BD($nom, $type, $caract, $details, $prixM, $img);
+    else  ajouter_vehicule_BD($name, $type, $caract, $details, $prixM, $img);
   }
 
   $controller = 'vehicle'; $action = 'add';
@@ -84,11 +84,11 @@ function add()
 
 // Vérifie si tous les champs du formulaire d'inscription sont
 // correctement renseignés
-function verif_ajout_input($nom, $type, $caract, $details, $prixM, $img) //: bool
+function verif_ajout_input($name, $type, $caract, $details, $prixM, $img) //: bool
 {
-  if (empty($nom) || empty($type) || empty($caract) || empty($details) || empty($prixM) || empty($img) )
+  if (empty($name) || empty($type) || empty($caract) || empty($details) || empty($prixM) || empty($img) )
     return false;
-  if (!verif_alpha_num($nom))
+  if (!verif_alpha_num($name))
     return false;
   if (!verif_alpha_num($type) || !verif_alpha_num($caract))
     return false;
@@ -239,10 +239,10 @@ function bill()
     /*calcule et affiche le prix de location pour chaque vehicle ligne par ligne (A compléter)*/
     for ($i = 0 ; $i == count(getFacture($idE)) ; $i++) {
         $prixM = getFacture($idE)['prixM'];
-        $nom = getFacture($idE)['nom'];
+        $name = getFacture($idE)['name'];
 
         $prixL = $prixM;
-        echo $nom . '          ' . $prixL;
+        echo $name . '          ' . $prixL;
         
     }
     /*calcule le montant total de la flotte de admin*/

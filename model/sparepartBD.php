@@ -5,16 +5,16 @@
         require('./model/connectBD.php');
         try {
             if ($rent) {
-                $sql = "SELECT * FROM 'spares_parts' WHERE ref = (
+                $sql = "SELECT * FROM 'spare_part' WHERE ref = (
                         SELECT idv FROM `bill` GROUP BY idv);";
                 $command = $pdo->prepare($sql);
                 $bool = $command->execute();
             }
             else {
                 if ($role == 'admin')
-                    $sql = "SELECT * FROM 'spares_parts' WHERE idL=:id";
+                    $sql = "SELECT * FROM 'spare_part' WHERE idL=:id";
                 else
-                    $sql = "SELECT * FROM 'spares_parts' WHERE idC=:id";
+                    $sql = "SELECT * FROM 'spare_part' WHERE idC=:id";
 
                 $command = $pdo->prepare($sql);
                 $command->bindParam(':id', $id);
@@ -36,14 +36,14 @@
             return $Resultat;
     }
 
-    function ajouter_SparePart_BD($nom, $type, $caract, $details, $prixM, $img) {
+    function ajouter_SparePart_BD($name, $type, $caract, $details, $prixM, $img) {
     
         require('./model/connectBD.php');
 
-            $sql = "INSERT INTO 'spares_parts' (nom, type, caract, details, img, prixM)
-                    VALUES (:nom, :type, :caract, :details, :img, :prixM )";
+            $sql = "INSERT INTO 'spare_part' (name, type, caract, details, img, prixM)
+                    VALUES (:name, :type, :caract, :details, :img, :prixM )";
             $command = $pdo->prepare($sql);
-            $command->bindParam(':nom', $nom);
+            $command->bindParam(':name', $name);
             $command->bindParam(':type', $type);
             $command->bindParam(':caract', $caract);
             $command->bindParam(':details', $details);
@@ -57,7 +57,7 @@
     {
         require('./model/connectBD.php');
 
-            $sql = "DELETE FROM 'spares_parts' WHERE ref=:idv";
+            $sql = "DELETE FROM 'spare_part' WHERE ref=:idv";
 
             $command = $pdo->prepare($sql);
             $command->bindParam(':idv', $idv);
@@ -69,7 +69,7 @@
     {
         require('./model/connectBD.php');
 
-        $sql = "UPDATE 'spares_parts' SET idC = :id WHERE ref=:idv";
+        $sql = "UPDATE 'spare_part' SET idC = :id WHERE ref=:idv";
 
             $command = $pdo->prepare($sql);
             $command->bindParam(':id', $id);
@@ -81,7 +81,7 @@
     {
         require('./model/connectBD.php');
 
-        $sql = "UPDATE 'spares_parts' SET idC = null WHERE ref=:idv";
+        $sql = "UPDATE 'spare_part' SET idC = null WHERE ref=:idv";
 
             $command = $pdo->prepare($sql);
             $command->bindParam(':idv', $idv);
@@ -92,13 +92,13 @@
     {
         require('./model/connectBD.php');
 
-        $sql = "UPDATE 'spares_parts' SET debutL = null, finL = null WHERE ref=:idv";
+        $sql = "UPDATE 'spare_part' SET debutL = null, finL = null WHERE ref=:idv";
 
         $command = $pdo->prepare($sql);
         $command->bindParam(':idv', $idv);
         $bool = $command->execute();
 
-        $sql = "SELECT * FROM 'spares_parts' WHERE ref=:idv";
+        $sql = "SELECT * FROM 'spare_part' WHERE ref=:idv";
 
         $command = $pdo->prepare($sql);
         $command->bindParam(':idv', $idv);
@@ -112,14 +112,14 @@
     {
         require('./model/connectBD.php');
         if(!empty($finL)) {
-            $sql = "UPDATE 'spares_parts' SET finL = :finL WHERE ref=:idv";
+            $sql = "UPDATE 'spare_part' SET finL = :finL WHERE ref=:idv";
             $command = $pdo->prepare($sql);
             $command->bindParam(':finL', $finL);
             $command->bindParam(':idv', $idv);
             $bool = $command->execute();
         }
 
-        $sql = "UPDATE 'spares_parts' SET debutL = :debutL, state = 1 WHERE ref=:idv";
+        $sql = "UPDATE 'spare_part' SET debutL = :debutL, state = 1 WHERE ref=:idv";
 
         $command = $pdo->prepare($sql);
         $command->bindParam(':debutL', $debutL);
@@ -147,7 +147,7 @@
         /*Bug lorsqu un customer a plusieurs vehicules ou quand le state est egal � 0*/
         foreach($clients as $customer) {
 
-            $sql = "SELECT nom, debutL, finL, prixM FROM 'spares_parts' WHERE idC=:id AND state = 1 ";
+            $sql = "SELECT name, debutL, finL, prixM FROM 'spare_part' WHERE idC=:id AND state = 1 ";
             $command = $pdo->prepare($sql);
             $command->bindParam(':id', $customer['id']);
             $bool = $command->execute();

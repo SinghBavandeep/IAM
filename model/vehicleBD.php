@@ -1,4 +1,4 @@
-<?php
+f<?php
 
     function getVehicle_BD($id, $role, $rent) 
     {
@@ -36,14 +36,14 @@
             return $Resultat;
     }
 
-    function ajouter_vehicule_BD($nom, $type, $caract, $details, $prixM, $img) {
+    function ajouter_vehicule_BD($name, $type, $caract, $details, $prixM, $img) {
     
         require('./model/connectBD.php');
 
-            $sql = "INSERT INTO `vehicle` (nom, type, caract, details, img, prixM)
-                    VALUES (:nom, :type, :caract, :details, :img, :prixM )";
+            $sql = "INSERT INTO `vehicle` (name, type, caract, details, img, prixM)
+                    VALUES (:name, :type, :caract, :details, :img, :prixM )";
             $command = $pdo->prepare($sql);
-            $command->bindParam(':nom', $nom);
+            $command->bindParam(':name', $name);
             $command->bindParam(':type', $type);
             $command->bindParam(':caract', $caract);
             $command->bindParam(':details', $details);
@@ -147,7 +147,7 @@
         /*Bug lorsqu un customer a plusieurs vehicules ou quand le state est egal � 0*/
         foreach($clients as $customer) {
 
-            $sql = "SELECT nom, debutL, finL, prixM FROM `vehicle` WHERE idC=:id AND state = 1 ";
+            $sql = "SELECT name, debutL, finL, prixM FROM `vehicle` WHERE idC=:id AND state = 1 ";
             $command = $pdo->prepare($sql);
             $command->bindParam(':id', $customer['id']);
             $bool = $command->execute();

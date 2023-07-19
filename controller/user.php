@@ -13,8 +13,9 @@ function ident()
     } else {
         require('./model/userBD.php');
         if (!verif_ident_input($ident, $password) ||
-            (!verif_ident_customer_BD($ident, $password, $profile) &&
-                !verif_ident_admin_BD($ident, $password, $profile))) {
+            (!verif_ident_admin_BD($ident, $password, $profile) &&
+                !verif_ident_seller_BD($ident, $password, $profile) &&
+                !verif_ident_customer_BD($ident, $password, $profile))) {
             $msg = 'Login or password incorrect';
             $controller = "user";
             $action = "ident";
@@ -29,6 +30,7 @@ function ident()
 }
 
 // Gère l'inscription d'un nouveau client
+// Gère l'inscription d'un nouveau client
 function inscr()
 {
     // Définition des variables
@@ -37,6 +39,7 @@ function inscr()
     $email = isset($_POST['email']) ? test_input($_POST['email']) : '';
     $password = isset($_POST['password']) ? test_input($_POST['password']) : '';
     $address = isset($_POST['address']) ? test_input($_POST['address']) : '';
+    $photo = isset($_POST['photo']) ? test_input($_POST['photo']) : '';
     $msg = '';
 
     if (count($_POST) == 0) {
@@ -54,7 +57,7 @@ function inscr()
             $action = "inscr";
             require('./view/layout.tpl');
         } else {
-            inscr_BD($name, $username, $email, $password, $address);
+            inscr_BD($name, $username, $email, $password, $address, $photo);
 
             // Inscription réussie, authentification automatique.
             if (verif_ident_customer_BD($email, $password, $profile)) {
@@ -68,6 +71,7 @@ function inscr()
         }
     }
 }
+
 
 function account()
 {
