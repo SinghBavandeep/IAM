@@ -37,7 +37,6 @@ function inscr()
     $email = isset($_POST['email']) ? test_input($_POST['email']) : '';
     $password = isset($_POST['password']) ? test_input($_POST['password']) : '';
     $address = isset($_POST['address']) ? test_input($_POST['address']) : '';
-    $photo = isset($_POST['photo']) ? test_input($_POST['photo']) : '';
     $msg = '';
 
     if (count($_POST) == 0) {
@@ -55,7 +54,7 @@ function inscr()
             $action = "inscr";
             require('./view/layout.tpl');
         } else {
-            inscr_BD($name, $username, $email, $password, $address, $photo);
+            inscr_BD($name, $username, $email, $password, $address);
 
             // Inscription réussie, authentification automatique.
             if (verif_ident_customer_BD($email, $password, $profile)) {
@@ -84,10 +83,115 @@ function account()
     }
 }
 
+function AdminPanel()
+{
+    if (isset($_SESSION['profile']['username'])) {
+        $controller = 'user';
+        $action = 'adminpanel';
+
+        require('./view/layout.tpl');
+    } else {
+        // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
+        $url = './index.php?controller=user&action=adminpanel';
+        header('Location:' . $url);
+    }
+}
+function AddAS()
+{
+    if (isset($_SESSION['profile']['username'])) {
+        $controller = 'user';
+        $action = 'AddAS';
+
+        require('./view/layout.tpl');
+    } else {
+        // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
+        $url = './index.php?controller=user&action=AddAS';
+        header('Location:' . $url);
+    }
+}
+function vehicle_stock()
+{
+    if (isset($_SESSION['profile']['username'])) {
+        $controller = 'user';
+        $action = 'vehicle_stock';
+
+        require('./view/layout.tpl');
+    } else {
+        // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
+        $url = './index.php?controller=user&action=vehicle_stock';
+        header('Location:' . $url);
+    }
+}
+function color()
+{
+    if (isset($_SESSION['profile']['username'])) {
+        $controller = 'user';
+        $action = 'color';
+
+        require('./view/layout.tpl');
+    } else {
+        // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
+        $url = './index.php?controller=user&action=color';
+        header('Location:' . $url);
+    }
+}
+function about()
+{
+    if (isset($_SESSION['profile']['username'])) {
+        $controller = 'user';
+        $action = 'about';
+
+        require('./view/layout.tpl');
+    } else {
+        // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
+        $url = './index.php?controller=user&action=about';
+        header('Location:' . $url);
+    }
+}
+function news()
+{
+    if (isset($_SESSION['profile']['username'])) {
+        $controller = 'user';
+        $action = 'news';
+
+        require('./view/layout.tpl');
+    } else {
+        // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
+        $url = './index.php?controller=user&action=news';
+        header('Location:' . $url);
+    }
+}
+function features()
+{
+    if (isset($_SESSION['profile']['username'])) {
+        $controller = 'user';
+        $action = 'features';
+
+        require('./view/layout.tpl');
+    } else {
+        // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
+        $url = './index.php?controller=user&action=features';
+        header('Location:' . $url);
+    }
+}
+function chipping()
+{
+    if (isset($_SESSION['profile']['username'])) {
+        $controller = 'user';
+        $action = 'chipping';
+
+        require('./view/layout.tpl');
+    } else {
+        // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
+        $url = './index.php?controller=user&action=chipping';
+        header('Location:' . $url);
+    }
+}
+
+
 // Gère la mise à jour des informations du profil de l'utilisateur
 function update()
 {
-    $role = $_SESSION['profile']['role'];
     $name = isset($_POST['name']) ? test_input($_POST['name']) : '';
     $username = isset($_POST['username']) ? test_input($_POST['username']) : '';
     $email = isset($_POST['email']) ? test_input($_POST['email']) : '';
@@ -120,7 +224,7 @@ function update()
                 $photo = $_SESSION['profile']['photo'];
             }
 
-            if (update_BD($role, $name, $username, $email, $password, $address, $photo)) {
+            if (update_BD($name, $username, $email, $password, $address, $photo)) {
                 // Mise à jour réussie
                 $_SESSION['profile']['name'] = $name;
                 $_SESSION['profile']['username'] = $username;

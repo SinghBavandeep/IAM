@@ -3,105 +3,118 @@
     <!-- TITLE -->
     <h2 class="section__title">Vehicles</h2>
     <div class="card__container container">
+        <!-- Filter Form -->
+        <form method="GET" action="">
+            <label for="filter">Filter by:</label>
+            <select name="filter" id="filter" class="login__box">
+                <option value="">All</option>
+                <option value="price_low">Price Low to High</option>
+                <option value="price_high">Price High to Low</option>
+            </select>
+            <button type="submit" CLASS="nav__link">Apply</button>
+        </form>
+
         <div class="swiper card-swiper">
-        <br>
-            <div class="swiper-wrapper">
-                <!-- NEW 1 -->
-                <?php 
-                    foreach ($_SESSION['vehicles'] as $item) {
-                    echo '
-                        <div class="card__content swiper-slide" id="'.$item['ref'].'">
-                            <div class="card__data card__data-img">
-                                <img src="./view/image/'.$item['img'].'" alt="treat1" class="card__img">
-                                <h3 class="card__title">'.$item['name'].'</h3>
-                                <div class="card__subtitle">'.$item['type'].'</div>
-                                <div class="card__price">£'.$item['prixM'].'</div>
-                                <div class="swiper-button-next"></div>
-                                <div class="swiper-button-prev"></div>
-                            </div>
-                            <div class="card__data card__data-details">
-                                <div class="card__detail">
-                                    <div class="card__pagination">
-                                        <div class="card__subtitle">Vehicles</div>
-                                        <div class="swiper-pagination"></div>
+            <br>
+            <?php
+            $conn = mysqli_connect("localhost", "root", "", "project");
+
+            // Retrieve the products from the database with filtering
+            $filter = $_GET['filter'] ?? '';
+            switch ($filter) {
+                case 'price_low':
+                    $orderBy = 'ORDER BY prixM ASC';
+                    break;
+                case 'price_high':
+                    $orderBy = 'ORDER BY prixM DESC';
+                    break;
+                default:
+                    $orderBy = '';
+            }
+
+            $sql = "SELECT * FROM vehicle $orderBy";
+            $result = mysqli_query($conn, $sql);
+
+            // Check if any products were found
+            if (mysqli_num_rows($result) > 0) {
+            // Loop through the products and display them
+            while ($row = mysqli_fetch_assoc($result)) {
+            if (empty($filter)) {
+            echo '
+            <div class="login__create">
+                <div class="login__form">
+                    <div class="d-flex justify-content-center align-items-center vh-100">
+                        <div class="shadow w-350 p-3 text-center">';
+                            echo "Product Name: " . $row['name'] . "<br>";
+                            echo '<img src="./view/image/' . $row['img'] . '" alt="Alps" style="height: 400px; height: 400px;"><br>';
+                            echo "Product Price: " . $row['prixM'] . "<br>";
+                            echo "Product Details: " . $row['details'] . "<br>";
+                            echo "<br>";
+                            echo '
+                            <ul class="nav__list">
+                                <li class="nav__item">
+                                    <a href="#Vadmin" class="nav__link" id="afficherBtn">View more</a>
+                                </li><br>
+                                <li class="nav__item">
+                                    <a href="#Vadmin" class="nav__link" id="afficherBtn">Buy</a>
+                                </li><br>
+                                <li class="nav__item">
+                                    <div class="login__create">';
+                                        echo "Quantity: ";
+                                        echo '<input type="number" class="quantity-input" value="0" min="0" onchange="calculateTotal()"><br>
                                     </div>
-                                    <div class="card__info">
-                                        <!-- RENT -->
-                                        <div class="card__subtitle">Rental Dates</div>
-                                        <p class="card__description">Beginning : ';
-                                            echo empty($item['debutL'])?'Aucune':$item['debutL']; 
-                                            echo '<br>
-                                            Fin : ';
-                                            echo empty($item['finL'])?'Aucune':$item['finL']; 
-                                            echo '
-                                        </p>
-                                        <!-- FEATURES -->
-                                        <div class="card__subtitle">Features</div>
-                                        <p class="card__description">'.$item['caract'].'</p>
-                                        <!-- DETAILS -->
-                                        <div class="card__subtitle">Details</div>
-                                        <p class="card__description">'.$item['details'].'</p>
+                                </li><br>
+                            </ul>';
+
+                            echo '</div>
+                    </div>
+                </div>
+            </div><br>';
+            } else {
+            // Apply the filter to skip displaying filtered-out products
+            // Example: Skip products with a price less than 1000
+            if ($filter === 'price_low' && $row['prixM'] < 1000) {
+            continue;
+            }
+
+            echo '
+            <div class="login__create">
+                <div class="login__form">
+                    <div class="d-flex justify-content-center align-items-center vh-100">
+                        <div class="shadow w-350 p-3 text-center">';
+                            echo "Product Name: " . $row['name'] . "<br>";
+                            echo '<img src="./view/image/' . $row['img'] . '" alt="Alps" style="height: 400px; height: 400px;"><br>';
+                            echo "Product Price: " . $row['prixM'] . "<br>";
+                            echo "Product Details: " . $row['details'] . "<br>";
+                            echo "<br>";
+                            echo '
+                            <ul class="nav__list">
+                                <li class="nav__item">
+                                    <a href="#Vadmin" class="nav__link" id="afficherBtn">View more</a>
+                                </li><br>
+                                <li class="nav__item">
+                                    <a href="#Vadmin" class="nav__link" id="afficherBtn">Buy</a>
+                                </li><br>
+                                <li class="nav__item">
+                                    <div class="login__create">';
+                                        echo "Quantity: ";
+                                        echo '<input type="number" class="quantity-input" value="0" min="0" onchange="calculateTotal()"><br>
                                     </div>
-                                    
-                                </div>';
-                                if (isset($_GET["param"]) && $_GET['param'] == 'vehicle-home') {
-                                    if (!isset($_SESSION['profile']) || $_SESSION['profile']['role'] != 'admin') {
-                                        echo '
-                                        <div class="card__buttons">
-                                            <a href="./index.php?controller=vehicle&action=selection_flotte&param=' . $item['ref'] . '" class="button card__button">
-                                                <i class="bx bx-cart-alt "></i>
-                                            </a>
-                                        </div>';
-                                    }
-                                }
-                                else {
-                                    echo '
-                                    <div class="card__buttons">';
-                                        if ($_SESSION['profile']['role'] == 'customer') {
-                                            if (!empty($item['debutL']) || !empty($item['debutL'])) {
-                                                echo '
-                                                <a href="./index.php?controller=vehicle&action=deselection_flotte&param=' . $item['ref'] . '" class="button ">
-                                                    Cancel
-                                                </a>';
-                                            }
-                                            else {
-                                                echo '
-                                                <a href="./index.php?controller=vehicle&action=deselection_flotte&param=' . $item['ref'] . '" class="button ">
-                                                    Deselect
-                                                </a>';
-                                            }
-                                            echo '
-                                            <a href="./index.php?controller=vehicle&action=modifier_dates&param=' . $item['ref'] . '" class="button">
-                                                Edit
-                                            </a>';
-                                        }
-                                        if ($_SESSION['profile']['role'] == 'admin') {
-                                            if (isset($_GET['param']) && $_GET['param'] == 'vehicle-stock') {
-                                                echo '
-                                                <a href="./index.php?controller=vehicle&action=add" class="button ">
-                                                    Add
-                                                </a>
-                                                <a href="./index.php?controller=vehicle&action=supprimer&param='.$item['ref'].'" class="button">
-                                                    Delete
-                                                </a>';
-                                            }
-                                            if (isset($_GET['param']) && $_GET['param'] == 'vehicle-rent') {
-                                                echo '
-                                                <a href="./index.php?controller=vehicle&action=bill" class="button ">
-                                                    Billing
-                                                </a>';
-                                            }
-                                        }
-                                        echo '
-                                    </div>';
-                                }
-                                echo '
-                            </div>
-                        </div>
-                    ';
-                    }
-                ?>
-            </div>
+                                </li><br>
+                            </ul>';
+
+                            echo '</div>
+                    </div>
+                </div>
+            </div><br>';
+            }
+            }
+            } else {
+            echo "No products found in the database.";
+            }
+            // Close the database connection
+            mysqli_close($conn);
+            ?>
         </div>
     </div>
 </section>
