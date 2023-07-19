@@ -51,6 +51,9 @@
             }
             ?>
             <li class="nav__item">
+                <a href="./index.php?controller=user&action=about" class="nav__link">About</a>
+            </li>
+            <li class="nav__item">
                 <a href="./index.php?controller=user&action=account" class="nav__logo">
                     <img src="<?php
             if (!isset($_SESSION['profile'])) {
