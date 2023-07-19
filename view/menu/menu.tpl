@@ -1,3 +1,4 @@
+
 <nav class="nav container">
     <!-- LOGO -->
     <a href="./index.php?controller=user&action=home&param=vehicle-home" class="nav__logo">
@@ -27,6 +28,11 @@
             </li>
             <li class="nav__item">
                 <a href="./index.php?controller=sparepart&action=getSpareParts" class="nav__link">Spare parts</a>
+            </li>
+            <li class="nav__item">
+                <a href="./index.php?controller=user&action=cart" class="nav__link">
+                    <img src="./view/image/cart.png" alt="logo" class="nav__logo" width="40px" height="40px" alt="cart">
+                </a>
             </li>';
             }
 

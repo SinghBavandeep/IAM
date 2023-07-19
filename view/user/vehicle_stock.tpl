@@ -76,21 +76,18 @@
 						</a>';
 						}
 						if ($_SESSION['profile']['role'] == 'admin') {
-						if (isset($_GET['param']) && $_GET['param'] == 'vehicle-stock') {
 						echo '
-						<a href="./index.php?controller=vehicle&action=add" class="button ">
-							Add
-						</a>
-						<a href="./index.php?controller=vehicle&action=supprimer&param='.$item['ref'].'" class="button">
+						<a href="" class="button ">
+							ADD
+						</a>';
+						echo '
+						<a href="" class="button">
 							Delete
 						</a>';
-						}
-						if (isset($_GET['param']) && $_GET['param'] == 'vehicle-rent') {
 						echo '
-						<a href="./index.php?controller=vehicle&action=bill" class="button ">
-							Billing
+						<a href="" class="button">
+							Edith
 						</a>';
-						}
 						}
 						echo '
 					</div>';
@@ -114,7 +111,7 @@
 			<div class="swiper-wrapper">
 				<!-- NEW 1 -->
 				<?php
-                foreach ($_SESSION['vehicles'] as $item) {
+                foreach ($_SESSION[''] as $item) {
                     echo '
                         <div class="card__content swiper-slide" id="'.$item['ref'].'">
 				<div class="card__data card__data-img">
@@ -182,21 +179,18 @@
 						</a>';
 						}
 						if ($_SESSION['profile']['role'] == 'admin') {
-						if (isset($_GET['param']) && $_GET['param'] == 'vehicle-stock') {
 						echo '
-						<a href="./index.php?controller=vehicle&action=add" class="button ">
-							Add
-						</a>
-						<a href="./index.php?controller=vehicle&action=supprimer&param='.$item['ref'].'" class="button">
+						<a href="" class="button ">
+							ADD
+						</a>';
+						echo '
+						<a href="" class="button">
 							Delete
 						</a>';
-						}
-						if (isset($_GET['param']) && $_GET['param'] == 'vehicle-rent') {
 						echo '
-						<a href="./index.php?controller=vehicle&action=bill" class="button ">
-							Billing
+						<a href="" class="button">
+							Edith
 						</a>';
-						}
 						}
 						echo '
 					</div>';
