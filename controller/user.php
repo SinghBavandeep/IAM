@@ -194,6 +194,19 @@ function chipping()
         header('Location:' . $url);
     }
 }
+function cart()
+{
+    if (isset($_SESSION['profile']['username'])) {
+        $controller = 'user';
+        $action = 'cart';
+
+        require('./view/layout.tpl');
+    } else {
+        // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
+        $url = './index.php?controller=user&action=cart';
+        header('Location:' . $url);
+    }
+}
 
 
 // Gère la mise à jour des informations du profil de l'utilisateur

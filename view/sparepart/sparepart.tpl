@@ -63,11 +63,11 @@
                         <div class="shadow w-350 p-3 text-center">
                             Product Name: ' . $row['name'] . '<br>
                             <img src="./view/image/' . $row['img'] . '" alt="Alps" style="height: 400px; height: 400px;"><br>
-                            Product Price: ' . $row['prixM'] . '<br>
+                            Product Price: ' . $row['prixM'] . '£<br>
                             Product Details: ' . $row['details'] . '<br><br>
                             <ul class="nav__list">
                                 <li class="nav__item">
-                                    <a href="#Vadmin" class="nav__link" id="afficherBtn">View more</a>
+                                    <a href="#Vadmin" class="nav__link" id="afficherBtn">Add to cart</a>
                                 </li><br>
                                 <li class="nav__item">
                                     <a href="#Vadmin" class="nav__link" id="afficherBtn">Buy</a>

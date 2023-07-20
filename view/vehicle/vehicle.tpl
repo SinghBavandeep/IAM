@@ -47,13 +47,13 @@
                         <div class="shadow w-350 p-3 text-center">';
                             echo "Product Name: " . $row['name'] . "<br>";
                             echo '<img src="./view/image/' . $row['img'] . '" alt="Alps" style="height: 400px; height: 400px;"><br>';
-                            echo "Product Price: " . $row['prixM'] . "<br>";
+                            echo "Product Price: " . $row['prixM'] . "£<br>";
                             echo "Product Details: " . $row['details'] . "<br>";
                             echo "<br>";
                             echo '
                             <ul class="nav__list">
                                 <li class="nav__item">
-                                    <a href="#Vadmin" class="nav__link" id="afficherBtn">View more</a>
+                                    <a href="#Vadmin" class="nav__link" id="afficherBtn">Add to cart</a>
                                 </li><br>
                                 <li class="nav__item">
                                     <a href="#Vadmin" class="nav__link" id="afficherBtn">Buy</a>
