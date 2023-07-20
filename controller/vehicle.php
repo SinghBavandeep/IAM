@@ -3,7 +3,7 @@
   fonctions-action de gestion (c2) 
 */
 
-function show() 
+function show()
 {	
   require('./model/vehicleBD.php');
   $_SESSION['vehicles'] = getVehicle_BD(1, 'admin', null);

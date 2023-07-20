@@ -22,9 +22,9 @@
                                 <h1 class="home__title">'.$item['name'].'</h1>
                                 <p class="home__description">'.$item['details'].'</p>
                                 <div class="home__buttons">
-                                    <a href="./index.php?controller=vehicle&action=selection_flotte&param='.$item['ref'].'" class="button">Select</a>
-                                    <a href="./index.php?controller=vehicle&action=get&param=vehicle-home" class="button--link">
-                                        Features
+                                    <a href="./index.php?controller=vehicle&action=selection_flotte&param='.$item['ref'].'" class="button">Add</a>
+                                    <a href="./index.php?controller=vehicle&action=process_payment" class="button--link">
+                                        Buy
                                         <i class="bx bx-right-arrow-alt button__icon"></i>
                                     </a>
                                 </div>

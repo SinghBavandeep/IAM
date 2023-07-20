@@ -1,19 +1,23 @@
 <?php
 
-function getSparePart_BD($id, $role, $rent)
+// Function to get spare parts from the database
+function getSparePart_BD($id, $role, $rent, $pdo)
 {
     require('./model/connectBD.php');
+
     try {
         if ($rent) {
+            // Query to get rented spare parts
             $sql = "SELECT * FROM `spare_part` WHERE ref = (
                     SELECT idv FROM `bill` GROUP BY idv);";
             $command = $pdo->prepare($sql);
             $bool = $command->execute();
-        }
-        else {
+        } else {
             if ($role == 'admin')
+                // Query to get spare parts for the admin
                 $sql = "SELECT * FROM `spare_part` WHERE idL=:id";
             else
+                // Query to get spare parts for the customer
                 $sql = "SELECT * FROM `spare_part` WHERE idC=:id";
 
             $command = $pdo->prepare($sql);
@@ -23,18 +27,23 @@ function getSparePart_BD($id, $role, $rent)
 
         if ($bool) {
             $Resultat = $command->fetchAll(PDO::FETCH_ASSOC);
-            // var_dump($Resultat); die();
+            // Debugging purpose, you can remove this line
+            var_dump($Resultat);
+            die();
         }
-    }
-    catch (PDOException $e) {
-        echo utf8_encode('Echec de select : ' . $e->getMessage() . '\n');
+    } catch (PDOException $e) {
+        echo utf8_encode('Select failed: ' . $e->getMessage() . '\n');
         die();
     }
     if (count($Resultat) == 0)
-        return array(); // renvoie un tableau vide
+        return array(); // Return an empty array if there are no spare parts
     else
         return $Resultat;
 }
+
+// ... Rest of the functions ...
+
+
 
 function ajouter_SparePart_BD($name, $type, $caract, $details, $prixM, $img) {
 
