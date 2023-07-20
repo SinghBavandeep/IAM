@@ -28,20 +28,20 @@ The market will offer several menus for users to interact with:
 ### Features
 The site will have three types of users: Buyers, Sellers, and Administrators.
 
-1. **Administrator**
+1. **Administrator** (ID: admin | Password: 1234)
    - Can add or delete items from the market site.
    - Can display their name, photo.
    - Each item for sale should have an identification number, name, one or more photos, descriptions, videos (if available), and price.
    - Can manage categories and add or remove sellers/admin and user.
    
-2. **Sellers**
+2. **Sellers** (ID: seller | Password: 1234)
    - Must log in with their username and email for account access.
    - Can display their name, photo.
    - Able to publish items for sale with relevant details, including category, price, photos, descriptions, and video.
    - Can offer items for auction, buy it now, or best offer. An item cannot be available for both auction and best offer at the same time.
    - Sold items are automatically removed from the site upon a successful transaction.
 
-3. **Buyers**
+3. **Buyers** (ID: dupont | Password: 1234)
    - Can access their account with personal details like name, address, and email.
    - Can display their name, photo.
    - Must accept the contract for buying an item if they make an offer, which becomes legally binding if accepted by the seller.
@@ -60,7 +60,7 @@ The site will have three types of users: Buyers, Sellers, and Administrators.
 To develop your website, we follow the best practices for web design and use the following resources:
 - [Wireframe Tutorial](https://webdesign.tutsplus.com/articles/a-beginners-guide-to-wireframing--webdesign-7399)
 - [Storyboard Tutorial](https://www.fastcodesign.com/1672917/the-8-steps-to-creating-a-great-storyboard)
-- Tutorial for HTML, CSS, PHP, etc.: [W3Schools](https://www.w3schools.com/)
+- Tutorial for HTML, CSS, PHP, etc.: [W3Schools](https://www.w3schools.com/),https://stackoverflow.com/
 - We also use Chatgpt.
 
 ### Conclusion

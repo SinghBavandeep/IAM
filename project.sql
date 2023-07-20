@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : dim. 09 juil. 2023 à 12:25
+-- Généré le : jeu. 20 juil. 2023 à 10:43
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.0.26
 
@@ -34,15 +34,18 @@ CREATE TABLE IF NOT EXISTS `admin` (
   `username` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `email` text NOT NULL,
   `password` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `photo` text NOT NULL,
+  `address` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `admin`
 --
 
-INSERT INTO `admin` (`id`, `name`, `username`, `email`, `password`) VALUES
-(1, 'admin', 'admin', 'admin@gmail.com', '$2y$10$fCfMZkR58STvPZ3u8Ynx8.kWGYKGDrhvW1c07cdtNoUSByV17Cg/6');
+INSERT INTO `admin` (`id`, `name`, `username`, `email`, `password`, `photo`, `address`) VALUES
+(1, 'Admin', 'admin', 'admin@gmail.com', '$2y$10$fCfMZkR58STvPZ3u8Ynx8.kWGYKGDrhvW1c07cdtNoUSByV17Cg/6', 'Admin_1.png', 'Omnes Education London School'),
+(2, 'Admin2', 'admin2', 'admin2@gmail.com', '$2y$10$fCfMZkR58STvPZ3u8Ynx8.kWGYKGDrhvW1c07cdtNoUSByV17Cg/6', 'flash-img.png', 'Omnes Education London School');
 
 -- --------------------------------------------------------
 
@@ -83,20 +86,19 @@ CREATE TABLE IF NOT EXISTS `customer` (
   `username` text CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
   `password` text CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
   `email` text CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
+  `address` text NOT NULL,
+  `photo` text NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `customer`
 --
 
-INSERT INTO `customer` (`id`, `name`, `username`, `password`, `email`) VALUES
-(2, 'Voyer', 'Avoyer75', '$2y$10$fCfMZkR58STvPZ3u8Ynx8.kWGYKGDrhvW1c07cdtNoUSByV17Cg/6', 'voyer@email.com'),
-(3, 'Burban', 'Cburban92', '$2y$10$fCfMZkR58STvPZ3u8Ynx8.kWGYKGDrhvW1c07cdtNoUSByV17Cg/6', 'burban@email.com'),
-(4, 'Agez', 'fAgez03', '$2y$10$fCfMZkR58STvPZ3u8Ynx8.kWGYKGDrhvW1c07cdtNoUSByV17Cg/6', 'agez@email.com'),
-(5, 'Dupont ', 'dupont', '$2y$10$fCfMZkR58STvPZ3u8Ynx8.kWGYKGDrhvW1c07cdtNoUSByV17Cg/6', 'dupont@gmail.com'),
-(6, 'Perrier ', 'perrier13', '$2y$10$fCfMZkR58STvPZ3u8Ynx8.kWGYKGDrhvW1c07cdtNoUSByV17Cg/6', 'perrier@email.com');
+INSERT INTO `customer` (`id`, `name`, `username`, `password`, `email`, `address`, `photo`) VALUES
+(2, 'Customer', 'customer', '$2y$10$fCfMZkR58STvPZ3u8Ynx8.kWGYKGDrhvW1c07cdtNoUSByV17Cg/6', 'customer@gmail.com', 'Omnes Education London School', 'flash-img.png'),
+(5, 'Dupont', 'dupont', '$2y$10$fCfMZkR58STvPZ3u8Ynx8.kWGYKGDrhvW1c07cdtNoUSByV17Cg/6', 'dupont@gmail.com', 'Omnes Education London School', 'Admin_1.png');
 
 -- --------------------------------------------------------
 
@@ -106,21 +108,54 @@ INSERT INTO `customer` (`id`, `name`, `username`, `password`, `email`) VALUES
 
 DROP TABLE IF EXISTS `seller`;
 CREATE TABLE IF NOT EXISTS `seller` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL,
-  `username` varchar(50) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` text CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
+  `username` text CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
+  `password` text CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
+  `email` text CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
+  `address` text NOT NULL,
+  `photo` text NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `seller`
 --
 
-INSERT INTO `seller` (`id`, `name`, `username`, `email`, `password`) VALUES
-(2, 'Singh', 'SINGH', 'bavandeep45@gmail.com', '$2y$10$fCfMZkR58STvPZ3u8Ynx8.kWGYKGDrhvW1c07cdtNoU'),
-(3, 'Seller', 'seller', 'seller@gmail.com', '$2y$10$fCfMZkR58STvPZ3u8Ynx8.kWGYKGDrhvW1c07cdtNoU');
+INSERT INTO `seller` (`id`, `name`, `username`, `password`, `email`, `address`, `photo`) VALUES
+(10, 'Seller', 'seller', '$2y$10$fCfMZkR58STvPZ3u8Ynx8.kWGYKGDrhvW1c07cdtNoUSByV17Cg/6', 'seller@email.com', 'Omnes Education London School', 'Seller_1.png');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `spare_part`
+--
+
+DROP TABLE IF EXISTS `spare_part`;
+CREATE TABLE IF NOT EXISTS `spare_part` (
+  `ref` int NOT NULL AUTO_INCREMENT,
+  `name` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `type` text CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
+  `caract` text CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
+  `details` text,
+  `state` tinyint(1) DEFAULT '0',
+  `img` text CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
+  `prixM` double NOT NULL,
+  `idL` int NOT NULL DEFAULT '1',
+  `idC` int DEFAULT NULL,
+  PRIMARY KEY (`ref`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `spare_part`
+--
+
+INSERT INTO `spare_part` (`ref`, `name`, `type`, `caract`, `details`, `state`, `img`, `prixM`, `idL`, `idC`) VALUES
+(2, 'Ferrari 488', 'Diesel', 'Number of seats: 2,\r\nGearbox: manual,\r\nEngine: V8', 'The Ferrari 488 in our luxury category is a very fast sports car with excellent handling.', 0, 'wheel1.png', 2499.99, 1, NULL),
+(3, 'Dacia Duster', 'Diesel', 'Number of seats: 5\r\nGearbox: automatic\r\nEngine: 3.0d381', 'The Dacia Duster in our medium category is a family car with excellent comfort and reliability.', 1, 'wheel2.png', 399.99, 1, 5),
+(4, 'Fiat Multipla', 'DIesel', 'Number of seats: 6\r\nGearbox: manual\r\nEngine: 1.6 16v', 'The Fiat Multipla belonging to our low coast category is a car adapted to small budgets allowing to make daily journeys.', 0, 'wheel3.png', 249.99, 1, 3),
+(5, 'Lamborghini Gallardo', 'Diesel', 'Number of places: 2\r\nGearbox: manual\r\nEngine: V10', 'The Lamborghini Gallardo in our luxury category is a very fast sports car with excellent handling.', 1, 'wheel4.png', 2699.99, 1, 4);
 
 -- --------------------------------------------------------
 
@@ -148,9 +183,8 @@ CREATE TABLE IF NOT EXISTS `vehicle` (
 --
 
 INSERT INTO `vehicle` (`ref`, `name`, `type`, `caract`, `details`, `state`, `img`, `prixM`, `idL`, `idC`) VALUES
-(1, 'BMW X5', 'Diesel', 'Number of seats: 5,\r\nGearbox: automatic,\r\nEngine: 3.0d381', 'The BMW W5 in our medium category is a family car with excellent comfort and reliability.', 1, 'BMW X5 (moyen).png', 449.99, 1, 5),
-(2, 'Ferrari 488', 'Diesel', 'Number of seats: 2,\r\nGearbox: manual,\r\nEngine: V8', 'The Ferrari 488 in our luxury category is a very fast sports car with excellent handling.', 0, 'Ferrari-488 (luxe).png', 2499.99, 1, 2),
-(3, 'Dacia Duster', 'Diesel', 'Number of seats: 5\r\nGearbox: automatic\r\nEngine: 3.0d381', 'The Dacia Duster in our medium category is a family car with excellent comfort and reliability.', 1, 'dacia duster (low coast).png', 399.99, 1, 13),
+(2, 'Ferrari 488', 'Diesel', 'Number of seats: 2,\r\nGearbox: manual,\r\nEngine: V8', 'The Ferrari 488 in our luxury category is a very fast sports car with excellent handling.', 0, 'Ferrari-488 (luxe).png', 2499.99, 1, NULL),
+(3, 'Dacia Duster', 'Diesel', 'Number of seats: 5\r\nGearbox: automatic\r\nEngine: 3.0d381', 'The Dacia Duster in our medium category is a family car with excellent comfort and reliability.', 1, 'dacia duster (low coast).png', 399.99, 1, 5),
 (4, 'Fiat Multipla', 'DIesel', 'Number of seats: 6\r\nGearbox: manual\r\nEngine: 1.6 16v', 'The Fiat Multipla belonging to our low coast category is a car adapted to small budgets allowing to make daily journeys.', 0, 'Fiat Multipla (low coast).png', 249.99, 1, 3),
 (5, 'Lamborghini Gallardo', 'Diesel', 'Number of places: 2\r\nGearbox: manual\r\nEngine: V10', 'The Lamborghini Gallardo in our luxury category is a very fast sports car with excellent handling.', 1, 'lamborghini gallardo (luxe).png', 2699.99, 1, 4);
 COMMIT;
