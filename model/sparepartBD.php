@@ -8,17 +8,17 @@ function getSparePart_BD($id, $role, $rent, $pdo)
     try {
         if ($rent) {
             // Query to get rented spare parts
-            $sql = "SELECT * FROM `spare_part` WHERE ref = (
-                    SELECT idv FROM `bill` GROUP BY idv);";
+            $sql = "SELECT * FROM 'spare_part' WHERE ref = (
+                    SELECT idv FROM 'bill' GROUP BY idv);";
             $command = $pdo->prepare($sql);
             $bool = $command->execute();
         } else {
             if ($role == 'admin')
                 // Query to get spare parts for the admin
-                $sql = "SELECT * FROM `spare_part` WHERE idL=:id";
+                $sql = "SELECT * FROM 'spare_part' WHERE idL=:id";
             else
                 // Query to get spare parts for the customer
-                $sql = "SELECT * FROM `spare_part` WHERE idC=:id";
+                $sql = "SELECT * FROM 'spare_part' WHERE idC=:id";
 
             $command = $pdo->prepare($sql);
             $command->bindParam(':id', $id);

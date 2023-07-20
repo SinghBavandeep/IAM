@@ -8,7 +8,7 @@
                 <h3 class="login__title">Add a vehicle</h3>
                 <div class="login__box">
                     <i class="bx bxs-car login__icon"></i>
-                    <input type="text" name="nom" value="<?php echo $nom; ?>" placeholder="Name" class="login__input">
+                    <input type="text" name="name" value="<?php echo $name; ?>" placeholder="Name" class="login__input">
                 </div>
                 <div class="login__box">
                     <i class="bx bxs-gas-pump login__icon"></i>
@@ -27,13 +27,13 @@
                     <input type="text" name="prixM" value="<?php echo $prixM; ?>" placeholder="Price " class="login__input">
                 </div>
                 <div class="login__box">
-                    <i class="bx bx-link-alt login__icon"></i>
-                    <input type="text" name="img" value="<?php echo $img; ?>" placeholder="Image URL" class="login__input">
+                    <label for="photo">Photo: </label>
+                    <input type="file" name="photo" id="photo" required >
                 </div>
                 
                 
                 <!-- ADD -->
-                <input type="submit" value="Ajouter" class="button login__button"></input>
+                <input type="submit" value="Add" class="button login__button"></input>
             </form>
         </div>
     </div>

@@ -70,11 +70,11 @@ function add()
     require('./model/vehicleBD.php');
     
     if (!verif_ajout_input($name, $type, $caract, $details, $prixM, $img)) {
-        $msg = 'Erreur de saisie, veillez renseigner tous les champs s\'il vous plaît!';
+        $msg = 'Imput error!';
         $controller = "vehicle"; $action = "add";
         require('./view/layout.tpl');
     }
-    else  ajouter_vehicule_BD($name, $type, $caract, $details, $prixM, $img);
+    else  add_vehicle_BD($name, $type, $caract, $details, $prixM, $img);
   }
 
   $controller = 'vehicle'; $action = 'add';
@@ -100,13 +100,13 @@ function verif_ajout_input($name, $type, $caract, $details, $prixM, $img) //: bo
   return true;
 }
 
-function supprimer()
+function delete()
 {   
   $idv = $_GET['param'];
 
   require('./model/vehicleBD.php');
 
-  supprimer_vehicule_BD($idv);
+  delete_vehicle_BD($idv);
 
   $controller = 'vehicle'; $action = 'add';
   $url = "./index.php?controller=vehicle&action=getVehicle&param=vehicle-stock";

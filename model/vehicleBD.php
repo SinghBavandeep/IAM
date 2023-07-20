@@ -36,7 +36,7 @@ f<?php
             return $Resultat;
     }
 
-    function ajouter_vehicule_BD($name, $type, $caract, $details, $prixM, $img) {
+    function add_vehicle_BD($name, $type, $caract, $details, $prixM, $img) {
     
         require('./model/connectBD.php');
 
@@ -53,7 +53,7 @@ f<?php
             $bool = $command->execute();
     }
 
-    function supprimer_vehicule_BD($idv)
+    function delete_vehicle_BD($idv)
     {
         require('./model/connectBD.php');
 
