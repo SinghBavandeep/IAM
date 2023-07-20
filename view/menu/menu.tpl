@@ -30,6 +30,14 @@
             </li>';
             }
 
+            // Afficher les onglets pour les sellers
+            if (isset($_SESSION['profile']['role']) && $_SESSION['profile']['role'] == 'seller') {
+            echo '
+            <li class="nav__item">
+                <a href="./index.php?controller=user&action=vehicle_stock" class="nav__link">Stock</a>
+            </li>';
+            }
+
             // Afficher les onglets pour les administrateurs
             if (isset($_SESSION['profile']['role']) && $_SESSION['profile']['role'] == 'admin') {
             echo '

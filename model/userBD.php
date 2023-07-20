@@ -54,6 +54,7 @@ function verif_ident_seller_BD($ident, $password, &$profile)
 }
 
 
+
 // Vérifie si l'administrateur est présent dans la base de données
 // Vérifie si l'administrateur est présent dans la base de données
 function verif_ident_admin_BD($ident, $password, &$profile)
