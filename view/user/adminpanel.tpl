@@ -51,13 +51,13 @@
 								<td style="border: 1px solid black; padding: 8px;"><?php echo $row['username'];?></td>
 								<td style="border: 1px solid black; padding: 8px;"><?php echo $row['email'];?></td>
 								<td style="border: 1px solid black; padding: 8px;">
-									<form action="registerEdit.php" method="post">
+									<form action="./index.php?controller=user&action=registerEdit" method="post">
 										<input type="hidden" name="edit_id" value="<?php echo $row['id']?>">
 										<button type="submit" class="nav__link" name="edit_admin_btn">EDIT</button>
 									</form>
 								</td>
 								<td style="border: 1px solid black; padding: 8px;">
-									<form action="code.php" method="post">
+									<form action="./view/user/code.php" method="post">
 										<input type="hidden" name="delete_id" value="<?php echo $row['id'];?>">
 										<button type="submit" name="delete_admin_btn" class="nav__link">DELETE</button>
 									</form>
@@ -125,15 +125,15 @@
 								<td style="border: 1px solid black; padding: 8px;"><?php echo $row['username'];?></td>
 								<td style="border: 1px solid black; padding: 8px;"><?php echo $row['email'];?></td>
 								<td style="border: 1px solid black; padding: 8px;">
-									<form action="registerEdit.php" method="post">
+									<form action="./index.php?controller=user&action=registerEdit" method="post">
 										<input type="hidden" name="edit_id" value="<?php echo $row['id']?>">
-										<button type="submit" class="nav__link" name="edit_admin_btn">EDIT</button>
+										<button type="submit" class="nav__link" name="edit_Seller_btn">EDIT</button>
 									</form>
 								</td>
 								<td style="border: 1px solid black; padding: 8px;">
-									<form action="code.php" method="post">
+									<form action="./view/user/code.php" method="post">
 										<input type="hidden" name="delete_id" value="<?php echo $row['id'];?>">
-										<button type="submit" name="delete_admin_btn" class="nav__link">DELETE</button>
+										<button type="submit" name="delete_seller_btn" class="nav__link">DELETE</button>
 									</form>
 								</td>
 							</tr>
@@ -199,9 +199,9 @@
 								<td style="border: 1px solid black; padding: 8px;"><?php echo $row['username'];?></td>
 								<td style="border: 1px solid black; padding: 8px;"><?php echo $row['email'];?></td>
 								<td style="border: 1px solid black; padding: 8px;">
-									<form action="code.php" method="post">
+									<form action="./view/user/code.php" method="post">
 										<input type="hidden" name="delete_id" value="<?php echo $row['id'];?>">
-										<button type="submit" name="delete_admin_btn" class="nav__link">DELETE</button>
+										<button type="submit" name="delete_user_btn" class="nav__link">DELETE</button>
 									</form>
 								</td>
 							</tr>
