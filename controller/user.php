@@ -30,7 +30,6 @@ function ident()
 }
 
 // Gère l'inscription d'un nouveau client
-// Gère l'inscription d'un nouveau client
 function inscr()
 {
     // Définition des variables
