@@ -27,8 +27,8 @@
                     <input type="text" name="prixM" value="<?php echo $prixM; ?>" placeholder="Price " class="login__input">
                 </div>
                 <div class="login__box">
-                    <label for="photo">Photo: </label>
-                    <input type="file" name="photo" id="photo" required >
+                    <label for="img">Image: </label>
+                    <input type="file" name="img" id="img" required >
                 </div>
                 
                 
