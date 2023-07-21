@@ -109,7 +109,7 @@ function verif_ajout_input($name, $type, $caract, $details, $prixM, $img) //: bo
   return true;
 }
 
-function supprimer()
+function delete()
 {
   $idv = $_GET['param'];
 
