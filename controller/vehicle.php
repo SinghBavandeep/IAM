@@ -77,9 +77,8 @@ function add()
     else  add_vehicle_BD($name, $type, $caract, $details, $prixM, $img);
   }
 
-  $controller = 'vehicle'; $action = 'add';
-  $url = "./index.php?controller=vehicle&action=getVehicle&param=vehicle-stock";
-  header('Location:' . $url);
+  $controller = 'user'; $action = 'vehicle_stock';
+  require('./view/layout.tpl');
 }
 
 // Vérifie si tous les champs du formulaire d'inscription sont
@@ -108,9 +107,8 @@ function delete()
 
   delete_vehicle_BD($idv);
 
-  $controller = 'vehicle'; $action = 'add';
-  $url = "./index.php?controller=vehicle&action=getVehicle&param=vehicle-stock";
-  header('Location:' . $url);
+  $controller = 'user'; $action = 'vehicle_stock';
+  require('./view/layout.tpl');
 }
 
 // Vérifie si une chaîne est alphabétique
@@ -168,11 +166,10 @@ function deselection_flotte()
 
   deselection_flotte_BD($idv);
 
-  $controller = 'vehicle'; $action = 'getVehicle';
-  $url = "./index.php?controller=vehicle&action=getVehicle";
+  $controller = 'vehicle'; $action = 'getVehicles';
+  $url = "./index.php?controller=vehicle&action=getVehicles";
   header('Location:' . $url);
 }
-
 
 function bill()
 {
