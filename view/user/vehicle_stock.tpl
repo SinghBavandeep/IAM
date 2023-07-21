@@ -75,7 +75,7 @@
 							Edit
 						</a>';
 						}
-						if ($_SESSION['profile']['role'] == 'admin') {
+						if ($_SESSION['profile']['role'] == 'admin' || $_SESSION['profile']['role'] == 'seller') {
 						echo '
 						<a href="./index.php?controller=vehicle&action=add" class="button ">
 							ADD
