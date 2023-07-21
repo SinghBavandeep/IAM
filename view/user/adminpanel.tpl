@@ -57,7 +57,11 @@
 									</form>
 								</td>
 								<td style="border: 1px solid black; padding: 8px;">
+
 									<form action="./view/user/code.php" method="post">
+
+									<form action="./index.php?controller=user&action=delete&param=$row['id']" method="post">
+
 										<input type="hidden" name="delete_id" value="<?php echo $row['id'];?>">
 										<button type="submit" name="delete_admin_btn" class="nav__link">DELETE</button>
 									</form>

@@ -118,6 +118,49 @@ function inscr_BD($name, $username, $email, $password, $address, $photo)
     }
 }
 
+// Step 4: Send order confirmation email to the customer
+function send_confirmation_email($email, $name, $vehicle_name, $total_amount)
+{
+    // You should use a library or email sending method appropriate for your environment
+    // (e.g., PHPMailer, SwiftMailer, etc.). Here's an example of sending a basic email using PHP's mail() function:
+
+    $to = $email;
+    $subject = "Order Confirmation";
+
+    // The body of the confirmation message
+    $message = "Hello $name,\n\n";
+    $message .= "Thank you for placing an order on our website.\n";
+    $message .= "Here are the details of your order:\n";
+    $message .= "- Vehicle/Spare Part: $vehicle_name\n";
+    $message .= "- Total Amount: $total_amount\n\n";
+    $message .= "Your order is being processed.\n";
+    $message .= "We will send you a notification once it is shipped.\n\n";
+    $message .= "Best regards,\n";
+    $message .= "The Team at Our Website";
+
+    // Sending the email
+    $headers = "From: noreply@yoursite.com" . "\r\n" .
+        "Reply-To: noreply@yoursite.com" . "\r\n" .
+        "X-Mailer: PHP/" . phpversion();
+
+    // Using the mail() function to send the email
+    // (make sure your server is configured to send emails)
+    mail($to, $subject, $message, $headers);
+}
+
+// In the handle_payment() function, add the call to send_confirmation_email() after the payment is validated:
+function handle_payment($customerId, $name, $addressLine1, $addressLine2, $city, $postalCode, $country, $phoneNumber)
+{
+    // Step 1: Insert delivery details into the 'delivery' table
+    require('./model/userBD.php');
+    if (!insert_delivery_details($customerId, $name, $addressLine1, $addressLine2, $city, $postalCode, $country, $phoneNumber)) {
+        return false; // Failed to save delivery details
+    }
+
+    return true;
+}
+
+
 function insert_delivery_details($customerId, $name, $addressLine1, $addressLine2, $city, $postalCode, $country, $phoneNumber)
 {
     // Include the database connection file

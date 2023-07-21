@@ -7,7 +7,7 @@
 						<ul class="nav__list">
 
 							<li class="nav__item">
-								<a href="#Vadmin" class="nav__link" id="afficherBtn">Bye it now</a>
+								<a href="#Vadmin" class="nav__link" id="afficherBtn">Buy it now</a>
 							</li><br>
 							<li class="nav__item">
 								<a href="#Vseller" class="nav__link">Auctions</a>
