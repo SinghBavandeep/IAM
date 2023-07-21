@@ -38,7 +38,10 @@
             if (isset($_SESSION['profile']['role']) && $_SESSION['profile']['role'] == 'seller') {
             echo '
             <li class="nav__item">
-                <a href="./index.php?controller=user&action=vehicle_stock" class="nav__link">Stock</a>
+                <a href="./index.php?controller=user&action=vehicle_stock" class="nav__link">StockC</a>
+            </li>
+            <li class="nav__item">
+                <a href="./index.php?controller=user&action=sparepart_stock" class="nav__link">StockS</a>
             </li>';
             }
 

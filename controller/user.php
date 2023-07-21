@@ -129,6 +129,19 @@ function vehicle_stock()
         header('Location:' . $url);
     }
 }
+function sparepart_stock()
+{
+    if (isset($_SESSION['profile']['username'])) {
+        $controller = 'user';
+        $action = 'sparepart_stock';
+
+        require('./view/layout.tpl');
+    } else {
+        // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
+        $url = './index.php?controller=user&action=sparepart_stock';
+        header('Location:' . $url);
+    }
+}
 function color()
 {
     if (isset($_SESSION['profile']['username'])) {
