@@ -81,16 +81,14 @@ function verif_ident_admin_BD($ident, $password, &$profile)
 }
 
 // Insère un nouveau client dans la base de données
-function inscr_BD($name, $username, $email, $password, $address, $type)
+function inscr_BD($name, $username, $email, $password, $address, $photo)
 {
     require('./model/connectBD.php');
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT); // Cryptage du mot de passe
 
-    if ($type == "Admin") {
-        $sql = "INSERT INTO `admin` (name, username, email, password, address) VALUES (:name, :username, :email, :password, :address)";
-    } else {
-        $sql = "INSERT INTO `seller` (name, username, email, password, address) VALUES (:name, :username, :email, :password, :address)";
-    }
+
+        $sql = "INSERT INTO `customer` (name, username, email, password, address, photo) VALUES (:name, :username, :email, :password, :address, :photo)";
+
 
     try {
         $command = $pdo->prepare($sql);
@@ -99,6 +97,7 @@ function inscr_BD($name, $username, $email, $password, $address, $type)
         $command->bindParam(':email', $email);
         $command->bindParam(':password', $hashedPassword); // Enregistrement du mot de passe crypté
         $command->bindParam(':address', $address);
+        $command->bindParam(':photo', $photo);
         $bool = $command->execute();
 
         if ($bool) {
