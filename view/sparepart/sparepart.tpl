@@ -5,6 +5,7 @@
     <div class="card__container container">
         <!-- Filter Form -->
         <form method="GET" action="">
+            <?php include('Menu_Categorie.tpl')?><br>
             <label for="filter">Filter by:</label>
             <select name="filter" id="filter" class="login__box">
                 <option value="">All</option>

@@ -16,7 +16,7 @@
 			</div>
 			<!-- FORM -->
 			<div class="login__form">
-				<form action="./index.php?controller=user&action=AddNewAS" method="post" class="login__create" id="login-in">
+				<form action="./view/user/code.php" method="post" class="login__create" id="login-in">
 					<h3 class="login__title">Registration</h3>
 					<div class="login__box">
 						<i class="bx bxs-user login__icon"></i>
@@ -52,13 +52,7 @@
 						<input type="file" name="profile_img" id="profile_img" required >
 					</div>
 					<!-- SIGN IN -->
-					<input type="submit" value="Register" class="button login__button"></input>
-
-					<!-- SIGN UP -->
-					<div>
-						<span class="login__account">Already have an account?</span>
-						<a href="./index.php?controller=user&action=ident" class="login__signup">Login</a>
-					</div>
+					<input type="submit" value="Register" class="button login__button" name="register"></input>
 				</form>
 			</div>
 		</div>
