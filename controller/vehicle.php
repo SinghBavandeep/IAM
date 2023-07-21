@@ -155,7 +155,7 @@ function selection_flotte()
 
   selection_flotte_BD($id, $idv);
 
-  $controller = 'vehicle'; $action = 'getVehicle'; $param = 'vehicle-home';
+  $controller = 'vehicle'; $action = 'getVehicles'; $param = 'vehicle-home';
   $url = "./index.php?controller=$controller&action=$action&param=$param";
   header('Location:' . $url);
 }
