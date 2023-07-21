@@ -1,5 +1,6 @@
 <!-- DELIVERY DETAILS -->
 <section class="delivery-details container" id="delivery-details">
+    <br><br><br>
     <h2 class="section__title">Delivery Details</h2>
     <div class="delivery-details__form">
         <form action="./index.php?controller=user&action=process_payment" method="post" class="delivery-details__create" id="delivery-details-form">

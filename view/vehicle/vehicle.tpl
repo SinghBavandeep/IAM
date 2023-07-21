@@ -60,7 +60,7 @@
                                     </form>
                                 </li><br>
                                 <li class="nav__item">
-                                    <a href="./index.php?controller=user&action=process_payment&ref=' . $row['ref'] . '" class="nav__link" id="afficherBtn">Buy</a>
+                                    <a href="./index.php?controller=user&action=delivery_details&ref=' . $row['ref'] . '" class="nav__link" id="afficherBtn">Buy</a>
                                 </li><br>
                                 <li class="nav__item">
                                     <div class="login__create">

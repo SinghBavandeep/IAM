@@ -381,10 +381,11 @@ function verif_update_input($name, $username, $email, $password, $address, &$pas
 function delivery_details()
 {
     if (isset($_SESSION['profile']['username'])) {
+
         $controller = 'user';
         $action = 'delivery_details';
 
-        require('./view/delivery_details.tpl');
+        require('./view/layout.tpl');
     } else {
         // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
         $url = './index.php?controller=user&action=ident';
@@ -404,34 +405,26 @@ function process_payment()
         $addressLine2 = isset($_POST['address_line2']) ? test_input($_POST['address_line2']) : '';
         $city = isset($_POST['city']) ? test_input($_POST['city']) : '';
         $postalCode = isset($_POST['postal_code']) ? test_input($_POST['postal_code']) : '';
-        $country = isset($_POST['country']) ? test_input($_POST['country']) : '';
-        $phoneNumber = isset($_POST['phone_number']) ? test_input($_POST['phone_number']) : '';
 
         require('./model/userBD.php');
-        insert_delivery_details($customerId, $name, $addressLine1, $addressLine2, $city, $postalCode, $country, $phoneNumber);
-
-        // Capture des détails de paiement depuis le formulaire
-        $cardType = isset($_POST['card_type']) ? test_input($_POST['card_type']) : '';
-        $cardNumber = isset($_POST['card_number']) ? test_input($_POST['card_number']) : '';
-        $cardName = isset($_POST['card_name']) ? test_input($_POST['card_name']) : '';
-        $expirationDate = isset($_POST['expiration_date']) ? test_input($_POST['expiration_date']) : '';
-        $securityCode = isset($_POST['security_code']) ? test_input($_POST['security_code']) : '';
-
-        $paymentSuccess = handle_payment($customerId, $cardType, $cardNumber, $cardName, $expirationDate, $securityCode);
+        $paymentSuccess = handle_payment($customerId, $name, $addressLine1, $addressLine2, $city, $postalCode);
 
         if ($paymentSuccess) {
             // Paiement réussi
             // Effectuer les actions nécessaires (par exemple, mettre à jour l'état de l'achat, envoyer un e-mail de confirmation, etc.)
             $msg = 'Payment successful!';
+
+
         } else {
             // Paiement échoué
             $msg = 'Payment failed!';
         }
 
-        $controller = 'user';
-        $action = 'payment_result';
+        echo "<script type='text/javascript'>alert('$msg');</script>";
+        $controller = 'home';
+        $action = 'home';
 
-        require('./view/payment_result.tpl');
+        require('./view/layout.tpl');
     } else {
         // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
         $url = './index.php?controller=user&action=ident';
