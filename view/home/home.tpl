@@ -23,7 +23,7 @@
                                 <p class="home__description">'.$item['details'].'</p>
                                 <div class="home__buttons">
                                     <a href="./index.php?controller=vehicle&action=selection_flotte&param='.$item['ref'].'" class="button">Add</a>
-                                    <a href="./index.php?controller=vehicle&action=delivery_details&ref=' . $item['ref'] . '" class="button--link">
+                                    <a href="./index.php?controller=user&action=delivery_details&ref=' . $item['ref'] . '" class="button--link">
                                         Buy
                                         <i class="bx bx-right-arrow-alt button__icon"></i>
                                     </a>
