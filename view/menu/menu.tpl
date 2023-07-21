@@ -10,6 +10,9 @@
             <li class="nav__item">
                 <a href="./index.php?controller=user&action=home&param=vehicle-home" class="nav__link">Home</a>
             </li>
+            <li class="nav__item">
+                <a href="./index.php?controller=user&action=about" class="nav__link">About</a>
+            </li>
             <?php
             if (!isset($_SESSION['profile'])) {
                 echo '
@@ -28,11 +31,6 @@
             </li>
             <li class="nav__item">
                 <a href="./index.php?controller=sparepart&action=getSpareParts" class="nav__link">Spare parts</a>
-            </li>
-            <li class="nav__item">
-                <a href="./index.php?controller=user&action=cart" class="nav__link">
-                    <img src="./view/image/cart.png" alt="logo" class="nav__logo" width="40px" height="40px" alt="cart">
-                </a>
             </li>';
             }
 
@@ -60,10 +58,17 @@
                 <a href="./index.php?controller=user&action=deconnexion" class="nav__link">Logout</a>
             </li>';
             }
-            ?>
+
+            if (isset($_SESSION['profile']['role']) && $_SESSION['profile']['role'] == 'customer') {
+            echo '
             <li class="nav__item">
-                <a href="./index.php?controller=user&action=about" class="nav__link">About</a>
-            </li>
+                <a href="./index.php?controller=user&action=cart" class="nav__link">
+                    <img src="./view/image/cart.png" alt="logo" class="nav__logo" width="40px" height="40px" alt="cart">
+                </a>
+            </li>';
+            }
+            ?>
+
             <li class="nav__item">
                 <a href="./index.php?controller=user&action=account" class="nav__logo">
                     <img src="<?php

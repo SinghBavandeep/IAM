@@ -181,46 +181,6 @@ function deselection_flotte()
   header('Location:' . $url);
 }
 
-function modifier_dates()
-{
-  $idv = $_GET['param'];
-  $debutL = isset($_POST['debut']) ? test_input($_POST['debut']) : '';
-  $finL = isset($_POST['fin']) ? test_input($_POST['fin']) : '';
-
-  if (count($_POST) == 0) {
-    $controller = "sparepart"; $action = "modifier_dates";
-    require('./view/layout.tpl');
-  } else {
-    require('./model/sparepartBD.php');
-
-    if (!verif_dates_input($debutL, $finL)) {
-      $msg = 'Erreur de saisie, Réessayer !';
-      $controller = "sparepart"; $action = "modifier_dates";
-      require('./view/layout.tpl');
-    } else {
-      modifier_dates_BD($idv, $debutL, $finL);
-      $controller = 'sparepart'; $action = 'getSpareParts';
-      $url = "./index.php?controller=sparepart&action=getSpareParts";
-      header('Location:' . $url);
-    }
-  }
-}
-
-function annuler()
-{
-  $idv = $_GET['param'];
-
-  require('./model/sparepartBD.php');
-
-  annuler_location_BD($idv);
-
-  deselection_flotte();
-}
-
-function verif_date($date)
-{
-  return preg_match("/[0-9]{4}\-[0-9]{2}\-[0-9]{2}/", $date);
-}
 
 function bill()
 {
@@ -258,4 +218,20 @@ function bill()
 
   $_SESSION['montant'] = $prixT;
 }
+
+function add_to_cart()
+{
+  if (!isset($_SESSION['cart'])) {
+    $_SESSION['cart'] = array();
+  }
+
+  $sparepart_id = $_GET['id'];
+
+  // Add the vehicle to the cart (You can customize how you store the cart data)
+  $_SESSION['cart'][$sparepart_id] = 1; // You can set the quantity to 1 for now, or use the input quantity from the vehicle.tpl file
+
+  // Redirect back to the vehicle page or cart page
+  header('Location: ./index.php?controller=sparepart&action=getSpareParts');
+}
+
 ?>

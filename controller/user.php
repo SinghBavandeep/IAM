@@ -439,6 +439,23 @@ function process_payment()
     }
 }
 
+function calculate_cart_total()
+{
+    if (isset($_SESSION['cart']) && isset($_SESSION['panier'])) {
+        $total = 0;
+        foreach ($_SESSION['cart'] as $vehicle_id => $quantity) {
+            if (isset($_SESSION['panier'][$vehicle_id])) {
+                // Calculate the total price for each vehicle based on its quantity
+                $vehicle_price = $_SESSION['panier'][$vehicle_id]->prix;
+                $total += $vehicle_price * $quantity;
+            }
+        }
+        return number_format($total * 1.18, 2, ',', ''); // Return the total price with VAT
+    }
+    return '0€';
+}
+
+
 
 function error()
 {

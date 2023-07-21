@@ -33,7 +33,7 @@
                     $orderBy = '';
             }
 
-            $sql = "SELECT * FROM vehicle $orderBy";
+            $sql = "SELECT ref, name, img, prixM, details FROM vehicle $orderBy";
             $result = mysqli_query($conn, $sql);
 
             // Check if any products were found
@@ -54,10 +54,10 @@
                             echo '
                             <ul class="nav__list">
                                 <li class="nav__item">
-                                    <a href="#Vadmin" class="nav__link" id="afficherBtn">Add to cart</a>
+                                    <a href="./index.php?controller=vehicle&action=add_to_cart&ref=' . $row['ref'] . '" class="nav__link" id="afficherBtn">Add to cart</a>
                                 </li><br>
                                 <li class="nav__item">
-                                    <a href="#Vadmin" class="nav__link" id="afficherBtn">Buy</a>
+                                    <a href="./index.php?controller=user&action=process_payment&ref=' . $row['ref'] . '" class="nav__link" id="afficherBtn">Buy</a>
                                 </li><br>
                                 <li class="nav__item">
                                     <div class="login__create">';

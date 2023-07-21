@@ -1,24 +1,24 @@
 <?php
 
 // Function to get spare parts from the database
-function getSparePart_BD($id, $role, $rent, $pdo)
+function getSparePart_BD($id, $role, $rent)
 {
     require('./model/connectBD.php');
 
     try {
         if ($rent) {
             // Query to get rented spare parts
-            $sql = "SELECT * FROM 'spare_part' WHERE ref = (
-                    SELECT idv FROM 'bill' GROUP BY idv);";
+            $sql = "SELECT * FROM `spare_part` WHERE ref = (
+                    SELECT idv FROM `bill` GROUP BY idv);";
             $command = $pdo->prepare($sql);
             $bool = $command->execute();
         } else {
             if ($role == 'admin')
                 // Query to get spare parts for the admin
-                $sql = "SELECT * FROM 'spare_part' WHERE idL=:id";
+                $sql = "SELECT * FROM `spare_part` WHERE idL=:id";
             else
                 // Query to get spare parts for the customer
-                $sql = "SELECT * FROM 'spare_part' WHERE idC=:id";
+                $sql = "SELECT * FROM `spare_part` WHERE idC=:id";
 
             $command = $pdo->prepare($sql);
             $command->bindParam(':id', $id);
@@ -28,8 +28,8 @@ function getSparePart_BD($id, $role, $rent, $pdo)
         if ($bool) {
             $Resultat = $command->fetchAll(PDO::FETCH_ASSOC);
             // Debugging purpose, you can remove this line
-            var_dump($Resultat);
-            die();
+            //var_dump($Resultat);
+
         }
     } catch (PDOException $e) {
         echo utf8_encode('Select failed: ' . $e->getMessage() . '\n');

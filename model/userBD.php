@@ -118,6 +118,35 @@ function inscr_BD($name, $username, $email, $password, $address, $photo)
     }
 }
 
+function insert_delivery_details($customerId, $name, $addressLine1, $addressLine2, $city, $postalCode, $country, $phoneNumber)
+{
+    // Include the database connection file
+    require('./model/connectBD.php');
+
+    // Prepare the SQL statement to insert data into the 'delivery' table
+    $sql = "INSERT INTO `delivery` (customerId, name, addressLine1, addressLine2, city, postalCode, country, phoneNumber) VALUES (:customerId, :name, :addressLine1, :addressLine2, :city, :postalCode, :country, :phoneNumber)";
+    try {
+        $command = $pdo->prepare($sql);
+        $command->bindParam(':customerId', $customerId);
+        $command->bindParam(':name', $name);
+        $command->bindParam(':addressLine1', $addressLine1);
+        $command->bindParam(':addressLine2', $addressLine2); // Enregistrement du mot de passe crypté
+        $command->bindParam(':city', $city);
+        $command->bindParam(':postalCode', $postalCode);
+        $command->bindParam(':country', $country);
+        $command->bindParam(':phoneNumber', $phoneNumber);
+        $bool = $command->execute();
+
+        if ($bool) {
+            return true;
+        } else {
+            return false;
+        }
+    } catch (PDOException $e) {
+        echo utf8_encode('Echec de insert into : ' . $e->getMessage() . '.\n');
+        die();
+    }
+}
 
 
 

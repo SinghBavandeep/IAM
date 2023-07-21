@@ -174,52 +174,6 @@ function deselection_flotte()
 }
 
 
-function modifier_dates()
-{
-  $idv = $_GET['param'];
-  $debutL = isset($_POST['debut']) ? test_input($_POST['debut']) : '';
-  $finL = isset($_POST['fin']) ? test_input($_POST['fin']) : '';
-
-  if (count($_POST)==0) {
-    $controller = "vehicle"; $action = "modifier_dates";
-    require('./view/layout.tpl');
-  }
-  else {
-    require('./model/vehicleBD.php');
-
-    if (!verif_dates_input($debutL, $finL)) {
-      $msg = 'Erreur de saisie, Réessayer !';
-      $controller = "vehicle"; $action = "modifier_dates";
-      require('./view/layout.tpl');
-    }
-    else {
-      modifier_dates_BD($idv, $debutL, $finL);
-      $controller = 'vehicle'; $action = 'getVehicle';
-      $url = "./index.php?controller=vehicle&action=getVehicle";
-      header('Location:' . $url);
-    }
-  }
-}
-
-function annuler()
-{
-  $idv = $_GET['param'];
-
-  require('./model/vehicleBD.php');
-
-  annuler_location_BD($idv);
-
-  deselection_flotte();
-
-}
-
-function verif_date($date)
-{
-    return preg_match("/[0-9]{4}\-[0-9]{2}\-[0-9]{2}/", $date);
-}
-
-
-
 function bill()
 {
     $idE = 1;
@@ -259,15 +213,61 @@ function bill()
     $_SESSION['montant'] = $prixT;
 }
 
-function getJoursMois($mois) {
 
-    if ($mois == 02)
-        return 28;
-    else if  ($mois == 1 || $mois == 2 || $mois == 5 || $mois == 7 || $mois == 8 || $mois == 10 || $mois == 12)
-        return 31;
+function add_to_cart()
+{
 
-    return 30;
+  // Check if the cart exists in the session, and create it if it doesn't
+  if (!isset($_SESSION['cart'])) {
+    $_SESSION['cart'] = array();
+  }
+
+  // Get the vehicle ID from the query parameters
+  if (isset($_GET['id'])) {
+    $vehicle_id = $_GET['ref'];
+    var_dump($vehicle_id);
+    die();
+
+    // Get the customer ID from the session (assuming it's stored in $_SESSION['id'])
+    $customer_id = $_SESSION['id'] ?? 0;
+
+    if ($customer_id > 0) {
+      // Add the vehicle to the cart for the specific customer
+      // Use a multi-dimensional array to store cart data for each customer
+      if (!isset($_SESSION['cart'][$customer_id])) {
+        $_SESSION['cart'][$customer_id] = array();
+      }
+
+      // Check if the vehicle is already in the cart, and increase the quantity if it is
+      if (isset($_SESSION['cart'][$customer_id][$vehicle_id])) {
+        $_SESSION['cart'][$customer_id][$vehicle_id]++;
+      } else {
+        // If the vehicle is not in the cart, add it with quantity 1
+        $_SESSION['cart'][$customer_id][$vehicle_id] = 1;
+      }
+
+      // Update the 'idC' field in the 'vehicle' table with the customer ID
+      $conn = mysqli_connect("localhost", "root", "", "project");
+      $sql = "UPDATE vehicle SET idC = $customer_id WHERE ref = $vehicle_id";
+      mysqli_query($conn, $sql);
+      mysqli_close($conn);
+
+      // Redirect back to the vehicle page or cart page
+      header('Location: ./index.php?controller=vehicle&action=getVehicles');
+      exit(); // Always exit after a header redirect to prevent further execution of the script
+    } else {
+      // Customer not logged in, handle the error (e.g., redirect to login page)
+      header('Location: ./index.php?controller=login'); // Redirect to the login page or an error page
+      exit();
+    }
+  } else {
+    // Vehicle ID not provided, handle the error (e.g., redirect to home page)
+    header('Location: ./index.php'); // Redirect to the home page or an error page
+    exit();
+  }
 }
+
+
 
 
 ?>
