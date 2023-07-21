@@ -54,15 +54,17 @@
                             echo '
                             <ul class="nav__list">
                                 <li class="nav__item">
-                                    <a href="./index.php?controller=vehicle&action=add_to_cart&ref=' . $row['ref'] . '" class="nav__link" id="afficherBtn">Add to cart</a>
+                                    <form action="./view/vehicle/code.php" method="post" id="add_cart">
+                                        <input type="hidden" name="edit_id" value="' . $row['ref'] . '">
+                                        <button type="submit" name="addCart" class="nav__link" id="afficherBtn">Add to cart</button>
+                                    </form>
                                 </li><br>
                                 <li class="nav__item">
                                     <a href="./index.php?controller=user&action=process_payment&ref=' . $row['ref'] . '" class="nav__link" id="afficherBtn">Buy</a>
                                 </li><br>
                                 <li class="nav__item">
-                                    <div class="login__create">';
-                                        echo "Quantity: ";
-                                        echo '<input type="number" class="quantity-input" value="0" min="0" onchange="calculateTotal()"><br>
+                                    <div class="login__create">
+                                        Quantity: <input type="number" class="quantity-input" value="0" min="0" onchange="calculateTotal()"><br>
                                     </div>
                                 </li><br>
                             </ul>';
@@ -97,9 +99,8 @@
                                     <a href="#Vadmin" class="nav__link" id="afficherBtn">Buy</a>
                                 </li><br>
                                 <li class="nav__item">
-                                    <div class="login__create">';
-                                        echo "Quantity: ";
-                                        echo '<input type="number" class="quantity-input" value="0" min="0" onchange="calculateTotal()"><br>
+                                    <div class="login__create">
+                                        Quantity: <input type="number" class="quantity-input" value="0" min="0" onchange="calculateTotal()"><br>
                                     </div>
                                 </li><br>
                             </ul>';

@@ -1,91 +1,113 @@
-<!-- CART -->
-
+<!-- CARD -->
 <section class="section card">
+	<!-- TITLE -->
+	<h2 class="section__title">Cart</h2>
 	<div class="card__container container">
+		<!-- Filter Form -->
+		<form method="GET" action="">
+			<label for="filter">Filter by:</label>
+			<select name="filter" id="filter" class="login__box">
+				<option value="">All</option>
+				<option value="price_low">Price Low to High</option>
+				<option value="price_high">Price High to Low</option>
+			</select>
+			<button type="submit" CLASS="nav__link">Apply</button>
+		</form>
+
 		<div class="swiper card-swiper">
-			<div class="container">
-				<div class="checkout">
-					<div class="title">
-						<div class="wrap">
-							<h2 class="first">Shopping Cart</h2>
-						</div>
-						<div class="table">
-							<div class="wrap">
-								<div class="rowtitle">
-									<span class="name">Product Name</span>
-									<span class="prix">Price</span>
-									<span class="quantité">Quantity</span>
-									<span class="prixtotal">Total Price</span>
+			<br>
+			<?php
+            $conn = mysqli_connect("localhost", "root", "", "project");
 
-									<span class="action">Actions</span>
-								</div>
-								<?php
-								// Assuming you have the customer_id stored in a session variable like $_SESSION['id']
-								$customer_id = $_SESSION['id'] ?? 0;
+            // Retrieve the products from the database with filtering
+            $filter = $_GET['filter'] ?? '';
+            switch ($filter) {
+                case 'price_low':
+                    $orderBy = 'ORDER BY prixM ASC';
+                    break;
+                case 'price_high':
+                    $orderBy = 'ORDER BY prixM DESC';
+                    break;
+                default:
+                    $orderBy = '';
+            }
 
-								if ($customer_id > 0 && isset($_SESSION['cart'])) {
-								$req_ids = array_keys($_SESSION['cart']);
-								$vehicle_ids = array_filter($req_ids, function($id) { return substr($id, 0, 1) === 'V'; });
-								$spare_part_ids = array_filter($req_ids, function($id) { return substr($id, 0, 1) === 'S'; });
+            $sql = "SELECT ref, name, img, prixM, details FROM cart $orderBy";
+            $result = mysqli_query($conn, $sql);
 
-								// Fetch vehicles from the database
-								if (!empty($vehicle_ids)) {
-								$vehicle_ids_str = implode(',', array_map('intval', $vehicle_ids));
-								$vehicles = $DB->query("SELECT * FROM vehicle WHERE ref IN ($vehicle_ids_str) AND idC = $customer_id");
-								foreach ($vehicles as $vehicle):
-								?>
-								<div class="row">
-									<a href="#" class="img"><img src="" alt=""></a>
-									<span class="name"><?php echo $vehicle->name; ?></span>
-									<span class="prix"><?php echo number_format($vehicle->prixM, 2, ',', ''); ?></span>
-									<span class="quantité"><?php echo $_SESSION['cart']['V' . $vehicle->ref] ?? 0; ?></span>
-									<span class="prixtotal"><?php echo number_format($vehicle->prixM * $_SESSION['cart']['V' . $vehicle->ref], 2, ',', ''); ?></span>
-									<span class="action"><a href="#" class="del"><img src="" alt=""></a></span>
-								</div>
-								<?php
-										endforeach;
-									}
+            // Check if any products were found
+            if (mysqli_num_rows($result) > 0) {
+			// Loop through the products and display them
+			while ($row = mysqli_fetch_assoc($result)) {
+			if (empty($filter)) {
+			echo '
+			<div class="login__create">
+				<div class="login__form">
+					<div class="d-flex justify-content-center align-items-center vh-100">
+						<div class="shadow w-350 p-3 text-center">';
+							echo "Product Name: " . $row['name'] . "<br>";
+							echo '<img src="./view/image/' . $row['img'] . '" alt="Alps" style="height: 400px; height: 400px;"><br>';
+							echo "Product Price: " . $row['prixM'] . "£<br>";
+							echo "Product Details: " . $row['details'] . "<br>";
+							echo "<br>";
+							echo '
+							<ul class="nav__list">
+								<li class="nav__item">
+									<form action="./view/vehicle/code.php" method="post" id="add_cart">
+										<input type="hidden" name="ref" value="' . $row['ref'] . '">
+										<button type="submit" name="delete_product_btn" class="nav__link" id="afficherBtn">Delete</button>
+									</form>
+								</li><br>
+							</ul>';
 
-									// Fetch spare parts from the database
-									if (!empty($spare_part_ids)) {
-										$spare_part_ids_str = implode(',', array_map('intval', $spare_part_ids));
-										$spare_parts = $DB->query("SELECT * FROM spare_part WHERE ref IN ($spare_part_ids_str) AND idC = $customer_id");
-								foreach ($spare_parts as $spare_part):
-								?>
-								<div class="row">
-									<a href="#" class="img"><img src="" alt=""></a>
-									<span class="name"><?php echo $spare_part->name; ?></span>
-									<span class="prix"><?php echo number_format($spare_part->prixM, 2, ',', ''); ?></span>
-									<span class="quantité"><?php echo $_SESSION['cart']['S' . $spare_part->ref] ?? 0; ?></span>
-									<span class="prixtotal"><?php echo number_format($spare_part->prixM * $_SESSION['cart']['S' . $spare_part->ref], 2, ',', ''); ?></span>
-									<span class="action"><a href="#" class="del"><img src="" alt=""></a></span>
-								</div>
-								<?php
-										endforeach;
-									}
-
-								} else {
-								?>
-								<div class="row">
-									<p>The cart is empty.</p>
-								</div>
-								<?php } ?>
-
-								<!-- ... other rows and total calculation ... -->
-
-								<!-- Add the "Process payment" button -->
-								<div class="row grey">
-									<!-- ... other columns ... -->
-									<span class="action">
-       								 <a href="./index.php?controller=payment&action=process_payment" class="del">Process payment</a>
-    								</span>
-								</div>
-
-							</div>
-						</div>
+							echo '</div>
 					</div>
 				</div>
-			</div>
+			</div><br>';
+			} else {
+			// Apply the filter to skip displaying filtered-out products
+			// Example: Skip products with a price less than 1000
+			if ($filter === 'price_low' && $row['prixM'] < 1000) {
+			continue;
+			}
+
+			echo '
+			<div class="login__create">
+				<div class="login__form">
+					<div class="d-flex justify-content-center align-items-center vh-100">
+						<div class="shadow w-350 p-3 text-center">';
+							echo "Product Name: " . $row['name'] . "<br>";
+							echo '<img src="./view/image/' . $row['img'] . '" alt="Alps" style="height: 400px; height: 400px;"><br>';
+							echo "Product Price: " . $row['prixM'] . "<br>";
+							echo "Product Details: " . $row['details'] . "<br>";
+							echo "<br>";
+							echo '
+							<ul class="nav__list">
+								<li class="nav__item">
+									<a href="#Vadmin" class="nav__link" id="afficherBtn">View more</a>
+								</li><br>
+								<li class="nav__item">
+									<a href="#Vadmin" class="nav__link" id="afficherBtn">Buy</a>
+								</li><br>
+								<li class="nav__item">
+									<div class="login__create">
+										Quantity: <input type="number" class="quantity-input" value="0" min="0" onchange="calculateTotal()"><br>
+									</div>
+								</li><br>
+							</ul>';
+
+							echo '</div>
+					</div>
+				</div>
+			</div><br>';
+			}
+			}
+			} else {
+			echo "No products found in the database.";
+			}
+			// Close the database connection
+			mysqli_close($conn);
+			?>
 		</div>
 	</div>
 </section>
