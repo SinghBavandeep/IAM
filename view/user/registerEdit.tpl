@@ -38,7 +38,7 @@
                     <input type="hidden" value="<?php if (isset($_POST['edit_admin_btn'])){echo "Admin";}else{echo "Seller";}?>"  name="type" class="form-control">
                 </div>
                 <a href="./index.php?controller=user&action=adminpanel" class="btn btn-danger">CANCEL</a>
-                <button type="submit" name="update_Admin_btn" class="btn btn-success"> Update</button>
+                <button type="submit" name="update_btn" class="btn btn-success"> Update</button>
             </form>
             <?php
         }
