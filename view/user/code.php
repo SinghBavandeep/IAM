@@ -32,7 +32,7 @@ if ($password==$cpassword) {
 
 
 // Update profile
-if (isset($_POST['update_Admin_btn'])){
+if (isset($_POST['update_btn'])){
     $id=$_POST['edit_id'];
     $name=$_POST['edit_username'];
     $username = $_POST['edit_pseudo'];
@@ -43,7 +43,7 @@ if (isset($_POST['update_Admin_btn'])){
     if ($type=="Admin"){
         $query="UPDATE admin SET name='$name',username='$username',email='$email', password='$password' where id='$id'";
     }else{
-        $query="UPDATE seller SET name='$name',username='username',email='$email', password='$password' where id='$id'";
+        $query="UPDATE seller SET name='$name',username='$username',email='$email', password='$password' where id='$id'";
     }
 
 
